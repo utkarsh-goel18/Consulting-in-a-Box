@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import math
 import os
 from fastapi import APIRouter
 
@@ -13,7 +14,7 @@ from app.models.schemas import ConsultingDashboard
 router = APIRouter(prefix="/demo", tags=["demo"])
 _cached_dashboard: ConsultingDashboard | None = None
 
-DASHBOARD_CACHE_VERSION = "pnl-v4-accounting-schema"
+DASHBOARD_CACHE_VERSION = "pnl-v5-finite-kpis"
 
 
 def _cache_path() -> str:
@@ -29,24 +30,44 @@ def clear_dashboard_cache() -> None:
         pass
 
 
+def _finite(value: object) -> bool:
+    try:
+        return math.isfinite(float(value))
+    except (TypeError, ValueError):
+        return False
+
+
 def _cache_is_valid(dashboard: ConsultingDashboard) -> bool:
+    """Reject stale/partially serialized dashboards before they reach the UI."""
+    kpi = dashboard.kpi_summary
+    required_kpis = (
+        "revenue_prior", "revenue_current", "revenue_growth_pct",
+        "gross_profit_prior", "gross_profit_current", "gross_profit_growth_pct",
+        "net_profit_prior", "net_profit_current", "net_profit_growth_pct",
+        "net_margin_prior_pct", "net_margin_current_pct", "net_margin_delta_pp",
+        "orders_prior", "orders_current", "orders_growth_pct",
+        "aov_prior", "aov_current", "aov_growth_pct",
+        "active_customers_prior", "active_customers_current", "active_customers_growth_pct",
+        "cac_prior", "cac_current", "cac_growth_pct",
+        "churn_rate_prior_pct", "churn_rate_current_pct", "churn_rate_delta_pp",
+    )
+    if not all(_finite(getattr(kpi, field, None)) for field in required_kpis):
+        return False
+
     waterfall = dashboard.p_and_l_waterfall
     if not waterfall:
         return False
-
-    # Pydantic models expose attributes, while some schema configurations can
-    # leave nested waterfall rows as dictionaries. Support both representations.
-    def field(row, name, default=None):
-        if isinstance(row, dict):
-            return row.get(name, default)
-        return getattr(row, name, default)
-
-    totals = [row for row in waterfall if field(row, "type") == "total"]
+    totals = [
+        row for row in waterfall
+        if isinstance(row, dict) and row.get("type") == "total"
+    ]
     if len(totals) < 2:
         return False
-    prior = float(field(totals[0], "amount", 0))
-    current = float(field(totals[-1], "amount", 0))
-    impacts = sum(float(field(row, "amount", 0)) for row in waterfall if field(row, "type") != "total")
+    if not all(_finite(row.get("amount")) for row in waterfall if isinstance(row, dict)):
+        return False
+    prior = float(totals[0]["amount"])
+    current = float(totals[-1]["amount"])
+    impacts = sum(float(row["amount"]) for row in waterfall if row.get("type") != "total")
     return abs((prior + impacts) - current) <= 0.05
 
 
@@ -70,14 +91,13 @@ def bootstrap_demo() -> ConsultingDashboard:
     """Return the canonical NovaMart demo snapshot, never an uploaded workspace."""
     global _cached_dashboard
 
-    # Uploads and the demo are deliberately separate workspaces. Previously, clicking
-    # Run Demo after an upload caused the analytics engine to run against the uploaded
-    # schema and could fail on fields that only exist in the NovaMart fixture.
     if not repo.is_demo_workspace:
         _restore_demo_workspace()
 
     if _cached_dashboard is not None:
-        return _cached_dashboard
+        if _cache_is_valid(_cached_dashboard):
+            return _cached_dashboard
+        _cached_dashboard = None
 
     cache = _cache_path()
     if os.path.exists(cache):
@@ -111,7 +131,7 @@ def bootstrap_demo() -> ConsultingDashboard:
         shipping_partner_breakdown=snapshot["shipping_partner_breakdown"],
     )
     if not _cache_is_valid(_cached_dashboard):
-        raise RuntimeError("Deterministic P&L waterfall failed reconciliation.")
+        raise RuntimeError("Deterministic demo dashboard contains a non-finite KPI or failed P&L reconciliation.")
     try:
         with open(cache, "w", encoding="utf-8") as handle:
             json.dump(_cached_dashboard.model_dump(mode="json"), handle)
