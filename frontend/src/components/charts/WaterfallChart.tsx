@@ -1,5 +1,4 @@
 import React from 'react';
-import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip, Cell, CartesianGrid, ReferenceLine } from 'recharts';
 
 interface WaterfallStep {
   step: string;
@@ -14,21 +13,29 @@ interface WaterfallChartProps {
 }
 
 export const WaterfallChart: React.FC<WaterfallChartProps> = ({ data, currency = '₹' }) => {
-  // This chart intentionally renders each P&L impact from the zero origin.
-  // It is a driver-impact chart rather than a cumulative floating waterfall:
-  // positive impacts extend above zero and negative impacts extend below zero.
-  const chartData = data.map((item) => ({
-    step: item.step,
-    amount: Number.isFinite(item.amount) ? item.amount : 0,
-    type: item.type,
-    displayAmount: item.amount,
-    runningTotal: item.running_total,
+  const width = 1100;
+  const height = 360;
+  const margin = { top: 28, right: 24, bottom: 82, left: 82 };
+  const plotWidth = width - margin.left - margin.right;
+  const plotHeight = height - margin.top - margin.bottom;
+
+  const safeData = data.map((item) => ({
+    ...item,
+    amount: Number.isFinite(Number(item.amount)) ? Number(item.amount) : 0,
+    running_total: item.running_total == null ? undefined : Number(item.running_total),
   }));
 
-  const getBarColor = (type: string, amount: number) => {
-    if (type === 'total') return '#334155';
-    return amount < 0 || type === 'negative' ? '#e11d48' : '#059669';
-  };
+  // Totals are absolute profit benchmarks. Drivers are signed impacts from zero.
+  const values = safeData.flatMap((item) => {
+    if (item.type === 'total') return [0, Math.abs(item.amount)];
+    return [0, item.amount];
+  });
+  const maxAbs = Math.max(...values.map(Math.abs), 1);
+  const range = maxAbs * 1.12;
+  const y = (value: number) => margin.top + ((range - value) / (2 * range)) * plotHeight;
+  const zeroY = y(0);
+  const barWidth = Math.min(110, Math.max(52, plotWidth / Math.max(safeData.length * 1.65, 1)));
+  const stepGap = plotWidth / Math.max(safeData.length, 1);
 
   const formatAxis = (value: number) => {
     const abs = Math.abs(value);
@@ -41,29 +48,13 @@ export const WaterfallChart: React.FC<WaterfallChartProps> = ({ data, currency =
 
   const formatAmount = (value: number) => `${value < 0 ? '-' : '+'}${currency}${Math.abs(value).toLocaleString('en-IN')}`;
 
-  const CustomTooltip = ({ active, payload }: any) => {
-    if (!active || !payload?.length) return null;
-    const item = payload[0].payload;
-    return (
-      <div className="rounded-lg border border-slate-700 bg-slate-950 p-3 text-xs text-white shadow-xl">
-        <p className="mb-1 font-bold text-slate-200">{item.step}</p>
-        <p className={item.displayAmount < 0 ? 'text-rose-400' : item.type === 'total' ? 'text-slate-200' : 'text-emerald-400'}>
-          {item.type === 'total' ? `${currency}${Math.abs(item.displayAmount).toLocaleString('en-IN')}` : formatAmount(item.displayAmount)}
-        </p>
-        {item.type !== 'total' && item.runningTotal != null && (
-          <p className="mt-1 text-[10px] text-slate-500">
-            Running total: {currency}{item.runningTotal.toLocaleString('en-IN')}
-          </p>
-        )}
-      </div>
-    );
-  };
+  const ticks = [-range, -range / 2, 0, range / 2, range];
 
   return (
     <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
       <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h3 className="text-sm font-bold tracking-tight text-slate-900 dark:text-white">Executive P&L Waterfall Bridge</h3>
+          <h3 className="text-sm font-bold tracking-tight text-slate-900 dark:text-white">Executive P&amp;L Waterfall Bridge</h3>
           <p className="mt-1 text-xs text-slate-500">Prior-period profit → profit-impact drivers → current-period profit.</p>
         </div>
         <div className="flex items-center gap-4 text-[11px] text-slate-500">
@@ -72,19 +63,45 @@ export const WaterfallChart: React.FC<WaterfallChartProps> = ({ data, currency =
           <span className="flex items-center gap-1.5"><span className="h-2.5 w-2.5 rounded-sm bg-emerald-600" />Favorable</span>
         </div>
       </div>
-      <div className="h-80 w-full">
-        <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={chartData} margin={{ top: 20, right: 20, left: 20, bottom: 55 }}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#64748b" opacity={0.18} vertical={false} />
-            <XAxis dataKey="step" tick={{ fontSize: 10, fill: '#64748b' }} interval={0} angle={-18} textAnchor="end" height={65} />
-            <YAxis tick={{ fontSize: 10, fill: '#64748b' }} tickFormatter={formatAxis} />
-            <Tooltip cursor={{ fill: 'rgba(148,163,184,0.08)' }} content={<CustomTooltip />} />
-            <ReferenceLine y={0} stroke="#94a3b8" strokeWidth={1.5} />
-            <Bar dataKey="amount" radius={[4, 4, 4, 4]} isAnimationActive={false}>
-              {chartData.map((entry, idx) => <Cell key={`cell-${idx}`} fill={getBarColor(entry.type, entry.amount)} />)}
-            </Bar>
-          </BarChart>
-        </ResponsiveContainer>
+
+      <div className="h-80 w-full overflow-x-auto">
+        <svg viewBox={`0 0 ${width} ${height}`} width="100%" height="100%" role="img" aria-label="P and L impact bar chart">
+          <defs>
+            <style>{`.wf-label{font-family:Inter,ui-sans-serif,system-ui,sans-serif}`}</style>
+          </defs>
+
+          {ticks.map((tick) => (
+            <g key={`tick-${tick}`}>
+              <line x1={margin.left} x2={width - margin.right} y1={y(tick)} y2={y(tick)} stroke="currentColor" opacity={tick === 0 ? 0.35 : 0.12} strokeDasharray={tick === 0 ? undefined : '3 3'} />
+              <text className="wf-label" x={margin.left - 10} y={y(tick) + 4} textAnchor="end" fontSize="10" fill="currentColor" opacity="0.65">{formatAxis(tick)}</text>
+            </g>
+          ))}
+
+          <line x1={margin.left} x2={width - margin.right} y1={zeroY} y2={zeroY} stroke="currentColor" opacity="0.5" strokeWidth="1.5" />
+
+          {safeData.map((item, index) => {
+            const x = margin.left + stepGap * index + (stepGap - barWidth) / 2;
+            const isTotal = item.type === 'total';
+            const value = isTotal ? Math.abs(item.amount) : item.amount;
+            const topValue = Math.max(value, 0);
+            const bottomValue = Math.min(value, 0);
+            const top = y(topValue);
+            const bottom = y(bottomValue);
+            const rectY = isTotal ? y(value) : top;
+            const rectHeight = Math.max(2, Math.abs(bottom - top));
+            const fill = isTotal ? '#334155' : value < 0 ? '#e11d48' : '#059669';
+            const labelY = margin.top + plotHeight + 20;
+
+            return (
+              <g key={`${item.step}-${index}`}>
+                <rect x={x} y={rectY} width={barWidth} height={rectHeight} rx="5" fill={fill} opacity="0.96">
+                  <title>{isTotal ? `${item.step}: ${currency}${Math.abs(item.amount).toLocaleString('en-IN')}` : `${item.step}: ${formatAmount(item.amount)}`}</title>
+                </rect>
+                <text className="wf-label" x={x + barWidth / 2} y={labelY} textAnchor="middle" fontSize="10" fill="currentColor" opacity="0.7" transform={`rotate(-18 ${x + barWidth / 2} ${labelY})`}>{item.step}</text>
+              </g>
+            );
+          })}
+        </svg>
       </div>
     </div>
   );
