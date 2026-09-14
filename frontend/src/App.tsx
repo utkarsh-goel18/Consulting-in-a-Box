@@ -11,6 +11,7 @@ import { EvidenceModal } from './components/common/EvidenceModal';
 import { ConsultingDashboard, EvidenceDetail } from './types';
 import { bootstrapDemo, getEvidenceDetail } from './api/client';
 import { Loader2 } from 'lucide-react';
+import { Logo } from './components/brand/Logo';
 
 export const App: React.FC = () => {
   const [activeTab, setActiveTab] = useState('dashboard');
@@ -19,6 +20,7 @@ export const App: React.FC = () => {
   const [demoLoading, setDemoLoading] = useState(false);
   const [demoProgressStep, setDemoProgressStep] = useState('');
   const [activeEvidence, setActiveEvidence] = useState<EvidenceDetail | null>(null);
+  const [darkMode, setDarkMode] = useState(() => localStorage.getItem('cib-theme') === 'dark');
 
   const demoSequence = [
     'Profiling data…',
@@ -29,6 +31,11 @@ export const App: React.FC = () => {
     'Generating insights…',
     'Preparing recommendations…'
   ];
+
+  useEffect(() => {
+    document.documentElement.classList.toggle('dark', darkMode);
+    localStorage.setItem('cib-theme', darkMode ? 'dark' : 'light');
+  }, [darkMode]);
 
   const handleRunDemo = async () => {
     try {
@@ -67,7 +74,7 @@ export const App: React.FC = () => {
     return (
       <div className="min-h-screen bg-[#07111f] text-white flex items-center justify-center px-6">
         <div className="w-full max-w-sm text-center">
-          <div className="mx-auto mb-7 h-14 w-14 rounded-2xl bg-white text-[#07111f] flex items-center justify-center text-lg font-black shadow-2xl">CB</div>
+          <div className="mx-auto mb-7 flex justify-center text-white"><Logo size={58} compact /></div>
           <div className="text-sm font-semibold tracking-wide text-white">Consulting in a Box</div>
           <div className="mt-2 flex items-center justify-center gap-2 text-xs text-slate-400">
             <Loader2 className="h-4 w-4 animate-spin" />
@@ -82,13 +89,15 @@ export const App: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#f6f8fb] text-slate-900 font-sans">
+    <div className={`min-h-screen font-sans transition-colors duration-200 ${darkMode ? 'dark bg-[#0b1120] text-slate-100' : 'bg-[#f6f8fb] text-slate-900'}`}>
       <Navbar
         activeTab={activeTab}
         setActiveTab={setActiveTab}
         onRunDemo={handleRunDemo}
         demoLoading={demoLoading}
         demoProgressStep={demoProgressStep}
+        darkMode={darkMode}
+        onToggleTheme={() => setDarkMode(value => !value)}
       />
 
       <main className="mx-auto w-full max-w-[1440px] px-4 py-6 sm:px-6 lg:px-8 lg:py-8">
@@ -103,9 +112,9 @@ export const App: React.FC = () => {
 
       <EvidenceModal evidence={activeEvidence} onClose={() => setActiveEvidence(null)} />
 
-      <footer className="border-t border-slate-200 bg-white">
+      <footer className="border-t border-slate-200 bg-white dark:border-slate-800 dark:bg-[#0f172a]">
         <div className="mx-auto flex max-w-[1440px] flex-col gap-2 px-4 py-4 text-[11px] text-slate-400 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
-          <span>Consulting in a Box · Enterprise Decision Intelligence</span>
+          <span className="flex items-center gap-2"><Logo size={18} compact /> Consulting in a Box · Enterprise Decision Intelligence</span>
           <span>Deterministic analytics · Audit-ready evidence</span>
         </div>
       </footer>
