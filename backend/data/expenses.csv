@@ -1,0 +1,550 @@
+expense_id,expense_date,category,department,description,amount
+EXP-00001,2024-04-01,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3547.92
+EXP-00002,2024-04-01,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2259.11
+EXP-00003,2024-04-01,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1904.21
+EXP-00004,2024-04-02,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3496.34
+EXP-00005,2024-04-02,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2265.3
+EXP-00006,2024-04-02,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1888.32
+EXP-00007,2024-04-03,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3543.56
+EXP-00008,2024-04-03,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2162.03
+EXP-00009,2024-04-03,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1831.22
+EXP-00010,2024-04-04,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3571.43
+EXP-00011,2024-04-04,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2295.12
+EXP-00012,2024-04-04,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1907.08
+EXP-00013,2024-04-05,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3576.73
+EXP-00014,2024-04-05,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2144.38
+EXP-00015,2024-04-05,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1919.19
+EXP-00016,2024-04-06,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3549.25
+EXP-00017,2024-04-06,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2102.55
+EXP-00018,2024-04-06,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1898.17
+EXP-00019,2024-04-07,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3502.41
+EXP-00020,2024-04-07,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2264.32
+EXP-00021,2024-04-07,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1947.63
+EXP-00022,2024-04-08,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3417.07
+EXP-00023,2024-04-08,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2167.94
+EXP-00024,2024-04-08,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1888.83
+EXP-00025,2024-04-09,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3439.11
+EXP-00026,2024-04-09,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2103.14
+EXP-00027,2024-04-09,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1807.94
+EXP-00028,2024-04-10,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3598.61
+EXP-00029,2024-04-10,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2262.59
+EXP-00030,2024-04-10,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1846.3
+EXP-00031,2024-04-11,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3566.79
+EXP-00032,2024-04-11,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2210.38
+EXP-00033,2024-04-11,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1906.91
+EXP-00034,2024-04-12,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3404.96
+EXP-00035,2024-04-12,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2252.24
+EXP-00036,2024-04-12,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1800.01
+EXP-00037,2024-04-13,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3528.97
+EXP-00038,2024-04-13,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2294.85
+EXP-00039,2024-04-13,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1836.4
+EXP-00040,2024-04-14,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3433.18
+EXP-00041,2024-04-14,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2171.91
+EXP-00042,2024-04-14,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1837.61
+EXP-00043,2024-04-15,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3587.41
+EXP-00044,2024-04-15,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2233.13
+EXP-00045,2024-04-15,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1846.9
+EXP-00046,2024-04-16,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3451.15
+EXP-00047,2024-04-16,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2264.41
+EXP-00048,2024-04-16,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1945.54
+EXP-00049,2024-04-17,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3534.73
+EXP-00050,2024-04-17,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2125.82
+EXP-00051,2024-04-17,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1901.81
+EXP-00052,2024-04-18,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3423.4
+EXP-00053,2024-04-18,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2222.8
+EXP-00054,2024-04-18,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1884.62
+EXP-00055,2024-04-19,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3423.34
+EXP-00056,2024-04-19,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2126.0
+EXP-00057,2024-04-19,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1855.0
+EXP-00058,2024-04-20,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3540.54
+EXP-00059,2024-04-20,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2273.44
+EXP-00060,2024-04-20,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1823.1
+EXP-00061,2024-04-21,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3548.42
+EXP-00062,2024-04-21,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2203.61
+EXP-00063,2024-04-21,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1817.0
+EXP-00064,2024-04-22,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3488.25
+EXP-00065,2024-04-22,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2170.08
+EXP-00066,2024-04-22,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1854.68
+EXP-00067,2024-04-23,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3465.18
+EXP-00068,2024-04-23,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2171.55
+EXP-00069,2024-04-23,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1811.11
+EXP-00070,2024-04-24,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3469.45
+EXP-00071,2024-04-24,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2228.67
+EXP-00072,2024-04-24,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1842.77
+EXP-00073,2024-04-25,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3419.94
+EXP-00074,2024-04-25,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2255.49
+EXP-00075,2024-04-25,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1854.97
+EXP-00076,2024-04-26,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3528.87
+EXP-00077,2024-04-26,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2177.68
+EXP-00078,2024-04-26,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1886.4
+EXP-00079,2024-04-27,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3414.3
+EXP-00080,2024-04-27,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2144.46
+EXP-00081,2024-04-27,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1878.84
+EXP-00082,2024-04-28,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3578.55
+EXP-00083,2024-04-28,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2181.14
+EXP-00084,2024-04-28,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1909.36
+EXP-00085,2024-04-29,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3452.46
+EXP-00086,2024-04-29,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2246.79
+EXP-00087,2024-04-29,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1812.93
+EXP-00088,2024-04-30,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3438.49
+EXP-00089,2024-04-30,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2176.07
+EXP-00090,2024-04-30,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1809.3
+EXP-00091,2024-05-01,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3548.59
+EXP-00092,2024-05-01,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2132.9
+EXP-00093,2024-05-01,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1907.37
+EXP-00094,2024-05-02,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3512.85
+EXP-00095,2024-05-02,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2213.02
+EXP-00096,2024-05-02,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1827.45
+EXP-00097,2024-05-03,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3541.53
+EXP-00098,2024-05-03,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2213.26
+EXP-00099,2024-05-03,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1870.85
+EXP-00100,2024-05-04,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3487.74
+EXP-00101,2024-05-04,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2205.92
+EXP-00102,2024-05-04,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1896.23
+EXP-00103,2024-05-05,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3413.4
+EXP-00104,2024-05-05,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2113.95
+EXP-00105,2024-05-05,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1913.26
+EXP-00106,2024-05-06,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3553.29
+EXP-00107,2024-05-06,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2233.84
+EXP-00108,2024-05-06,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1913.56
+EXP-00109,2024-05-07,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3404.84
+EXP-00110,2024-05-07,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2179.86
+EXP-00111,2024-05-07,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1832.74
+EXP-00112,2024-05-08,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3490.59
+EXP-00113,2024-05-08,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2210.29
+EXP-00114,2024-05-08,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1940.29
+EXP-00115,2024-05-09,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3558.8
+EXP-00116,2024-05-09,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2233.73
+EXP-00117,2024-05-09,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1893.14
+EXP-00118,2024-05-10,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3566.7
+EXP-00119,2024-05-10,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2110.56
+EXP-00120,2024-05-10,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1865.39
+EXP-00121,2024-05-11,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3408.2
+EXP-00122,2024-05-11,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2142.69
+EXP-00123,2024-05-11,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1902.81
+EXP-00124,2024-05-12,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3425.66
+EXP-00125,2024-05-12,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2241.23
+EXP-00126,2024-05-12,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1843.7
+EXP-00127,2024-05-13,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3509.12
+EXP-00128,2024-05-13,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2134.58
+EXP-00129,2024-05-13,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1805.57
+EXP-00130,2024-05-14,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3416.14
+EXP-00131,2024-05-14,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2277.25
+EXP-00132,2024-05-14,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1813.76
+EXP-00133,2024-05-15,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3509.43
+EXP-00134,2024-05-15,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2180.82
+EXP-00135,2024-05-15,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1875.88
+EXP-00136,2024-05-16,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3497.46
+EXP-00137,2024-05-16,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2229.68
+EXP-00138,2024-05-16,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1916.25
+EXP-00139,2024-05-17,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3506.17
+EXP-00140,2024-05-17,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2276.86
+EXP-00141,2024-05-17,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1873.77
+EXP-00142,2024-05-18,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3499.46
+EXP-00143,2024-05-18,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2204.43
+EXP-00144,2024-05-18,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1915.68
+EXP-00145,2024-05-19,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3552.75
+EXP-00146,2024-05-19,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2108.75
+EXP-00147,2024-05-19,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1858.79
+EXP-00148,2024-05-20,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3596.66
+EXP-00149,2024-05-20,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2212.3
+EXP-00150,2024-05-20,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1894.49
+EXP-00151,2024-05-21,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3462.74
+EXP-00152,2024-05-21,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2122.57
+EXP-00153,2024-05-21,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1908.34
+EXP-00154,2024-05-22,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3468.99
+EXP-00155,2024-05-22,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2242.7
+EXP-00156,2024-05-22,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1902.48
+EXP-00157,2024-05-23,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3508.87
+EXP-00158,2024-05-23,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2137.97
+EXP-00159,2024-05-23,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1866.61
+EXP-00160,2024-05-24,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3406.9
+EXP-00161,2024-05-24,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2113.52
+EXP-00162,2024-05-24,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1815.73
+EXP-00163,2024-05-25,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3404.47
+EXP-00164,2024-05-25,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2195.42
+EXP-00165,2024-05-25,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1934.49
+EXP-00166,2024-05-26,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3544.59
+EXP-00167,2024-05-26,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2193.17
+EXP-00168,2024-05-26,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1918.87
+EXP-00169,2024-05-27,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3466.92
+EXP-00170,2024-05-27,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2179.35
+EXP-00171,2024-05-27,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1920.05
+EXP-00172,2024-05-28,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3440.23
+EXP-00173,2024-05-28,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2133.65
+EXP-00174,2024-05-28,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1924.34
+EXP-00175,2024-05-29,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3404.71
+EXP-00176,2024-05-29,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2260.64
+EXP-00177,2024-05-29,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1928.37
+EXP-00178,2024-05-30,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3438.0
+EXP-00179,2024-05-30,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2154.51
+EXP-00180,2024-05-30,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1894.82
+EXP-00181,2024-05-31,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3410.91
+EXP-00182,2024-05-31,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2154.46
+EXP-00183,2024-05-31,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1904.07
+EXP-00184,2024-06-01,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3533.69
+EXP-00185,2024-06-01,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2132.54
+EXP-00186,2024-06-01,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1870.89
+EXP-00187,2024-06-02,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3417.39
+EXP-00188,2024-06-02,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2278.76
+EXP-00189,2024-06-02,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1927.35
+EXP-00190,2024-06-03,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3579.11
+EXP-00191,2024-06-03,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2108.21
+EXP-00192,2024-06-03,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1846.51
+EXP-00193,2024-06-04,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3487.05
+EXP-00194,2024-06-04,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2105.92
+EXP-00195,2024-06-04,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1826.2
+EXP-00196,2024-06-05,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3466.5
+EXP-00197,2024-06-05,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2150.28
+EXP-00198,2024-06-05,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1946.5
+EXP-00199,2024-06-06,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3435.12
+EXP-00200,2024-06-06,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2259.53
+EXP-00201,2024-06-06,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1806.72
+EXP-00202,2024-06-07,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3554.46
+EXP-00203,2024-06-07,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2125.51
+EXP-00204,2024-06-07,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1806.34
+EXP-00205,2024-06-08,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3438.11
+EXP-00206,2024-06-08,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2144.96
+EXP-00207,2024-06-08,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1812.38
+EXP-00208,2024-06-09,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3595.79
+EXP-00209,2024-06-09,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2114.3
+EXP-00210,2024-06-09,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1931.91
+EXP-00211,2024-06-10,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3429.71
+EXP-00212,2024-06-10,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2273.0
+EXP-00213,2024-06-10,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1877.54
+EXP-00214,2024-06-11,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3476.61
+EXP-00215,2024-06-11,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2168.87
+EXP-00216,2024-06-11,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1830.53
+EXP-00217,2024-06-12,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3563.37
+EXP-00218,2024-06-12,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2254.4
+EXP-00219,2024-06-12,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1897.05
+EXP-00220,2024-06-13,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3532.98
+EXP-00221,2024-06-13,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2205.59
+EXP-00222,2024-06-13,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1914.58
+EXP-00223,2024-06-14,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3444.26
+EXP-00224,2024-06-14,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2260.89
+EXP-00225,2024-06-14,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1870.79
+EXP-00226,2024-06-15,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3570.81
+EXP-00227,2024-06-15,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2239.81
+EXP-00228,2024-06-15,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1908.31
+EXP-00229,2024-06-16,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3572.72
+EXP-00230,2024-06-16,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2207.85
+EXP-00231,2024-06-16,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1945.92
+EXP-00232,2024-06-17,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3482.37
+EXP-00233,2024-06-17,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2224.03
+EXP-00234,2024-06-17,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1888.97
+EXP-00235,2024-06-18,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3553.54
+EXP-00236,2024-06-18,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2153.83
+EXP-00237,2024-06-18,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1918.21
+EXP-00238,2024-06-19,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3447.98
+EXP-00239,2024-06-19,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2168.09
+EXP-00240,2024-06-19,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1835.07
+EXP-00241,2024-06-20,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3514.07
+EXP-00242,2024-06-20,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2100.75
+EXP-00243,2024-06-20,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1876.57
+EXP-00244,2024-06-21,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3570.94
+EXP-00245,2024-06-21,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2282.29
+EXP-00246,2024-06-21,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1826.45
+EXP-00247,2024-06-22,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3477.19
+EXP-00248,2024-06-22,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2160.19
+EXP-00249,2024-06-22,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1842.05
+EXP-00250,2024-06-23,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3525.52
+EXP-00251,2024-06-23,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2127.1
+EXP-00252,2024-06-23,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1936.22
+EXP-00253,2024-06-24,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3570.02
+EXP-00254,2024-06-24,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2201.91
+EXP-00255,2024-06-24,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1867.14
+EXP-00256,2024-06-25,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3528.26
+EXP-00257,2024-06-25,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2128.07
+EXP-00258,2024-06-25,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1878.46
+EXP-00259,2024-06-26,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3552.65
+EXP-00260,2024-06-26,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2132.31
+EXP-00261,2024-06-26,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1826.31
+EXP-00262,2024-06-27,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3586.24
+EXP-00263,2024-06-27,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2153.8
+EXP-00264,2024-06-27,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1841.59
+EXP-00265,2024-06-28,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3577.16
+EXP-00266,2024-06-28,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2289.7
+EXP-00267,2024-06-28,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1897.93
+EXP-00268,2024-06-29,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3525.76
+EXP-00269,2024-06-29,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2279.95
+EXP-00270,2024-06-29,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1928.86
+EXP-00271,2024-06-30,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3490.01
+EXP-00272,2024-06-30,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2147.55
+EXP-00273,2024-06-30,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1897.24
+EXP-00274,2024-07-01,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3598.93
+EXP-00275,2024-07-01,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2186.35
+EXP-00276,2024-07-01,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1876.18
+EXP-00277,2024-07-02,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3570.37
+EXP-00278,2024-07-02,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2178.18
+EXP-00279,2024-07-02,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1942.99
+EXP-00280,2024-07-03,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3528.09
+EXP-00281,2024-07-03,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2197.22
+EXP-00282,2024-07-03,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1865.87
+EXP-00283,2024-07-04,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3487.44
+EXP-00284,2024-07-04,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2204.03
+EXP-00285,2024-07-04,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1873.26
+EXP-00286,2024-07-05,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3505.16
+EXP-00287,2024-07-05,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2127.0
+EXP-00288,2024-07-05,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1906.7
+EXP-00289,2024-07-06,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3504.54
+EXP-00290,2024-07-06,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2206.37
+EXP-00291,2024-07-06,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1825.08
+EXP-00292,2024-07-07,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3478.64
+EXP-00293,2024-07-07,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2264.64
+EXP-00294,2024-07-07,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1869.76
+EXP-00295,2024-07-08,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3577.53
+EXP-00296,2024-07-08,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2134.24
+EXP-00297,2024-07-08,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1811.13
+EXP-00298,2024-07-09,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3432.89
+EXP-00299,2024-07-09,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2272.98
+EXP-00300,2024-07-09,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1829.33
+EXP-00301,2024-07-10,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3576.21
+EXP-00302,2024-07-10,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2239.71
+EXP-00303,2024-07-10,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1909.54
+EXP-00304,2024-07-11,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3559.54
+EXP-00305,2024-07-11,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2265.09
+EXP-00306,2024-07-11,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1863.86
+EXP-00307,2024-07-12,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3402.75
+EXP-00308,2024-07-12,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2158.88
+EXP-00309,2024-07-12,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1940.64
+EXP-00310,2024-07-13,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3514.5
+EXP-00311,2024-07-13,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2188.49
+EXP-00312,2024-07-13,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1824.85
+EXP-00313,2024-07-14,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3565.88
+EXP-00314,2024-07-14,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2299.42
+EXP-00315,2024-07-14,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1935.22
+EXP-00316,2024-07-15,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3542.6
+EXP-00317,2024-07-15,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2196.75
+EXP-00318,2024-07-15,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1921.96
+EXP-00319,2024-07-16,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3526.47
+EXP-00320,2024-07-16,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2232.73
+EXP-00321,2024-07-16,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1817.08
+EXP-00322,2024-07-17,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3415.33
+EXP-00323,2024-07-17,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2181.06
+EXP-00324,2024-07-17,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1930.05
+EXP-00325,2024-07-18,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3546.02
+EXP-00326,2024-07-18,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2216.08
+EXP-00327,2024-07-18,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1894.25
+EXP-00328,2024-07-19,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3494.96
+EXP-00329,2024-07-19,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2220.99
+EXP-00330,2024-07-19,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1822.26
+EXP-00331,2024-07-20,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3490.52
+EXP-00332,2024-07-20,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2220.09
+EXP-00333,2024-07-20,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1914.6
+EXP-00334,2024-07-21,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3413.57
+EXP-00335,2024-07-21,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2198.53
+EXP-00336,2024-07-21,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1805.44
+EXP-00337,2024-07-22,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3495.71
+EXP-00338,2024-07-22,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2277.18
+EXP-00339,2024-07-22,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1872.35
+EXP-00340,2024-07-23,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3529.41
+EXP-00341,2024-07-23,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2115.26
+EXP-00342,2024-07-23,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1804.09
+EXP-00343,2024-07-24,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3472.62
+EXP-00344,2024-07-24,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2107.95
+EXP-00345,2024-07-24,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1801.12
+EXP-00346,2024-07-25,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3480.39
+EXP-00347,2024-07-25,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2154.96
+EXP-00348,2024-07-25,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1888.73
+EXP-00349,2024-07-26,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3485.78
+EXP-00350,2024-07-26,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2199.18
+EXP-00351,2024-07-26,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1884.63
+EXP-00352,2024-07-27,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3574.83
+EXP-00353,2024-07-27,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2232.53
+EXP-00354,2024-07-27,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1810.04
+EXP-00355,2024-07-28,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3564.39
+EXP-00356,2024-07-28,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2293.05
+EXP-00357,2024-07-28,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1904.62
+EXP-00358,2024-07-29,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3456.05
+EXP-00359,2024-07-29,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2161.05
+EXP-00360,2024-07-29,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1825.73
+EXP-00361,2024-07-30,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3406.22
+EXP-00362,2024-07-30,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2176.04
+EXP-00363,2024-07-30,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1887.53
+EXP-00364,2024-07-31,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3590.62
+EXP-00365,2024-07-31,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2299.99
+EXP-00366,2024-07-31,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1914.27
+EXP-00367,2024-08-01,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3556.38
+EXP-00368,2024-08-01,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2287.54
+EXP-00369,2024-08-01,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1926.39
+EXP-00370,2024-08-02,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3451.83
+EXP-00371,2024-08-02,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2151.69
+EXP-00372,2024-08-02,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1940.44
+EXP-00373,2024-08-03,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3445.92
+EXP-00374,2024-08-03,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2283.85
+EXP-00375,2024-08-03,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1938.02
+EXP-00376,2024-08-04,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3469.97
+EXP-00377,2024-08-04,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2188.06
+EXP-00378,2024-08-04,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1882.78
+EXP-00379,2024-08-05,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3414.31
+EXP-00380,2024-08-05,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2191.57
+EXP-00381,2024-08-05,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1857.79
+EXP-00382,2024-08-06,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3469.67
+EXP-00383,2024-08-06,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2176.61
+EXP-00384,2024-08-06,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1929.79
+EXP-00385,2024-08-07,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3518.31
+EXP-00386,2024-08-07,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2159.9
+EXP-00387,2024-08-07,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1804.41
+EXP-00388,2024-08-08,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3575.57
+EXP-00389,2024-08-08,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2193.76
+EXP-00390,2024-08-08,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1858.66
+EXP-00391,2024-08-09,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3558.17
+EXP-00392,2024-08-09,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2135.25
+EXP-00393,2024-08-09,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1840.4
+EXP-00394,2024-08-10,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3455.62
+EXP-00395,2024-08-10,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2253.65
+EXP-00396,2024-08-10,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1854.42
+EXP-00397,2024-08-11,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3409.88
+EXP-00398,2024-08-11,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2247.06
+EXP-00399,2024-08-11,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1909.1
+EXP-00400,2024-08-12,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3582.53
+EXP-00401,2024-08-12,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2197.92
+EXP-00402,2024-08-12,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1945.91
+EXP-00403,2024-08-13,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3500.76
+EXP-00404,2024-08-13,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2211.39
+EXP-00405,2024-08-13,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1869.95
+EXP-00406,2024-08-14,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3559.86
+EXP-00407,2024-08-14,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2151.4
+EXP-00408,2024-08-14,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1903.05
+EXP-00409,2024-08-15,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3505.84
+EXP-00410,2024-08-15,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2267.42
+EXP-00411,2024-08-15,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1877.12
+EXP-00412,2024-08-16,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3411.78
+EXP-00413,2024-08-16,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2243.57
+EXP-00414,2024-08-16,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1844.54
+EXP-00415,2024-08-17,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3488.18
+EXP-00416,2024-08-17,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2228.65
+EXP-00417,2024-08-17,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1947.25
+EXP-00418,2024-08-18,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3490.68
+EXP-00419,2024-08-18,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2112.94
+EXP-00420,2024-08-18,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1906.22
+EXP-00421,2024-08-19,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3475.57
+EXP-00422,2024-08-19,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2111.85
+EXP-00423,2024-08-19,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1930.77
+EXP-00424,2024-08-20,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3402.42
+EXP-00425,2024-08-20,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2101.03
+EXP-00426,2024-08-20,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1918.47
+EXP-00427,2024-08-21,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3470.12
+EXP-00428,2024-08-21,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2148.24
+EXP-00429,2024-08-21,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1874.04
+EXP-00430,2024-08-22,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3538.6
+EXP-00431,2024-08-22,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2158.98
+EXP-00432,2024-08-22,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1885.88
+EXP-00433,2024-08-23,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3538.61
+EXP-00434,2024-08-23,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2197.93
+EXP-00435,2024-08-23,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1915.37
+EXP-00436,2024-08-24,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3544.16
+EXP-00437,2024-08-24,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2203.66
+EXP-00438,2024-08-24,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1923.62
+EXP-00439,2024-08-25,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3423.54
+EXP-00440,2024-08-25,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2194.48
+EXP-00441,2024-08-25,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1904.74
+EXP-00442,2024-08-26,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3524.35
+EXP-00443,2024-08-26,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2118.79
+EXP-00444,2024-08-26,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1806.35
+EXP-00445,2024-08-27,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3460.48
+EXP-00446,2024-08-27,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2208.77
+EXP-00447,2024-08-27,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1875.92
+EXP-00448,2024-08-28,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3436.14
+EXP-00449,2024-08-28,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2242.74
+EXP-00450,2024-08-28,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1801.35
+EXP-00451,2024-08-29,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3435.71
+EXP-00452,2024-08-29,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2222.86
+EXP-00453,2024-08-29,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1843.41
+EXP-00454,2024-08-30,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3518.65
+EXP-00455,2024-08-30,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2107.42
+EXP-00456,2024-08-30,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1819.07
+EXP-00457,2024-08-31,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3557.06
+EXP-00458,2024-08-31,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2272.82
+EXP-00459,2024-08-31,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1822.55
+EXP-00460,2024-09-01,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3417.43
+EXP-00461,2024-09-01,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2203.04
+EXP-00462,2024-09-01,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1948.89
+EXP-00463,2024-09-02,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3556.72
+EXP-00464,2024-09-02,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2294.71
+EXP-00465,2024-09-02,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1829.55
+EXP-00466,2024-09-03,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3563.62
+EXP-00467,2024-09-03,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2140.51
+EXP-00468,2024-09-03,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1871.27
+EXP-00469,2024-09-04,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3494.32
+EXP-00470,2024-09-04,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2138.63
+EXP-00471,2024-09-04,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1853.6
+EXP-00472,2024-09-05,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3456.09
+EXP-00473,2024-09-05,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2117.84
+EXP-00474,2024-09-05,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1817.13
+EXP-00475,2024-09-06,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3418.82
+EXP-00476,2024-09-06,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2162.19
+EXP-00477,2024-09-06,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1918.26
+EXP-00478,2024-09-07,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3536.66
+EXP-00479,2024-09-07,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2232.36
+EXP-00480,2024-09-07,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1807.49
+EXP-00481,2024-09-08,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3591.55
+EXP-00482,2024-09-08,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2112.72
+EXP-00483,2024-09-08,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1899.75
+EXP-00484,2024-09-09,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3443.92
+EXP-00485,2024-09-09,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2116.3
+EXP-00486,2024-09-09,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1938.26
+EXP-00487,2024-09-10,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3583.35
+EXP-00488,2024-09-10,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2106.53
+EXP-00489,2024-09-10,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1806.62
+EXP-00490,2024-09-11,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3512.09
+EXP-00491,2024-09-11,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2248.9
+EXP-00492,2024-09-11,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1911.84
+EXP-00493,2024-09-12,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3549.22
+EXP-00494,2024-09-12,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2178.13
+EXP-00495,2024-09-12,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1838.92
+EXP-00496,2024-09-13,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3426.6
+EXP-00497,2024-09-13,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2268.35
+EXP-00498,2024-09-13,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1817.92
+EXP-00499,2024-09-14,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3429.85
+EXP-00500,2024-09-14,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2151.94
+EXP-00501,2024-09-14,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1867.87
+EXP-00502,2024-09-15,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3595.64
+EXP-00503,2024-09-15,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2246.28
+EXP-00504,2024-09-15,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1853.1
+EXP-00505,2024-09-16,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3438.09
+EXP-00506,2024-09-16,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2255.69
+EXP-00507,2024-09-16,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1905.74
+EXP-00508,2024-09-17,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3542.56
+EXP-00509,2024-09-17,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2111.07
+EXP-00510,2024-09-17,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1861.91
+EXP-00511,2024-09-18,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3566.77
+EXP-00512,2024-09-18,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2261.41
+EXP-00513,2024-09-18,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1870.02
+EXP-00514,2024-09-19,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3416.06
+EXP-00515,2024-09-19,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2236.2
+EXP-00516,2024-09-19,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1866.62
+EXP-00517,2024-09-20,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3444.02
+EXP-00518,2024-09-20,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2231.58
+EXP-00519,2024-09-20,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1941.97
+EXP-00520,2024-09-21,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3504.49
+EXP-00521,2024-09-21,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2136.06
+EXP-00522,2024-09-21,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1819.79
+EXP-00523,2024-09-22,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3583.4
+EXP-00524,2024-09-22,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2280.39
+EXP-00525,2024-09-22,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1886.32
+EXP-00526,2024-09-23,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3431.47
+EXP-00527,2024-09-23,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2211.35
+EXP-00528,2024-09-23,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1814.49
+EXP-00529,2024-09-24,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3499.46
+EXP-00530,2024-09-24,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2128.99
+EXP-00531,2024-09-24,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1826.09
+EXP-00532,2024-09-25,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3413.24
+EXP-00533,2024-09-25,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2186.94
+EXP-00534,2024-09-25,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1925.05
+EXP-00535,2024-09-26,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3568.23
+EXP-00536,2024-09-26,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2276.05
+EXP-00537,2024-09-26,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1897.24
+EXP-00538,2024-09-27,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3419.89
+EXP-00539,2024-09-27,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2173.12
+EXP-00540,2024-09-27,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1854.32
+EXP-00541,2024-09-28,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3497.61
+EXP-00542,2024-09-28,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2246.21
+EXP-00543,2024-09-28,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1912.05
+EXP-00544,2024-09-29,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3514.57
+EXP-00545,2024-09-29,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2181.13
+EXP-00546,2024-09-29,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1879.12
+EXP-00547,2024-09-30,Warehousing & Fulfillment,Supply Chain,Cross-docking and inventory sorting facility leases,3596.01
+EXP-00548,2024-09-30,Technology & Hosting,Engineering,AWS cloud cluster and CDN traffic bandwidth,2293.25
+EXP-00549,2024-09-30,General & Admin,Corporate Operations,Executive staff payroll and compliance legal fees,1916.44

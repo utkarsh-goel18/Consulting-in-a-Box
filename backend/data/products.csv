@@ -1,0 +1,20 @@
+product_id,sku,product_name,category,subcategory,unit_cost,unit_price,supplier_name
+PRD-101,SKU-ELE-101,Wireless Noise-Cancelling Headphones,Electronics,Wireless,120.0,199.0,Electronics Global Logistics Inc.
+PRD-102,SKU-ELE-102,Smart 4K Ultra HD TV 55-inch,Electronics,Smart,310.0,489.0,Electronics Global Logistics Inc.
+PRD-103,SKU-ELE-103,Bluetooth Portable Speaker Pro,Electronics,Bluetooth,45.0,79.0,Electronics Global Logistics Inc.
+PRD-104,SKU-ELE-104,Ergonomic Mechanical Keyboard,Electronics,Ergonomic,55.0,95.0,Electronics Global Logistics Inc.
+PRD-105,SKU-ELE-105,USB-C Fast Charging Dock Hub,Electronics,USB-C,22.0,45.0,Electronics Global Logistics Inc.
+PRD-106,SKU-FAS-106,Premium Merino Wool Sweater,Fashion & Apparel,Premium,38.0,85.0,Fashion Global Logistics Inc.
+PRD-107,SKU-FAS-107,Classic Fit Denim Jeans,Fashion & Apparel,Classic,24.0,65.0,Fashion Global Logistics Inc.
+PRD-108,SKU-FAS-108,Waterproof Breathable Trail Jacket,Fashion & Apparel,Waterproof,65.0,140.0,Fashion Global Logistics Inc.
+PRD-109,SKU-FAS-109,Cotton Casual Polo Shirt,Fashion & Apparel,Cotton,12.0,32.0,Fashion Global Logistics Inc.
+PRD-110,SKU-FAS-110,Performance Athletic Running Shoes,Fashion & Apparel,Performance,42.0,95.0,Fashion Global Logistics Inc.
+PRD-111,SKU-HOM-111,Cold Brew Coffee Maker Glass,Home & Living,Cold,18.0,38.0,Home Global Logistics Inc.
+PRD-112,SKU-HOM-112,Memory Foam Ergonomic Pillow,Home & Living,Memory,22.0,49.0,Home Global Logistics Inc.
+PRD-113,SKU-HOM-113,Stainless Steel Cookware Set 10pc,Home & Living,Stainless,110.0,195.0,Home Global Logistics Inc.
+PRD-114,SKU-HOM-114,Smart LED Ambient Light Strip,Home & Living,Smart,14.0,29.0,Home Global Logistics Inc.
+PRD-115,SKU-BEA-115,Hyaluronic Acid Hydrating Serum,Beauty & Health,Hyaluronic,11.0,28.0,Beauty Global Logistics Inc.
+PRD-116,SKU-BEA-116,Sonic Rechargeable Toothbrush,Beauty & Health,Sonic,26.0,62.0,Beauty Global Logistics Inc.
+PRD-117,SKU-BEA-117,Organic Botanical Night Cream,Beauty & Health,Organic,16.0,42.0,Beauty Global Logistics Inc.
+PRD-118,SKU-GRO-118,Artisanal Dark Roast Coffee Beans 1kg,Grocery & Pantry,Artisanal,9.5,19.5,Grocery Global Logistics Inc.
+PRD-119,SKU-GRO-119,Organic Extra Virgin Olive Oil 500ml,Grocery & Pantry,Organic,8.0,16.0,Grocery Global Logistics Inc.

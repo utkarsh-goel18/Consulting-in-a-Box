@@ -1,0 +1,733 @@
+spend_id,spend_date,channel,campaign,spend_amount,impressions,clicks,attributed_orders,attributed_revenue
+MKT-00001,2024-04-01,Paid Social,Meta Retargeting & Lookalike,3690.54,276790,10333,51,25245.0
+MKT-00002,2024-04-01,Google Ads,Search Intent High-Value,3193.44,143704,13412,52,25480.0
+MKT-00003,2024-04-01,Affiliate,Cashback & Review Partners,1454.73,43641,4509,32,16320.0
+MKT-00004,2024-04-01,Email Marketing,Lifecycle VIP Retention,920.11,110413,7820,51,27030.0
+MKT-00005,2024-04-02,Paid Social,Meta Retargeting & Lookalike,3789.47,284210,10610,53,26235.0
+MKT-00006,2024-04-02,Google Ads,Search Intent High-Value,3221.23,144955,13529,52,25480.0
+MKT-00007,2024-04-02,Affiliate,Cashback & Review Partners,1476.59,44297,4577,32,16320.0
+MKT-00008,2024-04-02,Email Marketing,Lifecycle VIP Retention,944.74,113368,8030,52,27560.0
+MKT-00009,2024-04-03,Paid Social,Meta Retargeting & Lookalike,3691.04,276828,10334,51,25245.0
+MKT-00010,2024-04-03,Google Ads,Search Intent High-Value,3236.52,145643,13593,53,25970.0
+MKT-00011,2024-04-03,Affiliate,Cashback & Review Partners,1491.55,44746,4623,33,16830.0
+MKT-00012,2024-04-03,Email Marketing,Lifecycle VIP Retention,902.05,108246,7667,50,26500.0
+MKT-00013,2024-04-04,Paid Social,Meta Retargeting & Lookalike,3714.56,278591,10400,52,25740.0
+MKT-00014,2024-04-04,Google Ads,Search Intent High-Value,3143.14,141441,13201,51,24990.0
+MKT-00015,2024-04-04,Affiliate,Cashback & Review Partners,1429.3,42879,4430,31,15810.0
+MKT-00016,2024-04-04,Email Marketing,Lifecycle VIP Retention,923.62,110834,7850,51,27030.0
+MKT-00017,2024-04-05,Paid Social,Meta Retargeting & Lookalike,3854.08,289055,10791,54,26730.0
+MKT-00018,2024-04-05,Google Ads,Search Intent High-Value,3246.25,146081,13634,53,25970.0
+MKT-00019,2024-04-05,Affiliate,Cashback & Review Partners,1457.25,43717,4517,32,16320.0
+MKT-00020,2024-04-05,Email Marketing,Lifecycle VIP Retention,897.79,107734,7631,49,25970.0
+MKT-00021,2024-04-06,Paid Social,Meta Retargeting & Lookalike,3697.99,277349,10354,51,25245.0
+MKT-00022,2024-04-06,Google Ads,Search Intent High-Value,3288.92,148001,13813,53,25970.0
+MKT-00023,2024-04-06,Affiliate,Cashback & Review Partners,1400.19,42005,4340,31,15810.0
+MKT-00024,2024-04-06,Email Marketing,Lifecycle VIP Retention,898.26,107790,7635,49,25970.0
+MKT-00025,2024-04-07,Paid Social,Meta Retargeting & Lookalike,3657.63,274321,10241,51,25245.0
+MKT-00026,2024-04-07,Google Ads,Search Intent High-Value,3176.41,142938,13340,52,25480.0
+MKT-00027,2024-04-07,Affiliate,Cashback & Review Partners,1428.18,42845,4427,31,15810.0
+MKT-00028,2024-04-07,Email Marketing,Lifecycle VIP Retention,930.69,111682,7910,51,27030.0
+MKT-00029,2024-04-08,Paid Social,Meta Retargeting & Lookalike,3627.82,272086,10157,50,24750.0
+MKT-00030,2024-04-08,Google Ads,Search Intent High-Value,3119.05,140357,13100,51,24990.0
+MKT-00031,2024-04-08,Affiliate,Cashback & Review Partners,1428.91,42867,4429,31,15810.0
+MKT-00032,2024-04-08,Email Marketing,Lifecycle VIP Retention,914.73,109768,7775,50,26500.0
+MKT-00033,2024-04-09,Paid Social,Meta Retargeting & Lookalike,3839.29,287946,10750,53,26235.0
+MKT-00034,2024-04-09,Google Ads,Search Intent High-Value,3270.91,147191,13737,53,25970.0
+MKT-00035,2024-04-09,Affiliate,Cashback & Review Partners,1409.94,42298,4370,31,15810.0
+MKT-00036,2024-04-09,Email Marketing,Lifecycle VIP Retention,916.87,110024,7793,50,26500.0
+MKT-00037,2024-04-10,Paid Social,Meta Retargeting & Lookalike,3885.74,291430,10880,54,26730.0
+MKT-00038,2024-04-10,Google Ads,Search Intent High-Value,3140.64,141328,13190,51,24990.0
+MKT-00039,2024-04-10,Affiliate,Cashback & Review Partners,1405.24,42157,4356,31,15810.0
+MKT-00040,2024-04-10,Email Marketing,Lifecycle VIP Retention,874.27,104912,7431,48,25440.0
+MKT-00041,2024-04-11,Paid Social,Meta Retargeting & Lookalike,3681.98,276148,10309,51,25245.0
+MKT-00042,2024-04-11,Google Ads,Search Intent High-Value,3219.71,144886,13522,52,25480.0
+MKT-00043,2024-04-11,Affiliate,Cashback & Review Partners,1420.0,42599,4401,31,15810.0
+MKT-00044,2024-04-11,Email Marketing,Lifecycle VIP Retention,886.63,106395,7536,49,25970.0
+MKT-00045,2024-04-12,Paid Social,Meta Retargeting & Lookalike,3717.4,278805,10408,52,25740.0
+MKT-00046,2024-04-12,Google Ads,Search Intent High-Value,3130.29,140862,13147,51,24990.0
+MKT-00047,2024-04-12,Affiliate,Cashback & Review Partners,1473.06,44191,4566,32,16320.0
+MKT-00048,2024-04-12,Email Marketing,Lifecycle VIP Retention,918.6,110231,7808,51,27030.0
+MKT-00049,2024-04-13,Paid Social,Meta Retargeting & Lookalike,3694.21,277066,10343,51,25245.0
+MKT-00050,2024-04-13,Google Ads,Search Intent High-Value,3174.1,142834,13331,52,25480.0
+MKT-00051,2024-04-13,Affiliate,Cashback & Review Partners,1425.91,42777,4420,31,15810.0
+MKT-00052,2024-04-13,Email Marketing,Lifecycle VIP Retention,902.41,108289,7670,50,26500.0
+MKT-00053,2024-04-14,Paid Social,Meta Retargeting & Lookalike,3896.34,292225,10909,54,26730.0
+MKT-00054,2024-04-14,Google Ads,Search Intent High-Value,3282.78,147725,13787,53,25970.0
+MKT-00055,2024-04-14,Affiliate,Cashback & Review Partners,1442.42,43272,4471,32,16320.0
+MKT-00056,2024-04-14,Email Marketing,Lifecycle VIP Retention,900.16,108019,7651,50,26500.0
+MKT-00057,2024-04-15,Paid Social,Meta Retargeting & Lookalike,3630.87,272315,10166,50,24750.0
+MKT-00058,2024-04-15,Google Ads,Search Intent High-Value,3200.81,144036,13443,52,25480.0
+MKT-00059,2024-04-15,Affiliate,Cashback & Review Partners,1400.5,42015,4341,31,15810.0
+MKT-00060,2024-04-15,Email Marketing,Lifecycle VIP Retention,852.87,102344,7249,47,24910.0
+MKT-00061,2024-04-16,Paid Social,Meta Retargeting & Lookalike,3668.83,275162,10272,51,25245.0
+MKT-00062,2024-04-16,Google Ads,Search Intent High-Value,3240.57,145825,13610,53,25970.0
+MKT-00063,2024-04-16,Affiliate,Cashback & Review Partners,1442.28,43268,4471,32,16320.0
+MKT-00064,2024-04-16,Email Marketing,Lifecycle VIP Retention,933.42,112010,7934,51,27030.0
+MKT-00065,2024-04-17,Paid Social,Meta Retargeting & Lookalike,3642.41,273180,10198,51,25245.0
+MKT-00066,2024-04-17,Google Ads,Search Intent High-Value,3132.76,140974,13157,51,24990.0
+MKT-00067,2024-04-17,Affiliate,Cashback & Review Partners,1484.02,44520,4600,32,16320.0
+MKT-00068,2024-04-17,Email Marketing,Lifecycle VIP Retention,904.5,108540,7688,50,26500.0
+MKT-00069,2024-04-18,Paid Social,Meta Retargeting & Lookalike,3760.22,282016,10528,52,25740.0
+MKT-00070,2024-04-18,Google Ads,Search Intent High-Value,3140.4,141318,13189,51,24990.0
+MKT-00071,2024-04-18,Affiliate,Cashback & Review Partners,1459.0,43769,4522,32,16320.0
+MKT-00072,2024-04-18,Email Marketing,Lifecycle VIP Retention,854.09,102491,7259,47,24910.0
+MKT-00073,2024-04-19,Paid Social,Meta Retargeting & Lookalike,3793.36,284501,10621,53,26235.0
+MKT-00074,2024-04-19,Google Ads,Search Intent High-Value,3205.95,144267,13464,52,25480.0
+MKT-00075,2024-04-19,Affiliate,Cashback & Review Partners,1462.03,43860,4532,32,16320.0
+MKT-00076,2024-04-19,Email Marketing,Lifecycle VIP Retention,851.03,102123,7233,47,24910.0
+MKT-00077,2024-04-20,Paid Social,Meta Retargeting & Lookalike,3638.59,272893,10188,51,25245.0
+MKT-00078,2024-04-20,Google Ads,Search Intent High-Value,3181.17,143152,13360,52,25480.0
+MKT-00079,2024-04-20,Affiliate,Cashback & Review Partners,1436.81,43104,4454,31,15810.0
+MKT-00080,2024-04-20,Email Marketing,Lifecycle VIP Retention,876.78,105213,7452,48,25440.0
+MKT-00081,2024-04-21,Paid Social,Meta Retargeting & Lookalike,3829.58,287218,10722,53,26235.0
+MKT-00082,2024-04-21,Google Ads,Search Intent High-Value,3217.15,144771,13512,52,25480.0
+MKT-00083,2024-04-21,Affiliate,Cashback & Review Partners,1449.86,43495,4494,32,16320.0
+MKT-00084,2024-04-21,Email Marketing,Lifecycle VIP Retention,851.33,102159,7236,47,24910.0
+MKT-00085,2024-04-22,Paid Social,Meta Retargeting & Lookalike,3700.22,277516,10360,51,25245.0
+MKT-00086,2024-04-22,Google Ads,Search Intent High-Value,3286.82,147906,13804,53,25970.0
+MKT-00087,2024-04-22,Affiliate,Cashback & Review Partners,1441.79,43253,4469,32,16320.0
+MKT-00088,2024-04-22,Email Marketing,Lifecycle VIP Retention,870.36,104442,7398,48,25440.0
+MKT-00089,2024-04-23,Paid Social,Meta Retargeting & Lookalike,3793.68,284526,10622,53,26235.0
+MKT-00090,2024-04-23,Google Ads,Search Intent High-Value,3118.64,140338,13098,51,24990.0
+MKT-00091,2024-04-23,Affiliate,Cashback & Review Partners,1426.62,42798,4422,31,15810.0
+MKT-00092,2024-04-23,Email Marketing,Lifecycle VIP Retention,881.21,105745,7490,48,25440.0
+MKT-00093,2024-04-24,Paid Social,Meta Retargeting & Lookalike,3756.3,281722,10517,52,25740.0
+MKT-00094,2024-04-24,Google Ads,Search Intent High-Value,3195.05,143777,13419,52,25480.0
+MKT-00095,2024-04-24,Affiliate,Cashback & Review Partners,1494.41,44832,4632,33,16830.0
+MKT-00096,2024-04-24,Email Marketing,Lifecycle VIP Retention,913.66,109639,7766,50,26500.0
+MKT-00097,2024-04-25,Paid Social,Meta Retargeting & Lookalike,3701.62,277621,10364,51,25245.0
+MKT-00098,2024-04-25,Google Ads,Search Intent High-Value,3191.71,143626,13405,52,25480.0
+MKT-00099,2024-04-25,Affiliate,Cashback & Review Partners,1414.85,42445,4386,31,15810.0
+MKT-00100,2024-04-25,Email Marketing,Lifecycle VIP Retention,881.93,105831,7496,48,25440.0
+MKT-00101,2024-04-26,Paid Social,Meta Retargeting & Lookalike,3692.06,276904,10337,51,25245.0
+MKT-00102,2024-04-26,Google Ads,Search Intent High-Value,3178.4,143027,13349,52,25480.0
+MKT-00103,2024-04-26,Affiliate,Cashback & Review Partners,1415.99,42479,4389,31,15810.0
+MKT-00104,2024-04-26,Email Marketing,Lifecycle VIP Retention,911.18,109341,7745,50,26500.0
+MKT-00105,2024-04-27,Paid Social,Meta Retargeting & Lookalike,3819.49,286461,10694,53,26235.0
+MKT-00106,2024-04-27,Google Ads,Search Intent High-Value,3179.23,143065,13352,52,25480.0
+MKT-00107,2024-04-27,Affiliate,Cashback & Review Partners,1448.34,43450,4489,32,16320.0
+MKT-00108,2024-04-27,Email Marketing,Lifecycle VIP Retention,915.03,109803,7777,50,26500.0
+MKT-00109,2024-04-28,Paid Social,Meta Retargeting & Lookalike,3621.68,271625,10140,50,24750.0
+MKT-00110,2024-04-28,Google Ads,Search Intent High-Value,3221.94,144987,13532,52,25480.0
+MKT-00111,2024-04-28,Affiliate,Cashback & Review Partners,1403.8,42114,4351,31,15810.0
+MKT-00112,2024-04-28,Email Marketing,Lifecycle VIP Retention,926.13,111135,7872,51,27030.0
+MKT-00113,2024-04-29,Paid Social,Meta Retargeting & Lookalike,3879.77,290982,10863,54,26730.0
+MKT-00114,2024-04-29,Google Ads,Search Intent High-Value,3291.16,148102,13822,53,25970.0
+MKT-00115,2024-04-29,Affiliate,Cashback & Review Partners,1468.95,44068,4553,32,16320.0
+MKT-00116,2024-04-29,Email Marketing,Lifecycle VIP Retention,875.29,105034,7439,48,25440.0
+MKT-00117,2024-04-30,Paid Social,Meta Retargeting & Lookalike,3892.38,291928,10898,54,26730.0
+MKT-00118,2024-04-30,Google Ads,Search Intent High-Value,3265.6,146951,13715,53,25970.0
+MKT-00119,2024-04-30,Affiliate,Cashback & Review Partners,1481.01,44430,4591,32,16320.0
+MKT-00120,2024-04-30,Email Marketing,Lifecycle VIP Retention,935.63,112275,7952,51,27030.0
+MKT-00121,2024-05-01,Paid Social,Meta Retargeting & Lookalike,3886.94,291520,10883,54,26730.0
+MKT-00122,2024-05-01,Google Ads,Search Intent High-Value,3126.1,140674,13129,51,24990.0
+MKT-00123,2024-05-01,Affiliate,Cashback & Review Partners,1413.02,42390,4380,31,15810.0
+MKT-00124,2024-05-01,Email Marketing,Lifecycle VIP Retention,898.44,107812,7636,49,25970.0
+MKT-00125,2024-05-02,Paid Social,Meta Retargeting & Lookalike,3881.82,291136,10869,54,26730.0
+MKT-00126,2024-05-02,Google Ads,Search Intent High-Value,3138.04,141211,13179,51,24990.0
+MKT-00127,2024-05-02,Affiliate,Cashback & Review Partners,1428.76,42862,4429,31,15810.0
+MKT-00128,2024-05-02,Email Marketing,Lifecycle VIP Retention,892.8,107135,7588,49,25970.0
+MKT-00129,2024-05-03,Paid Social,Meta Retargeting & Lookalike,3627.42,272056,10156,50,24750.0
+MKT-00130,2024-05-03,Google Ads,Search Intent High-Value,3121.78,140480,13111,51,24990.0
+MKT-00131,2024-05-03,Affiliate,Cashback & Review Partners,1476.32,44289,4576,32,16320.0
+MKT-00132,2024-05-03,Email Marketing,Lifecycle VIP Retention,946.63,113595,8046,52,27560.0
+MKT-00133,2024-05-04,Paid Social,Meta Retargeting & Lookalike,3663.36,274752,10257,51,25245.0
+MKT-00134,2024-05-04,Google Ads,Search Intent High-Value,3163.58,142360,13287,51,24990.0
+MKT-00135,2024-05-04,Affiliate,Cashback & Review Partners,1488.55,44656,4614,33,16830.0
+MKT-00136,2024-05-04,Email Marketing,Lifecycle VIP Retention,872.3,104675,7414,48,25440.0
+MKT-00137,2024-05-05,Paid Social,Meta Retargeting & Lookalike,3624.98,271873,10149,50,24750.0
+MKT-00138,2024-05-05,Google Ads,Search Intent High-Value,3230.5,145372,13568,52,25480.0
+MKT-00139,2024-05-05,Affiliate,Cashback & Review Partners,1452.31,43569,4502,32,16320.0
+MKT-00140,2024-05-05,Email Marketing,Lifecycle VIP Retention,891.66,106999,7579,49,25970.0
+MKT-00141,2024-05-06,Paid Social,Meta Retargeting & Lookalike,3609.19,270689,10105,50,24750.0
+MKT-00142,2024-05-06,Google Ads,Search Intent High-Value,3120.36,140416,13105,51,24990.0
+MKT-00143,2024-05-06,Affiliate,Cashback & Review Partners,1490.88,44726,4621,33,16830.0
+MKT-00144,2024-05-06,Email Marketing,Lifecycle VIP Retention,930.84,111701,7912,51,27030.0
+MKT-00145,2024-05-07,Paid Social,Meta Retargeting & Lookalike,3871.13,290334,10839,54,26730.0
+MKT-00146,2024-05-07,Google Ads,Search Intent High-Value,3151.72,141827,13237,51,24990.0
+MKT-00147,2024-05-07,Affiliate,Cashback & Review Partners,1406.03,42181,4358,31,15810.0
+MKT-00148,2024-05-07,Email Marketing,Lifecycle VIP Retention,928.85,111462,7895,51,27030.0
+MKT-00149,2024-05-08,Paid Social,Meta Retargeting & Lookalike,3879.98,290998,10863,54,26730.0
+MKT-00150,2024-05-08,Google Ads,Search Intent High-Value,3179.92,143096,13355,52,25480.0
+MKT-00151,2024-05-08,Affiliate,Cashback & Review Partners,1498.94,44968,4646,33,16830.0
+MKT-00152,2024-05-08,Email Marketing,Lifecycle VIP Retention,926.68,111201,7876,51,27030.0
+MKT-00153,2024-05-09,Paid Social,Meta Retargeting & Lookalike,3636.58,272743,10182,51,25245.0
+MKT-00154,2024-05-09,Google Ads,Search Intent High-Value,3241.4,145863,13613,53,25970.0
+MKT-00155,2024-05-09,Affiliate,Cashback & Review Partners,1414.99,42449,4386,31,15810.0
+MKT-00156,2024-05-09,Email Marketing,Lifecycle VIP Retention,892.98,107158,7590,49,25970.0
+MKT-00157,2024-05-10,Paid Social,Meta Retargeting & Lookalike,3851.58,288868,10784,54,26730.0
+MKT-00158,2024-05-10,Google Ads,Search Intent High-Value,3259.15,146661,13688,53,25970.0
+MKT-00159,2024-05-10,Affiliate,Cashback & Review Partners,1480.98,44429,4591,32,16320.0
+MKT-00160,2024-05-10,Email Marketing,Lifecycle VIP Retention,911.84,109421,7750,50,26500.0
+MKT-00161,2024-05-11,Paid Social,Meta Retargeting & Lookalike,3709.07,278180,10385,52,25740.0
+MKT-00162,2024-05-11,Google Ads,Search Intent High-Value,3106.0,139770,13045,50,24500.0
+MKT-00163,2024-05-11,Affiliate,Cashback & Review Partners,1435.49,43064,4450,31,15810.0
+MKT-00164,2024-05-11,Email Marketing,Lifecycle VIP Retention,934.53,112143,7943,51,27030.0
+MKT-00165,2024-05-12,Paid Social,Meta Retargeting & Lookalike,3754.22,281566,10511,52,25740.0
+MKT-00166,2024-05-12,Google Ads,Search Intent High-Value,3264.28,146892,13709,53,25970.0
+MKT-00167,2024-05-12,Affiliate,Cashback & Review Partners,1416.65,42499,4391,31,15810.0
+MKT-00168,2024-05-12,Email Marketing,Lifecycle VIP Retention,882.74,105928,7503,49,25970.0
+MKT-00169,2024-05-13,Paid Social,Meta Retargeting & Lookalike,3842.72,288203,10759,53,26235.0
+MKT-00170,2024-05-13,Google Ads,Search Intent High-Value,3135.33,141089,13168,51,24990.0
+MKT-00171,2024-05-13,Affiliate,Cashback & Review Partners,1478.94,44368,4584,32,16320.0
+MKT-00172,2024-05-13,Email Marketing,Lifecycle VIP Retention,919.7,110363,7817,51,27030.0
+MKT-00173,2024-05-14,Paid Social,Meta Retargeting & Lookalike,3732.93,279969,10452,52,25740.0
+MKT-00174,2024-05-14,Google Ads,Search Intent High-Value,3287.43,147934,13807,53,25970.0
+MKT-00175,2024-05-14,Affiliate,Cashback & Review Partners,1434.48,43034,4446,31,15810.0
+MKT-00176,2024-05-14,Email Marketing,Lifecycle VIP Retention,908.86,109062,7725,50,26500.0
+MKT-00177,2024-05-15,Paid Social,Meta Retargeting & Lookalike,3855.12,289133,10794,54,26730.0
+MKT-00178,2024-05-15,Google Ads,Search Intent High-Value,3138.64,141238,13182,51,24990.0
+MKT-00179,2024-05-15,Affiliate,Cashback & Review Partners,1469.28,44078,4554,32,16320.0
+MKT-00180,2024-05-15,Email Marketing,Lifecycle VIP Retention,882.26,105870,7499,49,25970.0
+MKT-00181,2024-05-16,Paid Social,Meta Retargeting & Lookalike,3652.35,273926,10226,51,25245.0
+MKT-00182,2024-05-16,Google Ads,Search Intent High-Value,3114.89,140169,13082,51,24990.0
+MKT-00183,2024-05-16,Affiliate,Cashback & Review Partners,1447.16,43414,4486,32,16320.0
+MKT-00184,2024-05-16,Email Marketing,Lifecycle VIP Retention,906.12,108734,7702,50,26500.0
+MKT-00185,2024-05-17,Paid Social,Meta Retargeting & Lookalike,3682.56,276192,10311,51,25245.0
+MKT-00186,2024-05-17,Google Ads,Search Intent High-Value,3226.73,145202,13552,52,25480.0
+MKT-00187,2024-05-17,Affiliate,Cashback & Review Partners,1487.34,44620,4610,33,16830.0
+MKT-00188,2024-05-17,Email Marketing,Lifecycle VIP Retention,851.58,102189,7238,47,24910.0
+MKT-00189,2024-05-18,Paid Social,Meta Retargeting & Lookalike,3898.05,292353,10914,54,26730.0
+MKT-00190,2024-05-18,Google Ads,Search Intent High-Value,3187.25,143426,13386,52,25480.0
+MKT-00191,2024-05-18,Affiliate,Cashback & Review Partners,1402.89,42086,4348,31,15810.0
+MKT-00192,2024-05-18,Email Marketing,Lifecycle VIP Retention,912.54,109504,7756,50,26500.0
+MKT-00193,2024-05-19,Paid Social,Meta Retargeting & Lookalike,3848.74,288655,10776,54,26730.0
+MKT-00194,2024-05-19,Google Ads,Search Intent High-Value,3293.53,148208,13832,53,25970.0
+MKT-00195,2024-05-19,Affiliate,Cashback & Review Partners,1488.98,44669,4615,33,16830.0
+MKT-00196,2024-05-19,Email Marketing,Lifecycle VIP Retention,873.94,104872,7428,48,25440.0
+MKT-00197,2024-05-20,Paid Social,Meta Retargeting & Lookalike,3840.51,288038,10753,53,26235.0
+MKT-00198,2024-05-20,Google Ads,Search Intent High-Value,3119.36,140371,13101,51,24990.0
+MKT-00199,2024-05-20,Affiliate,Cashback & Review Partners,1493.23,44796,4629,33,16830.0
+MKT-00200,2024-05-20,Email Marketing,Lifecycle VIP Retention,880.5,105660,7484,48,25440.0
+MKT-00201,2024-05-21,Paid Social,Meta Retargeting & Lookalike,3791.56,284367,10616,53,26235.0
+MKT-00202,2024-05-21,Google Ads,Search Intent High-Value,3286.63,147898,13803,53,25970.0
+MKT-00203,2024-05-21,Affiliate,Cashback & Review Partners,1448.03,43440,4488,32,16320.0
+MKT-00204,2024-05-21,Email Marketing,Lifecycle VIP Retention,942.82,113138,8014,52,27560.0
+MKT-00205,2024-05-22,Paid Social,Meta Retargeting & Lookalike,3829.72,287228,10723,53,26235.0
+MKT-00206,2024-05-22,Google Ads,Search Intent High-Value,3150.64,141778,13232,51,24990.0
+MKT-00207,2024-05-22,Affiliate,Cashback & Review Partners,1498.08,44942,4644,33,16830.0
+MKT-00208,2024-05-22,Email Marketing,Lifecycle VIP Retention,905.85,108702,7699,50,26500.0
+MKT-00209,2024-05-23,Paid Social,Meta Retargeting & Lookalike,3832.66,287449,10731,53,26235.0
+MKT-00210,2024-05-23,Google Ads,Search Intent High-Value,3126.29,140683,13130,51,24990.0
+MKT-00211,2024-05-23,Affiliate,Cashback & Review Partners,1434.66,43039,4447,31,15810.0
+MKT-00212,2024-05-23,Email Marketing,Lifecycle VIP Retention,926.17,111140,7872,51,27030.0
+MKT-00213,2024-05-24,Paid Social,Meta Retargeting & Lookalike,3803.89,285292,10650,53,26235.0
+MKT-00214,2024-05-24,Google Ads,Search Intent High-Value,3197.25,143876,13428,52,25480.0
+MKT-00215,2024-05-24,Affiliate,Cashback & Review Partners,1472.16,44164,4563,32,16320.0
+MKT-00216,2024-05-24,Email Marketing,Lifecycle VIP Retention,926.26,111151,7873,51,27030.0
+MKT-00217,2024-05-25,Paid Social,Meta Retargeting & Lookalike,3816.73,286254,10686,53,26235.0
+MKT-00218,2024-05-25,Google Ads,Search Intent High-Value,3142.83,141427,13199,51,24990.0
+MKT-00219,2024-05-25,Affiliate,Cashback & Review Partners,1490.42,44712,4620,33,16830.0
+MKT-00220,2024-05-25,Email Marketing,Lifecycle VIP Retention,909.64,109156,7731,50,26500.0
+MKT-00221,2024-05-26,Paid Social,Meta Retargeting & Lookalike,3758.18,281863,10522,52,25740.0
+MKT-00222,2024-05-26,Google Ads,Search Intent High-Value,3175.63,142903,13337,52,25480.0
+MKT-00223,2024-05-26,Affiliate,Cashback & Review Partners,1439.37,43181,4462,31,15810.0
+MKT-00224,2024-05-26,Email Marketing,Lifecycle VIP Retention,905.13,108615,7693,50,26500.0
+MKT-00225,2024-05-27,Paid Social,Meta Retargeting & Lookalike,3693.33,276999,10341,51,25245.0
+MKT-00226,2024-05-27,Google Ads,Search Intent High-Value,3216.07,144723,13507,52,25480.0
+MKT-00227,2024-05-27,Affiliate,Cashback & Review Partners,1414.59,42437,4385,31,15810.0
+MKT-00228,2024-05-27,Email Marketing,Lifecycle VIP Retention,946.13,113535,8042,52,27560.0
+MKT-00229,2024-05-28,Paid Social,Meta Retargeting & Lookalike,3632.84,272462,10171,51,25245.0
+MKT-00230,2024-05-28,Google Ads,Search Intent High-Value,3143.59,141461,13203,51,24990.0
+MKT-00231,2024-05-28,Affiliate,Cashback & Review Partners,1432.52,42975,4440,31,15810.0
+MKT-00232,2024-05-28,Email Marketing,Lifecycle VIP Retention,919.51,110341,7815,51,27030.0
+MKT-00233,2024-05-29,Paid Social,Meta Retargeting & Lookalike,3650.26,273769,10220,51,25245.0
+MKT-00234,2024-05-29,Google Ads,Search Intent High-Value,3252.64,146368,13661,53,25970.0
+MKT-00235,2024-05-29,Affiliate,Cashback & Review Partners,1490.43,44712,4620,33,16830.0
+MKT-00236,2024-05-29,Email Marketing,Lifecycle VIP Retention,924.48,110937,7858,51,27030.0
+MKT-00237,2024-05-30,Paid Social,Meta Retargeting & Lookalike,3680.85,276063,10306,51,25245.0
+MKT-00238,2024-05-30,Google Ads,Search Intent High-Value,3225.79,145160,13548,52,25480.0
+MKT-00239,2024-05-30,Affiliate,Cashback & Review Partners,1442.2,43265,4470,32,16320.0
+MKT-00240,2024-05-30,Email Marketing,Lifecycle VIP Retention,882.98,105957,7505,49,25970.0
+MKT-00241,2024-05-31,Paid Social,Meta Retargeting & Lookalike,3796.98,284773,10631,53,26235.0
+MKT-00242,2024-05-31,Google Ads,Search Intent High-Value,3162.45,142310,13282,51,24990.0
+MKT-00243,2024-05-31,Affiliate,Cashback & Review Partners,1428.35,42850,4427,31,15810.0
+MKT-00244,2024-05-31,Email Marketing,Lifecycle VIP Retention,943.18,113181,8017,52,27560.0
+MKT-00245,2024-06-01,Paid Social,Meta Retargeting & Lookalike,3622.61,271696,10143,50,24750.0
+MKT-00246,2024-06-01,Google Ads,Search Intent High-Value,3164.21,142389,13289,51,24990.0
+MKT-00247,2024-06-01,Affiliate,Cashback & Review Partners,1467.48,44024,4549,32,16320.0
+MKT-00248,2024-06-01,Email Marketing,Lifecycle VIP Retention,918.09,110171,7803,51,27030.0
+MKT-00249,2024-06-02,Paid Social,Meta Retargeting & Lookalike,3617.93,271344,10130,50,24750.0
+MKT-00250,2024-06-02,Google Ads,Search Intent High-Value,3250.2,146259,13650,53,25970.0
+MKT-00251,2024-06-02,Affiliate,Cashback & Review Partners,1412.99,42389,4380,31,15810.0
+MKT-00252,2024-06-02,Email Marketing,Lifecycle VIP Retention,891.38,106965,7576,49,25970.0
+MKT-00253,2024-06-03,Paid Social,Meta Retargeting & Lookalike,3602.75,270206,10087,50,24750.0
+MKT-00254,2024-06-03,Google Ads,Search Intent High-Value,3268.6,147087,13728,53,25970.0
+MKT-00255,2024-06-03,Affiliate,Cashback & Review Partners,1493.31,44799,4629,33,16830.0
+MKT-00256,2024-06-03,Email Marketing,Lifecycle VIP Retention,913.41,109609,7764,50,26500.0
+MKT-00257,2024-06-04,Paid Social,Meta Retargeting & Lookalike,3860.65,289549,10809,54,26730.0
+MKT-00258,2024-06-04,Google Ads,Search Intent High-Value,3285.13,147830,13797,53,25970.0
+MKT-00259,2024-06-04,Affiliate,Cashback & Review Partners,1483.07,44492,4597,32,16320.0
+MKT-00260,2024-06-04,Email Marketing,Lifecycle VIP Retention,901.69,108202,7664,50,26500.0
+MKT-00261,2024-06-05,Paid Social,Meta Retargeting & Lookalike,3627.37,272052,10156,50,24750.0
+MKT-00262,2024-06-05,Google Ads,Search Intent High-Value,3102.43,139609,13030,50,24500.0
+MKT-00263,2024-06-05,Affiliate,Cashback & Review Partners,1443.47,43304,4474,32,16320.0
+MKT-00264,2024-06-05,Email Marketing,Lifecycle VIP Retention,863.0,103560,7335,47,24910.0
+MKT-00265,2024-06-06,Paid Social,Meta Retargeting & Lookalike,3705.81,277935,10376,52,25740.0
+MKT-00266,2024-06-06,Google Ads,Search Intent High-Value,3168.25,142571,13306,51,24990.0
+MKT-00267,2024-06-06,Affiliate,Cashback & Review Partners,1404.12,42123,4352,31,15810.0
+MKT-00268,2024-06-06,Email Marketing,Lifecycle VIP Retention,851.8,102216,7240,47,24910.0
+MKT-00269,2024-06-07,Paid Social,Meta Retargeting & Lookalike,3686.11,276458,10321,51,25245.0
+MKT-00270,2024-06-07,Google Ads,Search Intent High-Value,3272.36,147256,13743,53,25970.0
+MKT-00271,2024-06-07,Affiliate,Cashback & Review Partners,1458.99,43769,4522,32,16320.0
+MKT-00272,2024-06-07,Email Marketing,Lifecycle VIP Retention,870.17,104420,7396,48,25440.0
+MKT-00273,2024-06-08,Paid Social,Meta Retargeting & Lookalike,3717.88,278840,10410,52,25740.0
+MKT-00274,2024-06-08,Google Ads,Search Intent High-Value,3184.23,143290,13373,52,25480.0
+MKT-00275,2024-06-08,Affiliate,Cashback & Review Partners,1433.55,43006,4444,31,15810.0
+MKT-00276,2024-06-08,Email Marketing,Lifecycle VIP Retention,910.01,109201,7735,50,26500.0
+MKT-00277,2024-06-09,Paid Social,Meta Retargeting & Lookalike,3713.58,278518,10398,52,25740.0
+MKT-00278,2024-06-09,Google Ads,Search Intent High-Value,3151.99,141839,13238,51,24990.0
+MKT-00279,2024-06-09,Affiliate,Cashback & Review Partners,1456.01,43680,4513,32,16320.0
+MKT-00280,2024-06-09,Email Marketing,Lifecycle VIP Retention,861.08,103329,7319,47,24910.0
+MKT-00281,2024-06-10,Paid Social,Meta Retargeting & Lookalike,3609.23,270692,10105,50,24750.0
+MKT-00282,2024-06-10,Google Ads,Search Intent High-Value,3167.7,142546,13304,51,24990.0
+MKT-00283,2024-06-10,Affiliate,Cashback & Review Partners,1442.01,43260,4470,32,16320.0
+MKT-00284,2024-06-10,Email Marketing,Lifecycle VIP Retention,882.33,105879,7499,49,25970.0
+MKT-00285,2024-06-11,Paid Social,Meta Retargeting & Lookalike,3793.29,284496,10621,53,26235.0
+MKT-00286,2024-06-11,Google Ads,Search Intent High-Value,3186.89,143409,13384,52,25480.0
+MKT-00287,2024-06-11,Affiliate,Cashback & Review Partners,1432.57,42976,4440,31,15810.0
+MKT-00288,2024-06-11,Email Marketing,Lifecycle VIP Retention,856.22,102746,7277,47,24910.0
+MKT-00289,2024-06-12,Paid Social,Meta Retargeting & Lookalike,3656.24,274218,10237,51,25245.0
+MKT-00290,2024-06-12,Google Ads,Search Intent High-Value,3176.61,142947,13341,52,25480.0
+MKT-00291,2024-06-12,Affiliate,Cashback & Review Partners,1476.44,44293,4576,32,16320.0
+MKT-00292,2024-06-12,Email Marketing,Lifecycle VIP Retention,933.85,112061,7937,51,27030.0
+MKT-00293,2024-06-13,Paid Social,Meta Retargeting & Lookalike,3710.16,278262,10388,52,25740.0
+MKT-00294,2024-06-13,Google Ads,Search Intent High-Value,3165.88,142464,13296,51,24990.0
+MKT-00295,2024-06-13,Affiliate,Cashback & Review Partners,1464.59,43937,4540,32,16320.0
+MKT-00296,2024-06-13,Email Marketing,Lifecycle VIP Retention,869.01,104281,7386,48,25440.0
+MKT-00297,2024-06-14,Paid Social,Meta Retargeting & Lookalike,3863.91,289793,10818,54,26730.0
+MKT-00298,2024-06-14,Google Ads,Search Intent High-Value,3102.32,139604,13029,50,24500.0
+MKT-00299,2024-06-14,Affiliate,Cashback & Review Partners,1408.29,42248,4365,31,15810.0
+MKT-00300,2024-06-14,Email Marketing,Lifecycle VIP Retention,946.52,113582,8045,52,27560.0
+MKT-00301,2024-06-15,Paid Social,Meta Retargeting & Lookalike,3675.07,275630,10290,51,25245.0
+MKT-00302,2024-06-15,Google Ads,Search Intent High-Value,3214.39,144647,13500,52,25480.0
+MKT-00303,2024-06-15,Affiliate,Cashback & Review Partners,1439.97,43199,4463,31,15810.0
+MKT-00304,2024-06-15,Email Marketing,Lifecycle VIP Retention,905.14,108617,7693,50,26500.0
+MKT-00305,2024-06-16,Paid Social,Meta Retargeting & Lookalike,3758.09,281856,10522,52,25740.0
+MKT-00306,2024-06-16,Google Ads,Search Intent High-Value,3127.24,140725,13134,51,24990.0
+MKT-00307,2024-06-16,Affiliate,Cashback & Review Partners,1498.91,44967,4646,33,16830.0
+MKT-00308,2024-06-16,Email Marketing,Lifecycle VIP Retention,921.79,110615,7835,51,27030.0
+MKT-00309,2024-06-17,Paid Social,Meta Retargeting & Lookalike,3691.25,276843,10335,51,25245.0
+MKT-00310,2024-06-17,Google Ads,Search Intent High-Value,3284.27,147792,13793,53,25970.0
+MKT-00311,2024-06-17,Affiliate,Cashback & Review Partners,1414.42,42432,4384,31,15810.0
+MKT-00312,2024-06-17,Email Marketing,Lifecycle VIP Retention,934.63,112155,7944,51,27030.0
+MKT-00313,2024-06-18,Paid Social,Meta Retargeting & Lookalike,3726.02,279451,10432,52,25740.0
+MKT-00314,2024-06-18,Google Ads,Search Intent High-Value,3128.85,140798,13141,51,24990.0
+MKT-00315,2024-06-18,Affiliate,Cashback & Review Partners,1418.03,42540,4395,31,15810.0
+MKT-00316,2024-06-18,Email Marketing,Lifecycle VIP Retention,895.61,107473,7612,49,25970.0
+MKT-00317,2024-06-19,Paid Social,Meta Retargeting & Lookalike,3612.8,270959,10115,50,24750.0
+MKT-00318,2024-06-19,Google Ads,Search Intent High-Value,3206.68,144300,13468,52,25480.0
+MKT-00319,2024-06-19,Affiliate,Cashback & Review Partners,1440.92,43227,4466,32,16320.0
+MKT-00320,2024-06-19,Email Marketing,Lifecycle VIP Retention,893.59,107230,7595,49,25970.0
+MKT-00321,2024-06-20,Paid Social,Meta Retargeting & Lookalike,3774.67,283100,10569,53,26235.0
+MKT-00322,2024-06-20,Google Ads,Search Intent High-Value,3173.59,142811,13329,52,25480.0
+MKT-00323,2024-06-20,Affiliate,Cashback & Review Partners,1420.96,42628,4404,31,15810.0
+MKT-00324,2024-06-20,Email Marketing,Lifecycle VIP Retention,945.85,113502,8039,52,27560.0
+MKT-00325,2024-06-21,Paid Social,Meta Retargeting & Lookalike,3734.78,280108,10457,52,25740.0
+MKT-00326,2024-06-21,Google Ads,Search Intent High-Value,3204.16,144187,13457,52,25480.0
+MKT-00327,2024-06-21,Affiliate,Cashback & Review Partners,1463.56,43906,4537,32,16320.0
+MKT-00328,2024-06-21,Email Marketing,Lifecycle VIP Retention,936.27,112352,7958,52,27560.0
+MKT-00329,2024-06-22,Paid Social,Meta Retargeting & Lookalike,3651.3,273847,10223,51,25245.0
+MKT-00330,2024-06-22,Google Ads,Search Intent High-Value,3140.16,141307,13188,51,24990.0
+MKT-00331,2024-06-22,Affiliate,Cashback & Review Partners,1482.09,44462,4594,32,16320.0
+MKT-00332,2024-06-22,Email Marketing,Lifecycle VIP Retention,866.71,104005,7367,48,25440.0
+MKT-00333,2024-06-23,Paid Social,Meta Retargeting & Lookalike,3637.98,272848,10186,51,25245.0
+MKT-00334,2024-06-23,Google Ads,Search Intent High-Value,3130.34,140865,13147,51,24990.0
+MKT-00335,2024-06-23,Affiliate,Cashback & Review Partners,1474.92,44247,4572,32,16320.0
+MKT-00336,2024-06-23,Email Marketing,Lifecycle VIP Retention,918.08,110169,7803,51,27030.0
+MKT-00337,2024-06-24,Paid Social,Meta Retargeting & Lookalike,3636.03,272701,10180,51,25245.0
+MKT-00338,2024-06-24,Google Ads,Search Intent High-Value,3189.42,143523,13395,52,25480.0
+MKT-00339,2024-06-24,Affiliate,Cashback & Review Partners,1455.19,43655,4511,32,16320.0
+MKT-00340,2024-06-24,Email Marketing,Lifecycle VIP Retention,928.52,111422,7892,51,27030.0
+MKT-00341,2024-06-25,Paid Social,Meta Retargeting & Lookalike,3753.43,281507,10509,52,25740.0
+MKT-00342,2024-06-25,Google Ads,Search Intent High-Value,3224.85,145118,13544,52,25480.0
+MKT-00343,2024-06-25,Affiliate,Cashback & Review Partners,1488.16,44644,4613,33,16830.0
+MKT-00344,2024-06-25,Email Marketing,Lifecycle VIP Retention,939.56,112746,7986,52,27560.0
+MKT-00345,2024-06-26,Paid Social,Meta Retargeting & Lookalike,3623.2,271740,10144,50,24750.0
+MKT-00346,2024-06-26,Google Ads,Search Intent High-Value,3225.23,145135,13545,52,25480.0
+MKT-00347,2024-06-26,Affiliate,Cashback & Review Partners,1455.45,43663,4511,32,16320.0
+MKT-00348,2024-06-26,Email Marketing,Lifecycle VIP Retention,938.06,112567,7973,52,27560.0
+MKT-00349,2024-06-27,Paid Social,Meta Retargeting & Lookalike,3789.49,284211,10610,53,26235.0
+MKT-00350,2024-06-27,Google Ads,Search Intent High-Value,3133.73,141017,13161,51,24990.0
+MKT-00351,2024-06-27,Affiliate,Cashback & Review Partners,1487.27,44618,4610,33,16830.0
+MKT-00352,2024-06-27,Email Marketing,Lifecycle VIP Retention,948.67,113840,8063,52,27560.0
+MKT-00353,2024-06-28,Paid Social,Meta Retargeting & Lookalike,3645.41,273405,10207,51,25245.0
+MKT-00354,2024-06-28,Google Ads,Search Intent High-Value,3206.51,144292,13467,52,25480.0
+MKT-00355,2024-06-28,Affiliate,Cashback & Review Partners,1462.36,43870,4533,32,16320.0
+MKT-00356,2024-06-28,Email Marketing,Lifecycle VIP Retention,922.95,110753,7845,51,27030.0
+MKT-00357,2024-06-29,Paid Social,Meta Retargeting & Lookalike,3650.17,273762,10220,51,25245.0
+MKT-00358,2024-06-29,Google Ads,Search Intent High-Value,3231.01,145395,13570,52,25480.0
+MKT-00359,2024-06-29,Affiliate,Cashback & Review Partners,1416.57,42497,4391,31,15810.0
+MKT-00360,2024-06-29,Email Marketing,Lifecycle VIP Retention,866.2,103944,7362,48,25440.0
+MKT-00361,2024-06-30,Paid Social,Meta Retargeting & Lookalike,3895.76,292182,10908,54,26730.0
+MKT-00362,2024-06-30,Google Ads,Search Intent High-Value,3177.23,142975,13344,52,25480.0
+MKT-00363,2024-06-30,Affiliate,Cashback & Review Partners,1429.99,42899,4432,31,15810.0
+MKT-00364,2024-06-30,Email Marketing,Lifecycle VIP Retention,949.37,113924,8069,52,27560.0
+MKT-00365,2024-07-01,Paid Social,Meta Retargeting & Lookalike,4405.6,330420,12335,44,20240.0
+MKT-00366,2024-07-01,Google Ads,Search Intent High-Value,3243.76,145969,13623,53,25970.0
+MKT-00367,2024-07-01,Affiliate,Cashback & Review Partners,1474.91,44247,4572,32,16320.0
+MKT-00368,2024-07-01,Email Marketing,Lifecycle VIP Retention,897.07,107648,7625,49,25970.0
+MKT-00369,2024-07-02,Paid Social,Meta Retargeting & Lookalike,4650.37,348777,13021,47,21620.0
+MKT-00370,2024-07-02,Google Ads,Search Intent High-Value,3255.32,146489,13672,53,25970.0
+MKT-00371,2024-07-02,Affiliate,Cashback & Review Partners,1401.78,42053,4345,31,15810.0
+MKT-00372,2024-07-02,Email Marketing,Lifecycle VIP Retention,912.54,109504,7756,50,26500.0
+MKT-00373,2024-07-03,Paid Social,Meta Retargeting & Lookalike,4357.1,326782,12199,44,20240.0
+MKT-00374,2024-07-03,Google Ads,Search Intent High-Value,3126.75,140703,13132,51,24990.0
+MKT-00375,2024-07-03,Affiliate,Cashback & Review Partners,1445.78,43373,4481,32,16320.0
+MKT-00376,2024-07-03,Email Marketing,Lifecycle VIP Retention,875.48,105057,7441,48,25440.0
+MKT-00377,2024-07-04,Paid Social,Meta Retargeting & Lookalike,4694.82,352111,13145,47,21620.0
+MKT-00378,2024-07-04,Google Ads,Search Intent High-Value,3274.42,147348,13752,53,25970.0
+MKT-00379,2024-07-04,Affiliate,Cashback & Review Partners,1428.74,42862,4429,31,15810.0
+MKT-00380,2024-07-04,Email Marketing,Lifecycle VIP Retention,911.42,109370,7747,50,26500.0
+MKT-00381,2024-07-05,Paid Social,Meta Retargeting & Lookalike,4579.32,343448,12822,46,21160.0
+MKT-00382,2024-07-05,Google Ads,Search Intent High-Value,3223.63,145063,13539,52,25480.0
+MKT-00383,2024-07-05,Affiliate,Cashback & Review Partners,1480.3,44408,4588,32,16320.0
+MKT-00384,2024-07-05,Email Marketing,Lifecycle VIP Retention,850.91,102109,7232,47,24910.0
+MKT-00385,2024-07-06,Paid Social,Meta Retargeting & Lookalike,4675.01,350625,13090,47,21620.0
+MKT-00386,2024-07-06,Google Ads,Search Intent High-Value,3269.78,147139,13733,53,25970.0
+MKT-00387,2024-07-06,Affiliate,Cashback & Review Partners,1455.69,43670,4512,32,16320.0
+MKT-00388,2024-07-06,Email Marketing,Lifecycle VIP Retention,851.62,102194,7238,47,24910.0
+MKT-00389,2024-07-07,Paid Social,Meta Retargeting & Lookalike,4677.39,350804,13096,47,21620.0
+MKT-00390,2024-07-07,Google Ads,Search Intent High-Value,3102.32,139604,13029,50,24500.0
+MKT-00391,2024-07-07,Affiliate,Cashback & Review Partners,1471.11,44133,4560,32,16320.0
+MKT-00392,2024-07-07,Email Marketing,Lifecycle VIP Retention,894.0,107280,7599,49,25970.0
+MKT-00393,2024-07-08,Paid Social,Meta Retargeting & Lookalike,4425.01,331876,12390,44,20240.0
+MKT-00394,2024-07-08,Google Ads,Search Intent High-Value,3137.82,141201,13178,51,24990.0
+MKT-00395,2024-07-08,Affiliate,Cashback & Review Partners,1453.52,43605,4505,32,16320.0
+MKT-00396,2024-07-08,Email Marketing,Lifecycle VIP Retention,908.85,109061,7725,50,26500.0
+MKT-00397,2024-07-09,Paid Social,Meta Retargeting & Lookalike,4752.49,356436,13306,48,22080.0
+MKT-00398,2024-07-09,Google Ads,Search Intent High-Value,3185.45,143345,13378,52,25480.0
+MKT-00399,2024-07-09,Affiliate,Cashback & Review Partners,1433.27,42997,4443,31,15810.0
+MKT-00400,2024-07-09,Email Marketing,Lifecycle VIP Retention,909.83,109179,7733,50,26500.0
+MKT-00401,2024-07-10,Paid Social,Meta Retargeting & Lookalike,4607.13,345534,12899,46,21160.0
+MKT-00402,2024-07-10,Google Ads,Search Intent High-Value,3278.84,147547,13771,53,25970.0
+MKT-00403,2024-07-10,Affiliate,Cashback & Review Partners,1409.89,42296,4370,31,15810.0
+MKT-00404,2024-07-10,Email Marketing,Lifecycle VIP Retention,913.78,109654,7767,50,26500.0
+MKT-00405,2024-07-11,Paid Social,Meta Retargeting & Lookalike,4493.63,337021,12582,45,20700.0
+MKT-00406,2024-07-11,Google Ads,Search Intent High-Value,3173.61,142812,13329,52,25480.0
+MKT-00407,2024-07-11,Affiliate,Cashback & Review Partners,1449.35,43480,4492,32,16320.0
+MKT-00408,2024-07-11,Email Marketing,Lifecycle VIP Retention,884.77,106172,7520,49,25970.0
+MKT-00409,2024-07-12,Paid Social,Meta Retargeting & Lookalike,4491.16,336836,12575,45,20700.0
+MKT-00410,2024-07-12,Google Ads,Search Intent High-Value,3108.51,139883,13055,50,24500.0
+MKT-00411,2024-07-12,Affiliate,Cashback & Review Partners,1493.73,44812,4630,33,16830.0
+MKT-00412,2024-07-12,Email Marketing,Lifecycle VIP Retention,895.8,107496,7614,49,25970.0
+MKT-00413,2024-07-13,Paid Social,Meta Retargeting & Lookalike,4330.08,324755,12124,43,19780.0
+MKT-00414,2024-07-13,Google Ads,Search Intent High-Value,3259.06,146657,13688,53,25970.0
+MKT-00415,2024-07-13,Affiliate,Cashback & Review Partners,1461.77,43853,4531,32,16320.0
+MKT-00416,2024-07-13,Email Marketing,Lifecycle VIP Retention,889.36,106723,7559,49,25970.0
+MKT-00417,2024-07-14,Paid Social,Meta Retargeting & Lookalike,4733.85,355038,13254,48,22080.0
+MKT-00418,2024-07-14,Google Ads,Search Intent High-Value,3171.3,142708,13319,51,24990.0
+MKT-00419,2024-07-14,Affiliate,Cashback & Review Partners,1420.59,42617,4403,31,15810.0
+MKT-00420,2024-07-14,Email Marketing,Lifecycle VIP Retention,887.84,106540,7546,49,25970.0
+MKT-00421,2024-07-15,Paid Social,Meta Retargeting & Lookalike,4798.72,359904,13436,48,22080.0
+MKT-00422,2024-07-15,Google Ads,Search Intent High-Value,3221.49,144967,13530,52,25480.0
+MKT-00423,2024-07-15,Affiliate,Cashback & Review Partners,1481.14,44434,4591,32,16320.0
+MKT-00424,2024-07-15,Email Marketing,Lifecycle VIP Retention,909.12,109094,7727,50,26500.0
+MKT-00425,2024-07-16,Paid Social,Meta Retargeting & Lookalike,4517.74,338830,12649,45,20700.0
+MKT-00426,2024-07-16,Google Ads,Search Intent High-Value,3201.96,144088,13448,52,25480.0
+MKT-00427,2024-07-16,Affiliate,Cashback & Review Partners,1451.65,43549,4500,32,16320.0
+MKT-00428,2024-07-16,Email Marketing,Lifecycle VIP Retention,860.47,103256,7314,47,24910.0
+MKT-00429,2024-07-17,Paid Social,Meta Retargeting & Lookalike,4566.51,342487,12786,46,21160.0
+MKT-00430,2024-07-17,Google Ads,Search Intent High-Value,3124.81,140616,13124,51,24990.0
+MKT-00431,2024-07-17,Affiliate,Cashback & Review Partners,1469.41,44082,4555,32,16320.0
+MKT-00432,2024-07-17,Email Marketing,Lifecycle VIP Retention,881.33,105759,7491,48,25440.0
+MKT-00433,2024-07-18,Paid Social,Meta Retargeting & Lookalike,4712.36,353427,13194,47,21620.0
+MKT-00434,2024-07-18,Google Ads,Search Intent High-Value,3266.81,147006,13720,53,25970.0
+MKT-00435,2024-07-18,Affiliate,Cashback & Review Partners,1410.45,42313,4372,31,15810.0
+MKT-00436,2024-07-18,Email Marketing,Lifecycle VIP Retention,852.36,102282,7245,47,24910.0
+MKT-00437,2024-07-19,Paid Social,Meta Retargeting & Lookalike,4722.77,354207,13223,47,21620.0
+MKT-00438,2024-07-19,Google Ads,Search Intent High-Value,3142.1,141394,13196,51,24990.0
+MKT-00439,2024-07-19,Affiliate,Cashback & Review Partners,1423.7,42710,4413,31,15810.0
+MKT-00440,2024-07-19,Email Marketing,Lifecycle VIP Retention,860.38,103245,7313,47,24910.0
+MKT-00441,2024-07-20,Paid Social,Meta Retargeting & Lookalike,4574.77,343107,12809,46,21160.0
+MKT-00442,2024-07-20,Google Ads,Search Intent High-Value,3205.14,144231,13461,52,25480.0
+MKT-00443,2024-07-20,Affiliate,Cashback & Review Partners,1443.02,43290,4473,32,16320.0
+MKT-00444,2024-07-20,Email Marketing,Lifecycle VIP Retention,862.22,103466,7328,47,24910.0
+MKT-00445,2024-07-21,Paid Social,Meta Retargeting & Lookalike,4599.69,344976,12879,46,21160.0
+MKT-00446,2024-07-21,Google Ads,Search Intent High-Value,3209.96,144448,13481,52,25480.0
+MKT-00447,2024-07-21,Affiliate,Cashback & Review Partners,1416.06,42481,4389,31,15810.0
+MKT-00448,2024-07-21,Email Marketing,Lifecycle VIP Retention,917.48,110098,7798,50,26500.0
+MKT-00449,2024-07-22,Paid Social,Meta Retargeting & Lookalike,4756.69,356752,13318,48,22080.0
+MKT-00450,2024-07-22,Google Ads,Search Intent High-Value,3246.37,146086,13634,53,25970.0
+MKT-00451,2024-07-22,Affiliate,Cashback & Review Partners,1404.06,42121,4352,31,15810.0
+MKT-00452,2024-07-22,Email Marketing,Lifecycle VIP Retention,872.78,104733,7418,48,25440.0
+MKT-00453,2024-07-23,Paid Social,Meta Retargeting & Lookalike,4664.4,349830,13060,47,21620.0
+MKT-00454,2024-07-23,Google Ads,Search Intent High-Value,3146.4,141587,13214,51,24990.0
+MKT-00455,2024-07-23,Affiliate,Cashback & Review Partners,1471.97,44159,4563,32,16320.0
+MKT-00456,2024-07-23,Email Marketing,Lifecycle VIP Retention,889.21,106705,7558,49,25970.0
+MKT-00457,2024-07-24,Paid Social,Meta Retargeting & Lookalike,4511.72,338378,12632,45,20700.0
+MKT-00458,2024-07-24,Google Ads,Search Intent High-Value,3284.02,147780,13792,53,25970.0
+MKT-00459,2024-07-24,Affiliate,Cashback & Review Partners,1479.53,44385,4586,32,16320.0
+MKT-00460,2024-07-24,Email Marketing,Lifecycle VIP Retention,904.35,108521,7686,50,26500.0
+MKT-00461,2024-07-25,Paid Social,Meta Retargeting & Lookalike,4383.48,328761,12273,44,20240.0
+MKT-00462,2024-07-25,Google Ads,Search Intent High-Value,3132.26,140951,13155,51,24990.0
+MKT-00463,2024-07-25,Affiliate,Cashback & Review Partners,1463.9,43917,4538,32,16320.0
+MKT-00464,2024-07-25,Email Marketing,Lifecycle VIP Retention,922.86,110743,7844,51,27030.0
+MKT-00465,2024-07-26,Paid Social,Meta Retargeting & Lookalike,4752.52,356438,13307,48,22080.0
+MKT-00466,2024-07-26,Google Ads,Search Intent High-Value,3112.03,140041,13070,51,24990.0
+MKT-00467,2024-07-26,Affiliate,Cashback & Review Partners,1422.0,42659,4408,31,15810.0
+MKT-00468,2024-07-26,Email Marketing,Lifecycle VIP Retention,936.22,112346,7957,52,27560.0
+MKT-00469,2024-07-27,Paid Social,Meta Retargeting & Lookalike,4780.66,358549,13385,48,22080.0
+MKT-00470,2024-07-27,Google Ads,Search Intent High-Value,3118.97,140353,13099,51,24990.0
+MKT-00471,2024-07-27,Affiliate,Cashback & Review Partners,1490.12,44703,4619,33,16830.0
+MKT-00472,2024-07-27,Email Marketing,Lifecycle VIP Retention,945.91,113508,8040,52,27560.0
+MKT-00473,2024-07-28,Paid Social,Meta Retargeting & Lookalike,4572.99,342974,12804,46,21160.0
+MKT-00474,2024-07-28,Google Ads,Search Intent High-Value,3273.11,147289,13747,53,25970.0
+MKT-00475,2024-07-28,Affiliate,Cashback & Review Partners,1432.13,42963,4439,31,15810.0
+MKT-00476,2024-07-28,Email Marketing,Lifecycle VIP Retention,864.66,103759,7349,48,25440.0
+MKT-00477,2024-07-29,Paid Social,Meta Retargeting & Lookalike,4512.67,338450,12635,45,20700.0
+MKT-00478,2024-07-29,Google Ads,Search Intent High-Value,3122.84,140527,13115,51,24990.0
+MKT-00479,2024-07-29,Affiliate,Cashback & Review Partners,1441.88,43256,4469,32,16320.0
+MKT-00480,2024-07-29,Email Marketing,Lifecycle VIP Retention,902.12,108254,7668,50,26500.0
+MKT-00481,2024-07-30,Paid Social,Meta Retargeting & Lookalike,4483.03,336227,12552,45,20700.0
+MKT-00482,2024-07-30,Google Ads,Search Intent High-Value,3235.13,145580,13587,53,25970.0
+MKT-00483,2024-07-30,Affiliate,Cashback & Review Partners,1468.4,44052,4552,32,16320.0
+MKT-00484,2024-07-30,Email Marketing,Lifecycle VIP Retention,891.46,106975,7577,49,25970.0
+MKT-00485,2024-07-31,Paid Social,Meta Retargeting & Lookalike,4780.98,358573,13386,48,22080.0
+MKT-00486,2024-07-31,Google Ads,Search Intent High-Value,3197.03,143866,13427,52,25480.0
+MKT-00487,2024-07-31,Affiliate,Cashback & Review Partners,1423.38,42701,4412,31,15810.0
+MKT-00488,2024-07-31,Email Marketing,Lifecycle VIP Retention,904.63,108555,7689,50,26500.0
+MKT-00489,2024-08-01,Paid Social,Meta Retargeting & Lookalike,4331.05,324828,12126,43,19780.0
+MKT-00490,2024-08-01,Google Ads,Search Intent High-Value,3126.54,140694,13131,51,24990.0
+MKT-00491,2024-08-01,Affiliate,Cashback & Review Partners,1492.46,44773,4626,33,16830.0
+MKT-00492,2024-08-01,Email Marketing,Lifecycle VIP Retention,880.6,105671,7485,48,25440.0
+MKT-00493,2024-08-02,Paid Social,Meta Retargeting & Lookalike,4406.03,330451,12336,44,20240.0
+MKT-00494,2024-08-02,Google Ads,Search Intent High-Value,3208.72,144392,13476,52,25480.0
+MKT-00495,2024-08-02,Affiliate,Cashback & Review Partners,1448.57,43456,4490,32,16320.0
+MKT-00496,2024-08-02,Email Marketing,Lifecycle VIP Retention,908.77,109052,7724,50,26500.0
+MKT-00497,2024-08-03,Paid Social,Meta Retargeting & Lookalike,4758.22,356866,13323,48,22080.0
+MKT-00498,2024-08-03,Google Ads,Search Intent High-Value,3228.23,145270,13558,52,25480.0
+MKT-00499,2024-08-03,Affiliate,Cashback & Review Partners,1460.14,43804,4526,32,16320.0
+MKT-00500,2024-08-03,Email Marketing,Lifecycle VIP Retention,924.4,110927,7857,51,27030.0
+MKT-00501,2024-08-04,Paid Social,Meta Retargeting & Lookalike,4464.19,334814,12499,45,20700.0
+MKT-00502,2024-08-04,Google Ads,Search Intent High-Value,3184.83,143317,13376,52,25480.0
+MKT-00503,2024-08-04,Affiliate,Cashback & Review Partners,1417.71,42531,4394,31,15810.0
+MKT-00504,2024-08-04,Email Marketing,Lifecycle VIP Retention,932.3,111876,7924,51,27030.0
+MKT-00505,2024-08-05,Paid Social,Meta Retargeting & Lookalike,4668.41,350130,13071,47,21620.0
+MKT-00506,2024-08-05,Google Ads,Search Intent High-Value,3173.12,142790,13327,52,25480.0
+MKT-00507,2024-08-05,Affiliate,Cashback & Review Partners,1446.08,43382,4482,32,16320.0
+MKT-00508,2024-08-05,Email Marketing,Lifecycle VIP Retention,946.61,113593,8046,52,27560.0
+MKT-00509,2024-08-06,Paid Social,Meta Retargeting & Lookalike,4777.56,358316,13377,48,22080.0
+MKT-00510,2024-08-06,Google Ads,Search Intent High-Value,3196.73,143852,13426,52,25480.0
+MKT-00511,2024-08-06,Affiliate,Cashback & Review Partners,1414.17,42425,4383,31,15810.0
+MKT-00512,2024-08-06,Email Marketing,Lifecycle VIP Retention,912.62,109514,7757,50,26500.0
+MKT-00513,2024-08-07,Paid Social,Meta Retargeting & Lookalike,4315.22,323641,12082,43,19780.0
+MKT-00514,2024-08-07,Google Ads,Search Intent High-Value,3132.81,140976,13157,51,24990.0
+MKT-00515,2024-08-07,Affiliate,Cashback & Review Partners,1480.88,44426,4590,32,16320.0
+MKT-00516,2024-08-07,Email Marketing,Lifecycle VIP Retention,892.45,107093,7585,49,25970.0
+MKT-00517,2024-08-08,Paid Social,Meta Retargeting & Lookalike,4607.1,345532,12899,46,21160.0
+MKT-00518,2024-08-08,Google Ads,Search Intent High-Value,3152.68,141870,13241,51,24990.0
+MKT-00519,2024-08-08,Affiliate,Cashback & Review Partners,1423.86,42715,4413,31,15810.0
+MKT-00520,2024-08-08,Email Marketing,Lifecycle VIP Retention,873.68,104841,7426,48,25440.0
+MKT-00521,2024-08-09,Paid Social,Meta Retargeting & Lookalike,4516.94,338770,12647,45,20700.0
+MKT-00522,2024-08-09,Google Ads,Search Intent High-Value,3117.82,140302,13094,51,24990.0
+MKT-00523,2024-08-09,Affiliate,Cashback & Review Partners,1474.49,44234,4570,32,16320.0
+MKT-00524,2024-08-09,Email Marketing,Lifecycle VIP Retention,880.12,105613,7480,48,25440.0
+MKT-00525,2024-08-10,Paid Social,Meta Retargeting & Lookalike,4575.74,343180,12812,46,21160.0
+MKT-00526,2024-08-10,Google Ads,Search Intent High-Value,3147.16,141622,13218,51,24990.0
+MKT-00527,2024-08-10,Affiliate,Cashback & Review Partners,1403.82,42114,4351,31,15810.0
+MKT-00528,2024-08-10,Email Marketing,Lifecycle VIP Retention,897.89,107746,7632,49,25970.0
+MKT-00529,2024-08-11,Paid Social,Meta Retargeting & Lookalike,4499.32,337449,12598,45,20700.0
+MKT-00530,2024-08-11,Google Ads,Search Intent High-Value,3206.84,144307,13468,52,25480.0
+MKT-00531,2024-08-11,Affiliate,Cashback & Review Partners,1468.93,44067,4553,32,16320.0
+MKT-00532,2024-08-11,Email Marketing,Lifecycle VIP Retention,912.24,109468,7753,50,26500.0
+MKT-00533,2024-08-12,Paid Social,Meta Retargeting & Lookalike,4300.01,322500,12040,43,19780.0
+MKT-00534,2024-08-12,Google Ads,Search Intent High-Value,3172.71,142771,13325,52,25480.0
+MKT-00535,2024-08-12,Affiliate,Cashback & Review Partners,1413.46,42403,4381,31,15810.0
+MKT-00536,2024-08-12,Email Marketing,Lifecycle VIP Retention,888.55,106625,7552,49,25970.0
+MKT-00537,2024-08-13,Paid Social,Meta Retargeting & Lookalike,4747.71,356078,13293,48,22080.0
+MKT-00538,2024-08-13,Google Ads,Search Intent High-Value,3298.47,148431,13853,54,26460.0
+MKT-00539,2024-08-13,Affiliate,Cashback & Review Partners,1486.27,44588,4607,33,16830.0
+MKT-00540,2024-08-13,Email Marketing,Lifecycle VIP Retention,858.18,102982,7294,47,24910.0
+MKT-00541,2024-08-14,Paid Social,Meta Retargeting & Lookalike,4401.47,330110,12324,44,20240.0
+MKT-00542,2024-08-14,Google Ads,Search Intent High-Value,3195.94,143817,13422,52,25480.0
+MKT-00543,2024-08-14,Affiliate,Cashback & Review Partners,1403.0,42090,4349,31,15810.0
+MKT-00544,2024-08-14,Email Marketing,Lifecycle VIP Retention,925.24,111029,7864,51,27030.0
+MKT-00545,2024-08-15,Paid Social,Meta Retargeting & Lookalike,4757.04,356778,13319,48,22080.0
+MKT-00546,2024-08-15,Google Ads,Search Intent High-Value,3173.49,142807,13328,52,25480.0
+MKT-00547,2024-08-15,Affiliate,Cashback & Review Partners,1495.56,44866,4636,33,16830.0
+MKT-00548,2024-08-15,Email Marketing,Lifecycle VIP Retention,915.5,109860,7781,50,26500.0
+MKT-00549,2024-08-16,Paid Social,Meta Retargeting & Lookalike,4689.8,351734,13131,47,21620.0
+MKT-00550,2024-08-16,Google Ads,Search Intent High-Value,3150.08,141753,13230,51,24990.0
+MKT-00551,2024-08-16,Affiliate,Cashback & Review Partners,1478.55,44356,4583,32,16320.0
+MKT-00552,2024-08-16,Email Marketing,Lifecycle VIP Retention,908.01,108961,7718,50,26500.0
+MKT-00553,2024-08-17,Paid Social,Meta Retargeting & Lookalike,4396.92,329768,12311,44,20240.0
+MKT-00554,2024-08-17,Google Ads,Search Intent High-Value,3141.23,141355,13193,51,24990.0
+MKT-00555,2024-08-17,Affiliate,Cashback & Review Partners,1431.03,42930,4436,31,15810.0
+MKT-00556,2024-08-17,Email Marketing,Lifecycle VIP Retention,874.53,104943,7433,48,25440.0
+MKT-00557,2024-08-18,Paid Social,Meta Retargeting & Lookalike,4787.52,359064,13405,48,22080.0
+MKT-00558,2024-08-18,Google Ads,Search Intent High-Value,3144.06,141482,13205,51,24990.0
+MKT-00559,2024-08-18,Affiliate,Cashback & Review Partners,1490.91,44727,4621,33,16830.0
+MKT-00560,2024-08-18,Email Marketing,Lifecycle VIP Retention,878.38,105405,7466,48,25440.0
+MKT-00561,2024-08-19,Paid Social,Meta Retargeting & Lookalike,4794.27,359570,13423,48,22080.0
+MKT-00562,2024-08-19,Google Ads,Search Intent High-Value,3276.59,147446,13761,53,25970.0
+MKT-00563,2024-08-19,Affiliate,Cashback & Review Partners,1429.21,42876,4430,31,15810.0
+MKT-00564,2024-08-19,Email Marketing,Lifecycle VIP Retention,925.62,111074,7867,51,27030.0
+MKT-00565,2024-08-20,Paid Social,Meta Retargeting & Lookalike,4724.7,354352,13229,47,21620.0
+MKT-00566,2024-08-20,Google Ads,Search Intent High-Value,3120.25,140411,13105,51,24990.0
+MKT-00567,2024-08-20,Affiliate,Cashback & Review Partners,1499.19,44975,4647,33,16830.0
+MKT-00568,2024-08-20,Email Marketing,Lifecycle VIP Retention,879.39,105527,7474,48,25440.0
+MKT-00569,2024-08-21,Paid Social,Meta Retargeting & Lookalike,4547.45,341058,12732,46,21160.0
+MKT-00570,2024-08-21,Google Ads,Search Intent High-Value,3142.19,141398,13197,51,24990.0
+MKT-00571,2024-08-21,Affiliate,Cashback & Review Partners,1410.09,42302,4371,31,15810.0
+MKT-00572,2024-08-21,Email Marketing,Lifecycle VIP Retention,904.25,108509,7686,50,26500.0
+MKT-00573,2024-08-22,Paid Social,Meta Retargeting & Lookalike,4687.27,351545,13124,47,21620.0
+MKT-00574,2024-08-22,Google Ads,Search Intent High-Value,3184.53,143303,13375,52,25480.0
+MKT-00575,2024-08-22,Affiliate,Cashback & Review Partners,1485.78,44573,4605,33,16830.0
+MKT-00576,2024-08-22,Email Marketing,Lifecycle VIP Retention,922.22,110666,7838,51,27030.0
+MKT-00577,2024-08-23,Paid Social,Meta Retargeting & Lookalike,4492.92,336969,12580,45,20700.0
+MKT-00578,2024-08-23,Google Ads,Search Intent High-Value,3185.01,143325,13377,52,25480.0
+MKT-00579,2024-08-23,Affiliate,Cashback & Review Partners,1416.96,42508,4392,31,15810.0
+MKT-00580,2024-08-23,Email Marketing,Lifecycle VIP Retention,947.11,113652,8050,52,27560.0
+MKT-00581,2024-08-24,Paid Social,Meta Retargeting & Lookalike,4725.36,354402,13231,47,21620.0
+MKT-00582,2024-08-24,Google Ads,Search Intent High-Value,3123.05,140537,13116,51,24990.0
+MKT-00583,2024-08-24,Affiliate,Cashback & Review Partners,1402.58,42077,4347,31,15810.0
+MKT-00584,2024-08-24,Email Marketing,Lifecycle VIP Retention,863.15,103577,7336,47,24910.0
+MKT-00585,2024-08-25,Paid Social,Meta Retargeting & Lookalike,4722.59,354194,13223,47,21620.0
+MKT-00586,2024-08-25,Google Ads,Search Intent High-Value,3252.03,146341,13658,53,25970.0
+MKT-00587,2024-08-25,Affiliate,Cashback & Review Partners,1472.15,44164,4563,32,16320.0
+MKT-00588,2024-08-25,Email Marketing,Lifecycle VIP Retention,889.32,106718,7559,49,25970.0
+MKT-00589,2024-08-26,Paid Social,Meta Retargeting & Lookalike,4567.15,342536,12788,46,21160.0
+MKT-00590,2024-08-26,Google Ads,Search Intent High-Value,3127.78,140750,13136,51,24990.0
+MKT-00591,2024-08-26,Affiliate,Cashback & Review Partners,1441.21,43236,4467,32,16320.0
+MKT-00592,2024-08-26,Email Marketing,Lifecycle VIP Retention,856.6,102791,7281,47,24910.0
+MKT-00593,2024-08-27,Paid Social,Meta Retargeting & Lookalike,4332.99,324974,12132,43,19780.0
+MKT-00594,2024-08-27,Google Ads,Search Intent High-Value,3135.65,141104,13169,51,24990.0
+MKT-00595,2024-08-27,Affiliate,Cashback & Review Partners,1461.97,43859,4532,32,16320.0
+MKT-00596,2024-08-27,Email Marketing,Lifecycle VIP Retention,857.58,102910,7289,47,24910.0
+MKT-00597,2024-08-28,Paid Social,Meta Retargeting & Lookalike,4777.28,358296,13376,48,22080.0
+MKT-00598,2024-08-28,Google Ads,Search Intent High-Value,3158.98,142154,13267,51,24990.0
+MKT-00599,2024-08-28,Affiliate,Cashback & Review Partners,1489.81,44694,4618,33,16830.0
+MKT-00600,2024-08-28,Email Marketing,Lifecycle VIP Retention,942.11,113053,8007,52,27560.0
+MKT-00601,2024-08-29,Paid Social,Meta Retargeting & Lookalike,4608.74,345655,12904,46,21160.0
+MKT-00602,2024-08-29,Google Ads,Search Intent High-Value,3197.66,143894,13430,52,25480.0
+MKT-00603,2024-08-29,Affiliate,Cashback & Review Partners,1486.08,44582,4606,33,16830.0
+MKT-00604,2024-08-29,Email Marketing,Lifecycle VIP Retention,888.9,106668,7555,49,25970.0
+MKT-00605,2024-08-30,Paid Social,Meta Retargeting & Lookalike,4638.19,347864,12986,47,21620.0
+MKT-00606,2024-08-30,Google Ads,Search Intent High-Value,3268.5,147082,13727,53,25970.0
+MKT-00607,2024-08-30,Affiliate,Cashback & Review Partners,1471.22,44136,4560,32,16320.0
+MKT-00608,2024-08-30,Email Marketing,Lifecycle VIP Retention,938.87,112664,7980,52,27560.0
+MKT-00609,2024-08-31,Paid Social,Meta Retargeting & Lookalike,4319.25,323943,12093,43,19780.0
+MKT-00610,2024-08-31,Google Ads,Search Intent High-Value,3120.51,140423,13106,51,24990.0
+MKT-00611,2024-08-31,Affiliate,Cashback & Review Partners,1483.42,44502,4598,32,16320.0
+MKT-00612,2024-08-31,Email Marketing,Lifecycle VIP Retention,904.19,108502,7685,50,26500.0
+MKT-00613,2024-09-01,Paid Social,Meta Retargeting & Lookalike,4645.65,348423,13007,47,21620.0
+MKT-00614,2024-09-01,Google Ads,Search Intent High-Value,3287.7,147946,13808,53,25970.0
+MKT-00615,2024-09-01,Affiliate,Cashback & Review Partners,1483.76,44512,4599,32,16320.0
+MKT-00616,2024-09-01,Email Marketing,Lifecycle VIP Retention,930.08,111609,7905,51,27030.0
+MKT-00617,2024-09-02,Paid Social,Meta Retargeting & Lookalike,4663.05,349729,13056,47,21620.0
+MKT-00618,2024-09-02,Google Ads,Search Intent High-Value,3226.39,145187,13550,52,25480.0
+MKT-00619,2024-09-02,Affiliate,Cashback & Review Partners,1451.77,43553,4500,32,16320.0
+MKT-00620,2024-09-02,Email Marketing,Lifecycle VIP Retention,898.7,107844,7638,49,25970.0
+MKT-00621,2024-09-03,Paid Social,Meta Retargeting & Lookalike,4388.01,329100,12286,44,20240.0
+MKT-00622,2024-09-03,Google Ads,Search Intent High-Value,3248.4,146178,13643,53,25970.0
+MKT-00623,2024-09-03,Affiliate,Cashback & Review Partners,1477.41,44322,4579,32,16320.0
+MKT-00624,2024-09-03,Email Marketing,Lifecycle VIP Retention,913.59,109631,7765,50,26500.0
+MKT-00625,2024-09-04,Paid Social,Meta Retargeting & Lookalike,4378.51,328388,12259,44,20240.0
+MKT-00626,2024-09-04,Google Ads,Search Intent High-Value,3195.48,143796,13421,52,25480.0
+MKT-00627,2024-09-04,Affiliate,Cashback & Review Partners,1429.53,42885,4431,31,15810.0
+MKT-00628,2024-09-04,Email Marketing,Lifecycle VIP Retention,901.8,108215,7665,50,26500.0
+MKT-00629,2024-09-05,Paid Social,Meta Retargeting & Lookalike,4618.72,346403,12932,46,21160.0
+MKT-00630,2024-09-05,Google Ads,Search Intent High-Value,3199.19,143963,13436,52,25480.0
+MKT-00631,2024-09-05,Affiliate,Cashback & Review Partners,1420.84,42625,4404,31,15810.0
+MKT-00632,2024-09-05,Email Marketing,Lifecycle VIP Retention,890.43,106851,7568,49,25970.0
+MKT-00633,2024-09-06,Paid Social,Meta Retargeting & Lookalike,4410.12,330758,12348,44,20240.0
+MKT-00634,2024-09-06,Google Ads,Search Intent High-Value,3134.01,141030,13162,51,24990.0
+MKT-00635,2024-09-06,Affiliate,Cashback & Review Partners,1427.53,42825,4425,31,15810.0
+MKT-00636,2024-09-06,Email Marketing,Lifecycle VIP Retention,897.5,107700,7628,49,25970.0
+MKT-00637,2024-09-07,Paid Social,Meta Retargeting & Lookalike,4337.15,325286,12144,44,20240.0
+MKT-00638,2024-09-07,Google Ads,Search Intent High-Value,3119.71,140386,13102,51,24990.0
+MKT-00639,2024-09-07,Affiliate,Cashback & Review Partners,1420.55,42616,4403,31,15810.0
+MKT-00640,2024-09-07,Email Marketing,Lifecycle VIP Retention,893.51,107221,7594,49,25970.0
+MKT-00641,2024-09-08,Paid Social,Meta Retargeting & Lookalike,4321.54,324115,12100,43,19780.0
+MKT-00642,2024-09-08,Google Ads,Search Intent High-Value,3232.62,145468,13577,52,25480.0
+MKT-00643,2024-09-08,Affiliate,Cashback & Review Partners,1455.39,43661,4511,32,16320.0
+MKT-00644,2024-09-08,Email Marketing,Lifecycle VIP Retention,899.17,107900,7642,49,25970.0
+MKT-00645,2024-09-09,Paid Social,Meta Retargeting & Lookalike,4540.14,340510,12712,46,21160.0
+MKT-00646,2024-09-09,Google Ads,Search Intent High-Value,3148.65,141689,13224,51,24990.0
+MKT-00647,2024-09-09,Affiliate,Cashback & Review Partners,1481.19,44435,4591,32,16320.0
+MKT-00648,2024-09-09,Email Marketing,Lifecycle VIP Retention,865.94,103912,7360,48,25440.0
+MKT-00649,2024-09-10,Paid Social,Meta Retargeting & Lookalike,4641.27,348095,12995,47,21620.0
+MKT-00650,2024-09-10,Google Ads,Search Intent High-Value,3277.77,147499,13766,53,25970.0
+MKT-00651,2024-09-10,Affiliate,Cashback & Review Partners,1422.29,42668,4409,31,15810.0
+MKT-00652,2024-09-10,Email Marketing,Lifecycle VIP Retention,910.0,109200,7735,50,26500.0
+MKT-00653,2024-09-11,Paid Social,Meta Retargeting & Lookalike,4480.42,336031,12545,45,20700.0
+MKT-00654,2024-09-11,Google Ads,Search Intent High-Value,3140.0,141299,13187,51,24990.0
+MKT-00655,2024-09-11,Affiliate,Cashback & Review Partners,1436.61,43098,4453,31,15810.0
+MKT-00656,2024-09-11,Email Marketing,Lifecycle VIP Retention,850.01,102001,7225,47,24910.0
+MKT-00657,2024-09-12,Paid Social,Meta Retargeting & Lookalike,4460.34,334525,12488,45,20700.0
+MKT-00658,2024-09-12,Google Ads,Search Intent High-Value,3215.03,144676,13503,52,25480.0
+MKT-00659,2024-09-12,Affiliate,Cashback & Review Partners,1466.93,44008,4547,32,16320.0
+MKT-00660,2024-09-12,Email Marketing,Lifecycle VIP Retention,852.34,102280,7244,47,24910.0
+MKT-00661,2024-09-13,Paid Social,Meta Retargeting & Lookalike,4464.22,334816,12499,45,20700.0
+MKT-00662,2024-09-13,Google Ads,Search Intent High-Value,3281.32,147659,13781,53,25970.0
+MKT-00663,2024-09-13,Affiliate,Cashback & Review Partners,1412.53,42375,4378,31,15810.0
+MKT-00664,2024-09-13,Email Marketing,Lifecycle VIP Retention,914.27,109712,7771,50,26500.0
+MKT-00665,2024-09-14,Paid Social,Meta Retargeting & Lookalike,4328.46,324634,12119,43,19780.0
+MKT-00666,2024-09-14,Google Ads,Search Intent High-Value,3156.81,142056,13258,51,24990.0
+MKT-00667,2024-09-14,Affiliate,Cashback & Review Partners,1447.1,43413,4486,32,16320.0
+MKT-00668,2024-09-14,Email Marketing,Lifecycle VIP Retention,940.99,112919,7998,52,27560.0
+MKT-00669,2024-09-15,Paid Social,Meta Retargeting & Lookalike,4769.35,357701,13354,48,22080.0
+MKT-00670,2024-09-15,Google Ads,Search Intent High-Value,3169.47,142625,13311,51,24990.0
+MKT-00671,2024-09-15,Affiliate,Cashback & Review Partners,1460.53,43815,4527,32,16320.0
+MKT-00672,2024-09-15,Email Marketing,Lifecycle VIP Retention,877.74,105329,7460,48,25440.0
+MKT-00673,2024-09-16,Paid Social,Meta Retargeting & Lookalike,4472.14,335410,12521,45,20700.0
+MKT-00674,2024-09-16,Google Ads,Search Intent High-Value,3152.96,141883,13242,51,24990.0
+MKT-00675,2024-09-16,Affiliate,Cashback & Review Partners,1418.26,42547,4396,31,15810.0
+MKT-00676,2024-09-16,Email Marketing,Lifecycle VIP Retention,897.77,107732,7631,49,25970.0
+MKT-00677,2024-09-17,Paid Social,Meta Retargeting & Lookalike,4459.31,334448,12486,45,20700.0
+MKT-00678,2024-09-17,Google Ads,Search Intent High-Value,3268.46,147080,13727,53,25970.0
+MKT-00679,2024-09-17,Affiliate,Cashback & Review Partners,1467.81,44034,4550,32,16320.0
+MKT-00680,2024-09-17,Email Marketing,Lifecycle VIP Retention,919.98,110397,7819,51,27030.0
+MKT-00681,2024-09-18,Paid Social,Meta Retargeting & Lookalike,4551.85,341388,12745,46,21160.0
+MKT-00682,2024-09-18,Google Ads,Search Intent High-Value,3112.57,140065,13072,51,24990.0
+MKT-00683,2024-09-18,Affiliate,Cashback & Review Partners,1487.96,44638,4612,33,16830.0
+MKT-00684,2024-09-18,Email Marketing,Lifecycle VIP Retention,886.56,106386,7535,49,25970.0
+MKT-00685,2024-09-19,Paid Social,Meta Retargeting & Lookalike,4770.33,357774,13356,48,22080.0
+MKT-00686,2024-09-19,Google Ads,Search Intent High-Value,3204.38,144196,13458,52,25480.0
+MKT-00687,2024-09-19,Affiliate,Cashback & Review Partners,1442.29,43268,4471,32,16320.0
+MKT-00688,2024-09-19,Email Marketing,Lifecycle VIP Retention,908.92,109070,7725,50,26500.0
+MKT-00689,2024-09-20,Paid Social,Meta Retargeting & Lookalike,4626.98,347023,12955,46,21160.0
+MKT-00690,2024-09-20,Google Ads,Search Intent High-Value,3164.32,142394,13290,51,24990.0
+MKT-00691,2024-09-20,Affiliate,Cashback & Review Partners,1444.52,43335,4478,32,16320.0
+MKT-00692,2024-09-20,Email Marketing,Lifecycle VIP Retention,916.17,109940,7787,50,26500.0
+MKT-00693,2024-09-21,Paid Social,Meta Retargeting & Lookalike,4372.02,327901,12241,44,20240.0
+MKT-00694,2024-09-21,Google Ads,Search Intent High-Value,3132.9,140980,13158,51,24990.0
+MKT-00695,2024-09-21,Affiliate,Cashback & Review Partners,1425.59,42767,4419,31,15810.0
+MKT-00696,2024-09-21,Email Marketing,Lifecycle VIP Retention,891.02,106921,7573,49,25970.0
+MKT-00697,2024-09-22,Paid Social,Meta Retargeting & Lookalike,4605.01,345375,12894,46,21160.0
+MKT-00698,2024-09-22,Google Ads,Search Intent High-Value,3265.43,146944,13714,53,25970.0
+MKT-00699,2024-09-22,Affiliate,Cashback & Review Partners,1489.61,44688,4617,33,16830.0
+MKT-00700,2024-09-22,Email Marketing,Lifecycle VIP Retention,870.52,104462,7399,48,25440.0
+MKT-00701,2024-09-23,Paid Social,Meta Retargeting & Lookalike,4356.21,326715,12197,44,20240.0
+MKT-00702,2024-09-23,Google Ads,Search Intent High-Value,3230.5,145372,13568,52,25480.0
+MKT-00703,2024-09-23,Affiliate,Cashback & Review Partners,1493.69,44810,4630,33,16830.0
+MKT-00704,2024-09-23,Email Marketing,Lifecycle VIP Retention,890.92,106910,7572,49,25970.0
+MKT-00705,2024-09-24,Paid Social,Meta Retargeting & Lookalike,4769.1,357682,13353,48,22080.0
+MKT-00706,2024-09-24,Google Ads,Search Intent High-Value,3122.02,140490,13112,51,24990.0
+MKT-00707,2024-09-24,Affiliate,Cashback & Review Partners,1489.81,44694,4618,33,16830.0
+MKT-00708,2024-09-24,Email Marketing,Lifecycle VIP Retention,871.4,104567,7406,48,25440.0
+MKT-00709,2024-09-25,Paid Social,Meta Retargeting & Lookalike,4742.36,355677,13278,48,22080.0
+MKT-00710,2024-09-25,Google Ads,Search Intent High-Value,3265.02,146926,13713,53,25970.0
+MKT-00711,2024-09-25,Affiliate,Cashback & Review Partners,1436.95,43108,4454,31,15810.0
+MKT-00712,2024-09-25,Email Marketing,Lifecycle VIP Retention,880.83,105699,7487,48,25440.0
+MKT-00713,2024-09-26,Paid Social,Meta Retargeting & Lookalike,4415.65,331173,12363,44,20240.0
+MKT-00714,2024-09-26,Google Ads,Search Intent High-Value,3299.28,148467,13856,54,26460.0
+MKT-00715,2024-09-26,Affiliate,Cashback & Review Partners,1427.8,42834,4426,31,15810.0
+MKT-00716,2024-09-26,Email Marketing,Lifecycle VIP Retention,869.22,104306,7388,48,25440.0
+MKT-00717,2024-09-27,Paid Social,Meta Retargeting & Lookalike,4453.53,334014,12469,45,20700.0
+MKT-00718,2024-09-27,Google Ads,Search Intent High-Value,3226.33,145185,13550,52,25480.0
+MKT-00719,2024-09-27,Affiliate,Cashback & Review Partners,1460.32,43809,4527,32,16320.0
+MKT-00720,2024-09-27,Email Marketing,Lifecycle VIP Retention,893.76,107251,7596,49,25970.0
+MKT-00721,2024-09-28,Paid Social,Meta Retargeting & Lookalike,4425.32,331899,12390,44,20240.0
+MKT-00722,2024-09-28,Google Ads,Search Intent High-Value,3197.56,143890,13429,52,25480.0
+MKT-00723,2024-09-28,Affiliate,Cashback & Review Partners,1433.77,43013,4444,31,15810.0
+MKT-00724,2024-09-28,Email Marketing,Lifecycle VIP Retention,883.07,105968,7506,49,25970.0
+MKT-00725,2024-09-29,Paid Social,Meta Retargeting & Lookalike,4309.98,323248,12067,43,19780.0
+MKT-00726,2024-09-29,Google Ads,Search Intent High-Value,3170.14,142656,13314,51,24990.0
+MKT-00727,2024-09-29,Affiliate,Cashback & Review Partners,1403.35,42100,4350,31,15810.0
+MKT-00728,2024-09-29,Email Marketing,Lifecycle VIP Retention,945.87,113504,8039,52,27560.0
+MKT-00729,2024-09-30,Paid Social,Meta Retargeting & Lookalike,4528.25,339618,12679,45,20700.0
+MKT-00730,2024-09-30,Google Ads,Search Intent High-Value,3241.88,145884,13615,53,25970.0
+MKT-00731,2024-09-30,Affiliate,Cashback & Review Partners,1483.03,44490,4597,32,16320.0
+MKT-00732,2024-09-30,Email Marketing,Lifecycle VIP Retention,942.08,113049,8007,52,27560.0
