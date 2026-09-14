@@ -47,6 +47,12 @@ class DeterministicAnalyticsEngine:
         q_prior, q_curr = self._quarters()
         return orders[orders["quarter"] == q_prior], orders[orders["quarter"] == q_curr]
 
+    @staticmethod
+    def _delivered_orders(orders: pd.DataFrame) -> pd.DataFrame:
+        if orders.empty or "order_status" not in orders.columns:
+            return orders
+        return orders[orders["order_status"].astype(str).str.lower() != "returned"]
+
     def _cogs_for_orders(self, order_ids: pd.Series) -> float:
         items = self.dfs.get("order_items", pd.DataFrame())
         if items.empty:
@@ -54,16 +60,31 @@ class DeterministicAnalyticsEngine:
         subset = items[items["order_id"].isin(order_ids)]
         return float((subset["quantity"] * subset["unit_cogs"]).sum()) if not subset.empty else 0.0
 
+    def _return_cost_for_quarter(self, quarter: str) -> float:
+        """Return P&L cost after refunds are excluded from recognized net sales.
+
+        orders.net_amount contains the sale value even when an order is later returned.
+        Recognized revenue therefore uses delivered orders only; the returns line carries
+        reverse-logistics cost only. This prevents refund amounts from being subtracted twice.
+        """
+        returns = self.dfs.get("returns", pd.DataFrame())
+        if returns.empty or "quarter" not in returns.columns:
+            return 0.0
+        return float(returns.loc[returns["quarter"] == quarter, "reverse_logistics_cost"].sum())
+
     def calculate_executive_kpis(self) -> KPISummary:
         if self._kpi_cache is not None:
             return self._kpi_cache
-        orders_p, orders_c = self._quarter_orders()
+        orders_p_all, orders_c_all = self._quarter_orders()
+        orders_p = self._delivered_orders(orders_p_all)
+        orders_c = self._delivered_orders(orders_c_all)
         marketing = self.dfs.get("marketing_spend", pd.DataFrame())
         expenses = self.dfs.get("expenses", pd.DataFrame())
-        returns = self.dfs.get("returns", pd.DataFrame())
         customers = self.dfs.get("customers", pd.DataFrame())
         q_prior, q_curr = self._quarters()
 
+        # P&L revenue is recognized on delivered orders. Returned-order refund amounts
+        # are therefore not deducted again below; only reverse-logistics cost remains.
         rev_p, rev_c = float(orders_p["net_amount"].sum()), float(orders_c["net_amount"].sum())
         ord_p, ord_c = len(orders_p), len(orders_c)
         aov_p, aov_c = rev_p / max(ord_p, 1), rev_c / max(ord_c, 1)
@@ -74,10 +95,8 @@ class DeterministicAnalyticsEngine:
         mkt_c = float(marketing.loc[marketing["quarter"] == q_curr, "spend_amount"].sum()) if not marketing.empty else 0.0
         exp_p = float(expenses.loc[expenses["quarter"] == q_prior, "amount"].sum()) if not expenses.empty else 0.0
         exp_c = float(expenses.loc[expenses["quarter"] == q_curr, "amount"].sum()) if not expenses.empty else 0.0
-        ret_p_df = returns[returns["quarter"] == q_prior] if not returns.empty else pd.DataFrame()
-        ret_c_df = returns[returns["quarter"] == q_curr] if not returns.empty else pd.DataFrame()
-        ret_p = float(ret_p_df.get("refund_amount", pd.Series(dtype=float)).sum() + ret_p_df.get("reverse_logistics_cost", pd.Series(dtype=float)).sum())
-        ret_c = float(ret_c_df.get("refund_amount", pd.Series(dtype=float)).sum() + ret_c_df.get("reverse_logistics_cost", pd.Series(dtype=float)).sum())
+        ret_p = self._return_cost_for_quarter(q_prior)
+        ret_c = self._return_cost_for_quarter(q_curr)
         gp_p, gp_c = rev_p - cogs_p, rev_c - cogs_c
         net_p = rev_p - cogs_p - delivery_p - mkt_p - exp_p - ret_p
         net_c = rev_c - cogs_c - delivery_c - mkt_c - exp_c - ret_c
@@ -108,36 +127,43 @@ class DeterministicAnalyticsEngine:
         return self._kpi_cache
 
     def _period_costs(self) -> Dict[str, tuple[float, float]]:
-        orders_p, orders_c = self._quarter_orders()
+        orders_p_all, orders_c_all = self._quarter_orders()
+        orders_p = self._delivered_orders(orders_p_all)
+        orders_c = self._delivered_orders(orders_c_all)
         marketing = self.dfs.get("marketing_spend", pd.DataFrame())
         expenses = self.dfs.get("expenses", pd.DataFrame())
-        returns = self.dfs.get("returns", pd.DataFrame())
         q_prior, q_curr = self._quarters()
         return {
             "COGS": (self._cogs_for_orders(orders_p["order_id"]), self._cogs_for_orders(orders_c["order_id"])),
             "Delivery Costs": (float(orders_p["delivery_cost"].sum()), float(orders_c["delivery_cost"].sum())),
             "Marketing Spend": (float(marketing.loc[marketing["quarter"] == q_prior, "spend_amount"].sum()), float(marketing.loc[marketing["quarter"] == q_curr, "spend_amount"].sum())),
             "Operating Expenses": (float(expenses.loc[expenses["quarter"] == q_prior, "amount"].sum()), float(expenses.loc[expenses["quarter"] == q_curr, "amount"].sum())),
-            "Returns & Reverse Logistics": (
-                float(returns.loc[returns["quarter"] == q_prior, "refund_amount"].sum() + returns.loc[returns["quarter"] == q_prior, "reverse_logistics_cost"].sum()) if not returns.empty else 0.0,
-                float(returns.loc[returns["quarter"] == q_curr, "refund_amount"].sum() + returns.loc[returns["quarter"] == q_curr, "reverse_logistics_cost"].sum()) if not returns.empty else 0.0,
-            ),
+            "Returns & Reverse Logistics": (self._return_cost_for_quarter(q_prior), self._return_cost_for_quarter(q_curr)),
         }
 
     def calculate_pnl_waterfall(self) -> List[Dict[str, Any]]:
+        """Build an accounting-consistent profit bridge.
+
+        Every non-total bar is a profit impact, not a raw metric delta. The bridge
+        reconciles exactly to current net profit minus prior net profit.
+        """
         kpi = self.calculate_executive_kpis()
         costs = self._period_costs()
         deltas = [("Revenue Volume & AOV", kpi.revenue_current - kpi.revenue_prior)]
         deltas.extend((label, -(current - prior)) for label, (prior, current) in costs.items())
+
+        expected_delta = kpi.net_profit_current - kpi.net_profit_prior
+        modeled_delta = sum(amount for _, amount in deltas)
+        residual = expected_delta - modeled_delta
+        if abs(residual) > 0.01:
+            deltas.append(("Other / Reconciliation", residual))
+
         running = kpi.net_profit_prior
         result = [{"step": "Prior Net Profit", "amount": round(running, 2), "type": "total", "running_total": round(running, 2)}]
         for label, amount in deltas:
-            running += amount
-            result.append({"step": label, "amount": round(amount, 2), "type": "negative" if amount < 0 else "positive", "running_total": round(running, 2)})
-        reconciliation = kpi.net_profit_current - running
-        if abs(reconciliation) > 0.01:
-            running += reconciliation
-            result.append({"step": "Other / Reconciliation", "amount": round(reconciliation, 2), "type": "positive" if reconciliation >= 0 else "negative", "running_total": round(running, 2)})
+            amount = round(amount, 2)
+            running = round(running + amount, 2)
+            result.append({"step": label, "amount": amount, "type": "negative" if amount < 0 else "positive", "running_total": running})
         result.append({"step": "Current Net Profit", "amount": round(kpi.net_profit_current, 2), "type": "total", "running_total": round(kpi.net_profit_current, 2)})
         return result
 
