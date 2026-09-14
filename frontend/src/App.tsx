@@ -13,7 +13,9 @@ import { bootstrapDemo, getEvidenceDetail } from './api/client';
 import { Loader2, RefreshCw } from 'lucide-react';
 import { Logo } from './components/brand/Logo';
 
-const CACHE_KEY = 'cib-dashboard-v3';
+// Bump this whenever the dashboard response contract changes. This prevents an
+// older sessionStorage snapshot from masking corrected backend calculations.
+const CACHE_KEY = 'cib-dashboard-v4-accounting-bridge';
 
 export const App: React.FC = () => {
   const cached = (() => { try { return JSON.parse(sessionStorage.getItem(CACHE_KEY) || 'null') as ConsultingDashboard | null; } catch { return null; } })();
