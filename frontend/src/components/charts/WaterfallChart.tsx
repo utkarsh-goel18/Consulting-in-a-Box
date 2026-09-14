@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 interface WaterfallStep {
   step: string;
@@ -13,6 +13,8 @@ interface WaterfallChartProps {
 }
 
 export const WaterfallChart: React.FC<WaterfallChartProps> = ({ data, currency = '₹' }) => {
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
   const width = 1100;
   const height = 360;
   const margin = { top: 28, right: 24, bottom: 82, left: 82 };
@@ -49,6 +51,7 @@ export const WaterfallChart: React.FC<WaterfallChartProps> = ({ data, currency =
   const formatAmount = (value: number) => `${value < 0 ? '-' : '+'}${currency}${Math.abs(value).toLocaleString('en-IN')}`;
 
   const ticks = [-range, -range / 2, 0, range / 2, range];
+  const hoveredItem = hoveredIndex == null ? null : safeData[hoveredIndex];
 
   return (
     <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
@@ -91,16 +94,43 @@ export const WaterfallChart: React.FC<WaterfallChartProps> = ({ data, currency =
             const rectHeight = Math.max(2, Math.abs(bottom - top));
             const fill = isTotal ? '#334155' : value < 0 ? '#e11d48' : '#059669';
             const labelY = margin.top + plotHeight + 20;
+            const isHovered = hoveredIndex === index;
 
             return (
-              <g key={`${item.step}-${index}`}>
-                <rect x={x} y={rectY} width={barWidth} height={rectHeight} rx="5" fill={fill} opacity="0.96">
-                  <title>{isTotal ? `${item.step}: ${currency}${Math.abs(item.amount).toLocaleString('en-IN')}` : `${item.step}: ${formatAmount(item.amount)}`}</title>
-                </rect>
+              <g
+                key={`${item.step}-${index}`}
+                onMouseEnter={() => setHoveredIndex(index)}
+                onMouseLeave={() => setHoveredIndex(null)}
+                className="cursor-pointer"
+              >
+                <rect x={x} y={rectY} width={barWidth} height={rectHeight} rx="5" fill={fill} opacity={isHovered ? '1' : '0.96'} stroke={isHovered ? 'currentColor' : 'none'} strokeWidth="1.5" />
                 <text className="wf-label" x={x + barWidth / 2} y={labelY} textAnchor="middle" fontSize="10" fill="currentColor" opacity="0.7" transform={`rotate(-18 ${x + barWidth / 2} ${labelY})`}>{item.step}</text>
               </g>
             );
           })}
+
+          {hoveredItem && hoveredIndex != null && (() => {
+            const item = hoveredItem;
+            const x = margin.left + stepGap * hoveredIndex + (stepGap - barWidth) / 2;
+            const isTotal = item.type === 'total';
+            const value = isTotal ? Math.abs(item.amount) : item.amount;
+            const barTop = y(Math.max(value, 0));
+            const barBottom = y(Math.min(value, 0));
+            const tooltipText = isTotal
+              ? `${item.step}: ${currency}${Math.abs(item.amount).toLocaleString('en-IN')}`
+              : `${item.step}: ${formatAmount(item.amount)}`;
+            const tooltipWidth = Math.min(250, Math.max(130, tooltipText.length * 6.4 + 20));
+            const tooltipX = Math.min(width - margin.right - tooltipWidth, Math.max(margin.left, x + barWidth / 2 - tooltipWidth / 2));
+            const rawTooltipY = isTotal || value >= 0 ? barTop - 42 : barBottom + 12;
+            const tooltipY = Math.max(4, Math.min(height - 30, rawTooltipY));
+
+            return (
+              <g pointerEvents="none">
+                <rect x={tooltipX} y={tooltipY} width={tooltipWidth} height="28" rx="6" fill="#0f172a" opacity="0.96" />
+                <text className="wf-label" x={tooltipX + tooltipWidth / 2} y={tooltipY + 18} textAnchor="middle" fontSize="11" fontWeight="600" fill="white">{tooltipText}</text>
+              </g>
+            );
+          })()}
         </svg>
       </div>
     </div>
