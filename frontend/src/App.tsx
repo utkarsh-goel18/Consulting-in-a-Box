@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Navbar } from './components/layout/Navbar';
 import { DashboardPageINR as DashboardPage } from './pages/DashboardPageINR';
 import { DatasetsPageV2 as DatasetsPage } from './pages/DatasetsPageV2';
 import { AnalysisPage } from './pages/AnalysisPage';
