@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowUpRight, ArrowDownRight, Minus } from 'lucide-react';
+import { ArrowDownRight, ArrowUpRight, Minus } from 'lucide-react';
 
 interface MetricCardProps {
   label: string;
@@ -24,61 +24,42 @@ export const MetricCard: React.FC<MetricCardProps> = ({
   badge,
   onClick,
 }) => {
-  const isDelta = deltaPct !== undefined || deltaPp !== undefined;
-  const rawDelta = deltaPct !== undefined ? deltaPct : (deltaPp || 0);
-  const isNeutral = rawDelta === 0;
-  const isPositive = rawDelta > 0;
-  
-  // Decide favorable vs unfavorable
-  const isFavorable = isPositiveGood ? isPositive : !isPositive;
+  const rawDelta = deltaPct ?? deltaPp ?? 0;
+  const neutral = rawDelta === 0;
+  const positive = rawDelta > 0;
+  const favorable = isPositiveGood ? positive : !positive;
 
   return (
     <div
       onClick={onClick}
-      className={`bg-white border border-slate-200 rounded-lg p-4 shadow-sm hover:border-slate-300 transition-all ${
-        onClick ? 'cursor-pointer hover:shadow-md' : ''
-      }`}
+      className={`group rounded-2xl border border-slate-200 bg-white p-5 shadow-[0_1px_2px_rgba(15,23,42,0.03)] transition duration-200 hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-[0_10px_30px_rgba(15,23,42,0.06)] ${onClick ? 'cursor-pointer' : ''}`}
     >
-      <div className="flex items-center justify-between mb-1.5">
-        <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">{label}</span>
+      <div className="flex items-start justify-between gap-3">
+        <span className="text-[11px] font-bold uppercase tracking-[0.14em] text-slate-400">{label}</span>
         {badge && (
-          <span className="text-[10px] font-medium px-2 py-0.5 rounded bg-slate-100 text-slate-600 border border-slate-200">
+          <span className="rounded-full border border-slate-200 bg-slate-50 px-2 py-1 text-[9px] font-bold uppercase tracking-wider text-slate-500">
             {badge}
           </span>
         )}
       </div>
 
-      <div className="flex items-baseline space-x-2">
-        <span className="text-2xl font-bold tracking-tight text-slate-900">{value}</span>
+      <div className="mt-3 flex items-end gap-2">
+        <span className="text-[27px] font-bold leading-none tracking-[-0.04em] text-slate-950">{value}</span>
       </div>
 
-      {isDelta && (
-        <div className="flex items-center space-x-1.5 mt-2">
-          <div
-            className={`inline-flex items-center px-1.5 py-0.5 rounded text-xs font-semibold ${
-              isNeutral
-                ? 'bg-slate-100 text-slate-600'
-                : isFavorable
-                ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
-                : 'bg-rose-50 text-rose-700 border border-rose-200'
-            }`}
-          >
-            {isNeutral ? (
-              <Minus className="w-3 h-3 mr-0.5" />
-            ) : isPositive ? (
-              <ArrowUpRight className="w-3 h-3 mr-0.5" />
-            ) : (
-              <ArrowDownRight className="w-3 h-3 mr-0.5" />
-            )}
-            <span>
-              {deltaPct !== undefined ? `${isPositive ? '+' : ''}${deltaPct.toFixed(1)}%` : `${isPositive ? '+' : ''}${deltaPp?.toFixed(1)} pp`}
-            </span>
-          </div>
-          {priorValue && <span className="text-[11px] text-slate-400">vs {priorValue} prior</span>}
+      {rawDelta !== undefined && (
+        <div className="mt-3 flex items-center gap-2">
+          <span className={`inline-flex items-center gap-0.5 rounded-md px-1.5 py-1 text-[10px] font-bold ${
+            neutral ? 'bg-slate-100 text-slate-500' : favorable ? 'bg-emerald-50 text-emerald-700' : 'bg-rose-50 text-rose-700'
+          }`}>
+            {neutral ? <Minus className="h-3 w-3" /> : positive ? <ArrowUpRight className="h-3 w-3" /> : <ArrowDownRight className="h-3 w-3" />}
+            {deltaPct !== undefined ? `${positive ? '+' : ''}${deltaPct.toFixed(1)}%` : `${positive ? '+' : ''}${(deltaPp ?? 0).toFixed(1)} pp`}
+          </span>
+          {priorValue && <span className="text-[10px] text-slate-400">vs {priorValue}</span>}
         </div>
       )}
 
-      {subtitle && <p className="text-[11px] text-slate-500 mt-2 line-clamp-1">{subtitle}</p>}
+      {subtitle && <p className="mt-3 truncate border-t border-slate-100 pt-3 text-[10px] leading-4 text-slate-500">{subtitle}</p>}
     </div>
   );
 };
