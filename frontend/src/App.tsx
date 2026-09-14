@@ -13,13 +13,44 @@ import { bootstrapDemo, getEvidenceDetail } from './api/client';
 import { ArrowRight, BarChart3, Database, FileText, Loader2, RefreshCw, ShieldCheck, Sparkles, TrendingUp } from 'lucide-react';
 import { Logo } from './components/brand/Logo';
 
-const CACHE_KEY = 'cib-dashboard-v4-accounting-bridge';
-const DEMO_STARTED_KEY = 'cib-demo-engagement-started-v1';
+const CACHE_KEY = 'cib-dashboard-v5-runtime-validation';
+const DEMO_STARTED_KEY = 'cib-demo-engagement-started-v2';
 const ANALYSIS_DASHBOARD_KEY = 'cib-analysis-dashboard-v1';
 
+const isFiniteNumber = (value: unknown): value is number => typeof value === 'number' && Number.isFinite(value);
+
+const isUsableDashboard = (value: unknown): value is ConsultingDashboard => {
+  if (!value || typeof value !== 'object') return false;
+  const data = value as Partial<ConsultingDashboard>;
+  const kpi = data.kpi_summary as Partial<ConsultingDashboard['kpi_summary']> | undefined;
+  if (!kpi || !data.driver_tree || !Array.isArray(data.p_and_l_waterfall)) return false;
+  const requiredKpis = [
+    kpi.revenue_prior, kpi.revenue_current, kpi.revenue_growth_pct,
+    kpi.gross_profit_prior, kpi.gross_profit_current, kpi.gross_profit_growth_pct,
+    kpi.net_profit_prior, kpi.net_profit_current, kpi.net_profit_growth_pct,
+    kpi.net_margin_prior_pct, kpi.net_margin_current_pct, kpi.net_margin_delta_pp,
+    kpi.orders_prior, kpi.orders_current, kpi.orders_growth_pct,
+    kpi.aov_prior, kpi.aov_current, kpi.aov_growth_pct,
+    kpi.cac_prior, kpi.cac_current, kpi.cac_growth_pct,
+    kpi.churn_rate_prior_pct, kpi.churn_rate_current_pct, kpi.churn_rate_delta_pp,
+  ];
+  return requiredKpis.every(isFiniteNumber) && data.p_and_l_waterfall.every(row =>
+    row && typeof row.step === 'string' && isFiniteNumber(row.amount) && isFiniteNumber(row.running_total) && typeof row.type === 'string'
+  );
+};
+
+const readCachedDashboard = (): ConsultingDashboard | null => {
+  if (sessionStorage.getItem(DEMO_STARTED_KEY) !== 'true') return null;
+  try {
+    const parsed = JSON.parse(sessionStorage.getItem(CACHE_KEY) || 'null');
+    return isUsableDashboard(parsed) ? parsed : null;
+  } catch {
+    return null;
+  }
+};
+
 export const App: React.FC = () => {
-  const hasRunDemo = sessionStorage.getItem(DEMO_STARTED_KEY) === 'true';
-  const cached = hasRunDemo ? (() => { try { return JSON.parse(sessionStorage.getItem(CACHE_KEY) || 'null') as ConsultingDashboard | null; } catch { return null; } })() : null;
+  const cached = readCachedDashboard();
   const [activeTab, setActiveTab] = useState('dashboard');
   const [dashboardData, setDashboardData] = useState<ConsultingDashboard | null>(cached);
   const [demoLoading, setDemoLoading] = useState(false);
@@ -31,15 +62,36 @@ export const App: React.FC = () => {
   useEffect(() => { document.documentElement.classList.toggle('dark', darkMode); localStorage.setItem('cib-theme', darkMode ? 'dark' : 'light'); }, [darkMode]);
 
   const runDemo = async () => {
-    try { setLoadError(''); setDemoLoading(true); setDemoProgressStep('Preparing the NovaMart case…'); const data = await bootstrapDemo(); setDemoProgressStep('Building the decision workspace…'); setDashboardData(data); sessionStorage.setItem(CACHE_KEY, JSON.stringify(data)); sessionStorage.setItem(DEMO_STARTED_KEY, 'true'); setActiveTab('dashboard'); }
-    catch (err: any) { setLoadError(err?.message || 'Unable to connect to the analytical engine.'); }
-    finally { setDemoLoading(false); setDemoProgressStep(''); }
+    try {
+      setLoadError('');
+      setDemoLoading(true);
+      setDemoProgressStep('Preparing the NovaMart case…');
+      const data = await bootstrapDemo();
+      if (!isUsableDashboard(data)) throw new Error('The analytical engine returned an incomplete dashboard. Please restart the backend and try again.');
+      setDemoProgressStep('Building the decision workspace…');
+      setDashboardData(data);
+      sessionStorage.setItem(CACHE_KEY, JSON.stringify(data));
+      sessionStorage.setItem(DEMO_STARTED_KEY, 'true');
+      setActiveTab('dashboard');
+    } catch (err: any) {
+      setLoadError(err?.message || 'Unable to connect to the analytical engine.');
+    } finally {
+      setDemoLoading(false);
+      setDemoProgressStep('');
+    }
   };
 
   const handleAnalysisExecuted = () => {
     try {
       const raw = sessionStorage.getItem(ANALYSIS_DASHBOARD_KEY);
-      if (raw) { const data = JSON.parse(raw) as ConsultingDashboard; setDashboardData(data); sessionStorage.setItem(CACHE_KEY, JSON.stringify(data)); sessionStorage.setItem(DEMO_STARTED_KEY, 'true'); }
+      if (raw) {
+        const data = JSON.parse(raw) as ConsultingDashboard;
+        if (isUsableDashboard(data)) {
+          setDashboardData(data);
+          sessionStorage.setItem(CACHE_KEY, JSON.stringify(data));
+          sessionStorage.setItem(DEMO_STARTED_KEY, 'true');
+        }
+      }
     } catch { /* keep the current workspace if the persisted result is malformed */ }
     setActiveTab('insights');
   };
