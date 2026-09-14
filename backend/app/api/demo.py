@@ -33,12 +33,20 @@ def _cache_is_valid(dashboard: ConsultingDashboard) -> bool:
     waterfall = dashboard.p_and_l_waterfall
     if not waterfall:
         return False
-    totals = [row for row in waterfall if row.type == "total"]
+
+    # Pydantic models expose attributes, while some schema configurations can
+    # leave nested waterfall rows as dictionaries. Support both representations.
+    def field(row, name, default=None):
+        if isinstance(row, dict):
+            return row.get(name, default)
+        return getattr(row, name, default)
+
+    totals = [row for row in waterfall if field(row, "type") == "total"]
     if len(totals) < 2:
         return False
-    prior = float(totals[0].amount)
-    current = float(totals[-1].amount)
-    impacts = sum(float(row.amount) for row in waterfall if row.type != "total")
+    prior = float(field(totals[0], "amount", 0))
+    current = float(field(totals[-1], "amount", 0))
+    impacts = sum(float(field(row, "amount", 0)) for row in waterfall if field(row, "type") != "total")
     return abs((prior + impacts) - current) <= 0.05
 
 
