@@ -3,15 +3,8 @@ name: Consulting in a Box CI
 on:
   push:
     branches: [main]
-    paths-ignore: ['ci-debug/**']
   pull_request:
     branches: [main]
-
-permissions:
-  contents: write
-
-env:
-  PYTHONUNBUFFERED: '1'
 
 jobs:
   backend:
@@ -28,31 +21,7 @@ jobs:
         with:
           python-version: '3.12'
       - run: pip install -r requirements.txt
-      - name: Run backend tests
-        id: test
-        continue-on-error: true
-        run: |
-          set -o pipefail
-          pytest -q 2>&1 | tee /tmp/backend-test.log
-      - name: Publish backend diagnostics
-        if: steps.test.outcome == 'failure'
-        working-directory: .
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          python - <<'PY'
-          import base64, json
-          from pathlib import Path
-          p = Path('/tmp/backend-test.log')
-          encoded = base64.b64encode(p.read_bytes()).decode()
-          Path('/tmp/payload.json').write_text(json.dumps({"message":"CI: capture backend test diagnostics","content":encoded,"branch":"main"}))
-          PY
-          SHA=$(gh api repos/${{ github.repository }}/contents/ci-debug/backend-test.log --jq .sha 2>/dev/null || true)
-          if [ -n "$SHA" ]; then jq --arg sha "$SHA" '.sha=$sha' /tmp/payload.json > /tmp/payload2.json && mv /tmp/payload2.json /tmp/payload.json; fi
-          gh api --method PUT repos/${{ github.repository }}/contents/ci-debug/backend-test.log --input /tmp/payload.json >/dev/null
-      - name: Fail if backend tests failed
-        if: steps.test.outcome == 'failure'
-        run: exit 1
+      - run: pytest -q
 
   frontend:
     runs-on: ubuntu-latest
@@ -67,28 +36,4 @@ jobs:
           cache: npm
           cache-dependency-path: frontend/package-lock.json
       - run: npm ci
-      - name: Build frontend
-        id: build
-        continue-on-error: true
-        run: |
-          set -o pipefail
-          npm run build 2>&1 | tee /tmp/frontend-build.log
-      - name: Publish frontend build diagnostics
-        if: steps.build.outcome == 'failure'
-        working-directory: .
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          python - <<'PY'
-          import base64, json
-          from pathlib import Path
-          p = Path('/tmp/frontend-build.log')
-          encoded = base64.b64encode(p.read_bytes()).decode()
-          Path('/tmp/payload.json').write_text(json.dumps({"message":"CI: capture frontend build diagnostics","content":encoded,"branch":"main"}))
-          PY
-          SHA=$(gh api repos/${{ github.repository }}/contents/ci-debug/frontend-build.log --jq .sha 2>/dev/null || true)
-          if [ -n "$SHA" ]; then jq --arg sha "$SHA" '.sha=$sha' /tmp/payload.json > /tmp/payload2.json && mv /tmp/payload2.json /tmp/payload.json; fi
-          gh api --method PUT repos/${{ github.repository }}/contents/ci-debug/frontend-build.log --input /tmp/payload.json >/dev/null
-      - name: Fail if frontend build failed
-        if: steps.build.outcome == 'failure'
-        run: exit 1
+      - run: npm run build
