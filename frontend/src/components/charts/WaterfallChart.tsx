@@ -14,11 +14,25 @@ interface WaterfallChartProps {
 }
 
 export const WaterfallChart: React.FC<WaterfallChartProps> = ({ data, currency = '₹' }) => {
-  const chartData = data.map((item, index) => {
+  // Recharts stacks positive and negative values independently. If a floating
+  // waterfall bar uses a negative base directly, the positive segment starts
+  // at zero instead of spanning from priorTotal to runningTotal. Shift the
+  // entire chart into a non-negative coordinate system and place the zero line
+  // at `baselineOffset` so every impact bar floats between its two totals.
+  const rawTotals = data.flatMap((item) => {
+    if (item.type === 'total') return [item.amount];
+    const running = item.running_total ?? item.amount;
+    return [running, running - item.amount];
+  });
+  const minimumTotal = Math.min(0, ...rawTotals);
+  const baselineOffset = Math.max(0, -minimumTotal);
+
+  const chartData = data.map((item) => {
     if (item.type === 'total') {
+      const shiftedTotal = item.amount + baselineOffset;
       return {
         step: item.step,
-        base: 0,
+        base: Math.min(baselineOffset, shiftedTotal),
         value: Math.abs(item.amount),
         type: item.type,
         displayAmount: item.amount,
@@ -30,11 +44,12 @@ export const WaterfallChart: React.FC<WaterfallChartProps> = ({ data, currency =
     // from it rather than maintaining a second running calculation in the UI.
     const runningTotal = item.running_total ?? item.amount;
     const priorTotal = runningTotal - item.amount;
-    const base = Math.min(priorTotal, runningTotal);
+    const shiftedRunning = runningTotal + baselineOffset;
+    const shiftedPrior = priorTotal + baselineOffset;
 
     return {
       step: item.step,
-      base,
+      base: Math.min(shiftedPrior, shiftedRunning),
       value: Math.abs(item.amount),
       type: item.type,
       displayAmount: item.amount,
@@ -49,8 +64,9 @@ export const WaterfallChart: React.FC<WaterfallChartProps> = ({ data, currency =
   };
 
   const formatAxis = (value: number) => {
-    const abs = Math.abs(value);
-    const sign = value < 0 ? '-' : '';
+    const actualValue = value - baselineOffset;
+    const abs = Math.abs(actualValue);
+    const sign = actualValue < 0 ? '-' : '';
     if (abs >= 10_000_000) return `${sign}${currency}${(abs / 10_000_000).toFixed(1)}Cr`;
     if (abs >= 100_000) return `${sign}${currency}${(abs / 100_000).toFixed(1)}L`;
     if (abs >= 1_000) return `${sign}${currency}${(abs / 1_000).toFixed(0)}K`;
@@ -97,7 +113,7 @@ export const WaterfallChart: React.FC<WaterfallChartProps> = ({ data, currency =
             <XAxis dataKey="step" tick={{ fontSize: 10, fill: '#64748b' }} interval={0} angle={-18} textAnchor="end" height={65} />
             <YAxis tick={{ fontSize: 10, fill: '#64748b' }} tickFormatter={formatAxis} />
             <Tooltip cursor={{ fill: 'rgba(148,163,184,0.08)' }} content={<CustomTooltip />} />
-            <ReferenceLine y={0} stroke="#94a3b8" />
+            <ReferenceLine y={baselineOffset} stroke="#94a3b8" />
             <Bar dataKey="base" stackId="waterfall" fill="transparent" isAnimationActive={false} />
             <Bar dataKey="value" stackId="waterfall" radius={[4, 4, 4, 4]} isAnimationActive={false}>
               {chartData.map((entry, idx) => <Cell key={`cell-${idx}`} fill={getBarColor(entry.type, entry.displayAmount)} />)}
