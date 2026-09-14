@@ -15,12 +15,23 @@ from app.api.settings import router as settings_router
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Startup: ensure demo data exists and is preloaded
+    # Load the complete demo dataset once at startup. Previously the startup
+    # check only required three files, which could cause /demo/bootstrap to
+    # regenerate every dataset when one auxiliary CSV was missing.
     os.makedirs(settings.DATA_DIR, exist_ok=True)
-    required = ["customers.csv", "orders.csv", "products.csv"]
+    required = [
+        "customers.csv",
+        "orders.csv",
+        "products.csv",
+        "order_items.csv",
+        "marketing_spend.csv",
+        "expenses.csv",
+        "returns.csv",
+    ]
     if not all(os.path.exists(os.path.join(settings.DATA_DIR, f)) for f in required):
         print("Generating initial synthetic NovaMart demo dataset...")
         generate_datasets(settings.DATA_DIR, scale="demo")
+
     repo.load_from_directory(settings.DATA_DIR)
     print(f"Loaded {len(repo.dataframes)} tables into memory & DuckDB analytical engine.")
     yield
@@ -32,16 +43,14 @@ app = FastAPI(
     lifespan=lifespan
 )
 
-# Enterprise CORS setup
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"], # In development allow all local frontend ports
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Mount API Routers
 app.include_router(demo_router, prefix="/api")
 app.include_router(datasets_router, prefix="/api")
 app.include_router(analysis_router, prefix="/api")
