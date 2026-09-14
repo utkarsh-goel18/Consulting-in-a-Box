@@ -2,9 +2,9 @@ from fastapi import APIRouter
 from pydantic import BaseModel
 
 from app.ai import get_ai_provider
-from app.core.analysis_service import build_consulting_snapshot, get_snapshot
+from app.core.analysis_service import build_consulting_snapshot
 from app.core.database import repo
-from app.models.schemas import AnalysisPlan
+from app.models.schemas import AnalysisPlan, ConsultingDashboard
 
 router = APIRouter(prefix="/analysis", tags=["analysis"])
 
@@ -35,15 +35,30 @@ def generate_plan(req: PlanRequest):
     selected = next((case for case in PREDEFINED_CASES if case["id"] == req.case_id), None)
     problem_text = req.custom_problem.strip() or (selected["default_question"] if selected else req.case_id)
     provider = get_ai_provider()
-    return provider.generate_analysis_plan(problem_text, {"case_id": req.case_id, "tables": {k: len(v) for k, v in repo.dataframes.items()}})
+    return provider.generate_analysis_plan(problem_text, {"case_id": req.case_id, "workspace": repo.workspace_name, "tables": {k: len(v) for k, v in repo.dataframes.items()}})
 
 
 @router.post("/execute")
 def execute_analysis(req: PlanRequest):
-    """Execute the deterministic plan and return verified outputs plus an execution audit trail."""
+    """Execute against the currently active workspace and return a complete dashboard."""
     plan = generate_plan(req)
     snapshot = build_consulting_snapshot()
     kpi = snapshot["kpi_summary"]
+    dashboard = ConsultingDashboard(
+        company_name=snapshot["company_name"],
+        industry=snapshot["industry"],
+        quarter_evaluated=snapshot["quarter_evaluated"],
+        problem_title=snapshot["problem_title"],
+        kpi_summary=kpi,
+        driver_tree=snapshot["driver_tree"],
+        insights=snapshot["insights"],
+        recommendations=snapshot["recommendations"],
+        p_and_l_waterfall=snapshot["waterfall"],
+        monthly_trend=snapshot["monthly_trend"],
+        category_performance=snapshot["category_performance"],
+        marketing_efficiency=snapshot["marketing_efficiency"],
+        shipping_partner_breakdown=snapshot["shipping_partner_breakdown"],
+    )
     return {
         "case_id": req.case_id,
         "case_title": plan.case_title,
@@ -51,7 +66,7 @@ def execute_analysis(req: PlanRequest):
         "plan": plan.model_dump(),
         "timeline": [
             {"step": 1, "title": "Profile & validate inputs", "status": "COMPLETED", "detail": f"Validated {len(repo.dataframes)} datasets and their analytical relationships."},
-            {"step": 2, "title": "Compute deterministic KPIs", "status": "COMPLETED", "detail": f"Evaluated revenue, profit, orders, AOV, CAC and churn for the two latest quarters."},
+            {"step": 2, "title": "Compute deterministic KPIs", "status": "COMPLETED", "detail": "Evaluated revenue, profit, orders, AOV, CAC and churn for the two latest quarters."},
             {"step": 3, "title": "Decompose root causes", "status": "COMPLETED", "detail": f"Built a reconciled P&L driver tree for {kpi.net_profit_growth_pct:+.1f}% net-profit movement."},
             {"step": 4, "title": "Classify findings", "status": "COMPLETED", "detail": f"Produced {len(snapshot['insights'])} FACT / INSIGHT / HYPOTHESIS statements with evidence IDs."},
             {"step": 5, "title": "Size actions & scenarios", "status": "COMPLETED", "detail": f"Generated {len(snapshot['recommendations'])} evidence-backed recommendations and deterministic what-if inputs."},
@@ -62,4 +77,5 @@ def execute_analysis(req: PlanRequest):
             "insights": [item.model_dump() for item in snapshot["insights"]],
             "recommendations": [item.model_dump() for item in snapshot["recommendations"]],
         },
+        "dashboard": dashboard.model_dump(mode="json"),
     }
