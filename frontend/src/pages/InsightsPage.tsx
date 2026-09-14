@@ -1,205 +1,38 @@
-import React, { useState } from 'react';
-import { 
-  GitFork, 
-  ShieldCheck, 
-  Sparkles, 
-  HelpCircle, 
-  CheckSquare, 
-  ArrowRight, 
-  Eye, 
-  Filter, 
-  DollarSign, 
-  AlertTriangle 
-} from 'lucide-react';
-import { ConsultingDashboard, StatementType, ExecutiveInsight } from '../types';
-import { DriverTreeComponent } from '../components/charts/DriverTreeComponent';
+import React, { useMemo, useState } from 'react';
+import { AlertTriangle, CheckCircle2, ChevronDown, ChevronRight, GitBranch, HelpCircle, Lightbulb, ShieldCheck } from 'lucide-react';
+import { ConsultingDashboard, DriverNode, ExecutiveInsight } from '../types';
 
-interface InsightsPageProps {
-  data: ConsultingDashboard;
-  onViewEvidence: (evidenceId: string) => void;
+interface Props { data: ConsultingDashboard; onViewEvidence: (evidenceId: string) => void; }
+const inr = (value: number) => { const abs = Math.abs(value); const sign = value < 0 ? '-' : ''; if (abs >= 10_000_000) return `${sign}₹${(abs / 10_000_000).toFixed(2)}Cr`; if (abs >= 100_000) return `${sign}₹${(abs / 100_000).toFixed(2)}L`; if (abs >= 1_000) return `${sign}₹${(abs / 1_000).toFixed(1)}K`; return `${sign}₹${Math.round(abs).toLocaleString('en-IN')}`; };
+const classMeta: Record<string, { icon: React.ReactNode; cls: string }> = {
+  FACT: { icon: <CheckCircle2 className="h-4 w-4" />, cls: 'bg-blue-50 text-blue-700 border-blue-200' },
+  INSIGHT: { icon: <Lightbulb className="h-4 w-4" />, cls: 'bg-amber-50 text-amber-700 border-amber-200' },
+  HYPOTHESIS: { icon: <HelpCircle className="h-4 w-4" />, cls: 'bg-purple-50 text-purple-700 border-purple-200' },
+};
+
+function TreeNode({ node, depth, onEvidence }: { node: DriverNode; depth: number; onEvidence: (id: string) => void }) {
+  const [open, setOpen] = useState(depth < 2);
+  const negative = node.delta_value < 0;
+  return <div className={depth ? 'ml-5 border-l border-slate-200 pl-4 dark:border-slate-800' : ''}>
+    <div className="group flex items-center gap-3 py-2">
+      {node.children.length ? <button onClick={() => setOpen(v => !v)} className="rounded p-1 text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800">{open ? <ChevronDown className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}</button> : <span className="w-6" />}
+      <div className="min-w-0 flex-1"><div className="flex flex-wrap items-center gap-2"><span className={`h-2 w-2 rounded-full ${negative ? 'bg-rose-500' : node.delta_value > 0 ? 'bg-emerald-500' : 'bg-slate-300'}`} /><span className="text-xs font-bold text-slate-800 dark:text-slate-100">{node.label}</span><span className="rounded bg-slate-100 px-1.5 py-0.5 font-mono text-[10px] text-slate-500 dark:bg-slate-800">{node.contribution_pct.toFixed(1)}%</span></div><div className="mt-1 text-[11px] text-slate-500">{node.metric_name} · {inr(node.prior_value)} → {inr(node.current_value)} · impact {node.delta_value >= 0 ? '+' : ''}{inr(node.delta_value)}</div></div>
+      {node.evidence_id && <button onClick={() => onEvidence(node.evidence_id!)} className="opacity-0 group-hover:opacity-100 text-[10px] font-semibold text-blue-600">Evidence</button>}
+    </div>
+    {open && node.children.map(child => <TreeNode key={child.id} node={child} depth={depth + 1} onEvidence={onEvidence} />)}
+  </div>;
 }
 
-export const InsightsPage: React.FC<InsightsPageProps> = ({ data, onViewEvidence }) => {
-  const [filterType, setFilterType] = useState<string>('ALL');
-
-  const filteredInsights = data.insights.filter((ins) => {
-    if (filterType === 'ALL') return true;
-    return ins.classification === filterType;
-  });
-
-  const getBadgeStyle = (cls: StatementType) => {
-    switch (cls) {
-      case 'FACT':
-        return 'bg-blue-50 text-blue-700 border-blue-200';
-      case 'INSIGHT':
-        return 'bg-purple-50 text-purple-700 border-purple-200';
-      case 'HYPOTHESIS':
-        return 'bg-amber-50 text-amber-700 border-amber-200';
-      case 'RECOMMENDATION':
-        return 'bg-emerald-50 text-emerald-700 border-emerald-200';
-      default:
-        return 'bg-slate-100 text-slate-700 border-slate-200';
-    }
-  };
-
-  return (
-    <div className="space-y-6 animate-in fade-in duration-200">
-      
-      {/* Top Header & Diagnosis Alert */}
-      <div className="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-          <div>
-            <div className="flex items-center space-x-2">
-              <span className="text-[10px] font-bold uppercase tracking-wider text-blue-700 bg-blue-50 px-2 py-0.5 rounded border border-blue-200">
-                Executive Diagnosis
-              </span>
-              <span className="text-xs font-mono text-slate-400">Governance: Rigorous Evidence Classification</span>
-            </div>
-            <h2 className="text-xl font-bold tracking-tight text-slate-900 mt-1">
-              Profit declined 17.4% QoQ — Primary Cost & Revenue Drivers Isolated
-            </h2>
-            <p className="text-xs text-slate-500 mt-1 max-w-3xl">
-              Every statement is governed by strict truth classification: Facts are directly supported by SQL aggregates; 
-              Insights synthesize relational contributions; Hypotheses identify unconfirmed operational correlations.
-            </p>
-          </div>
-
-          <div className="flex items-center space-x-2 font-mono text-xs text-slate-600 bg-slate-50 px-3 py-2 rounded-lg border border-slate-200">
-            <ShieldCheck className="w-4 h-4 text-emerald-600" />
-            <span>Zero Hallucination Guaranteed</span>
-          </div>
-        </div>
-      </div>
-
-      {/* Top 3 High-Impact Drivers Banner */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
-          <span className="text-xs font-bold text-rose-600 font-mono">01 • LAST-MILE LOGISTICS SURGE</span>
-          <h4 className="text-sm font-bold text-slate-900 mt-1">Delivery costs increased 13.7%</h4>
-          <p className="text-xs text-slate-500 mt-1">FastLogistics instituted a 17.1% regional rate spike on Tier-2 routes.</p>
-          <div className="mt-3 flex items-center justify-between pt-2 border-t border-slate-100">
-            <span className="text-xs font-mono font-bold text-slate-900">Impact: +$112.4K</span>
-            <button
-              onClick={() => onViewEvidence('ev_shipping_surge')}
-              className="text-xs text-blue-600 hover:text-blue-800 font-semibold flex items-center space-x-1"
-            >
-              <span>View Audit</span>
-              <ArrowRight className="w-3 h-3" />
-            </button>
-          </div>
-        </div>
-
-        <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
-          <span className="text-xs font-bold text-amber-600 font-mono">02 • BASKET SIZE / AOV SHRINKAGE</span>
-          <h4 className="text-sm font-bold text-slate-900 mt-1">Average Order Value declined 5.1%</h4>
-          <p className="text-xs text-slate-500 mt-1">Electronics units per basket decreased 8.4% amid promotional fatigue.</p>
-          <div className="mt-3 flex items-center justify-between pt-2 border-t border-slate-100">
-            <span className="text-xs font-mono font-bold text-slate-900">Impact: -$490.0K Margin</span>
-            <button
-              onClick={() => onViewEvidence('ev_aov_shrink')}
-              className="text-xs text-blue-600 hover:text-blue-800 font-semibold flex items-center space-x-1"
-            >
-              <span>View Audit</span>
-              <ArrowRight className="w-3 h-3" />
-            </button>
-          </div>
-        </div>
-
-        <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
-          <span className="text-xs font-bold text-purple-600 font-mono">03 • TIER-2 CHURN & SURCHARGES</span>
-          <h4 className="text-sm font-bold text-slate-900 mt-1">Customer churn increased +3.2 pp</h4>
-          <p className="text-xs text-slate-500 mt-1">74% of churning customers were in Tier-2 after minimum order delivery fee.</p>
-          <div className="mt-3 flex items-center justify-between pt-2 border-t border-slate-100">
-            <span className="text-xs font-mono font-bold text-slate-900">At Risk: $142.0K LTV</span>
-            <button
-              onClick={() => onViewEvidence('ev_churn_surge')}
-              className="text-xs text-blue-600 hover:text-blue-800 font-semibold flex items-center space-x-1"
-            >
-              <span>View Audit</span>
-              <ArrowRight className="w-3 h-3" />
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* Signature Driver Tree Component */}
-      <DriverTreeComponent
-        tree={data.driver_tree}
-        onViewEvidence={onViewEvidence}
-      />
-
-      {/* Classified Insights Section */}
-      <div className="bg-white rounded-xl border border-slate-200 p-5 shadow-sm space-y-4">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100">
-          <div>
-            <h3 className="text-sm font-bold text-slate-900 tracking-tight flex items-center space-x-2">
-              <ShieldCheck className="w-4 h-4 text-blue-600" />
-              <span>Classified Executive Findings & Governance Ledger</span>
-            </h3>
-            <p className="text-xs text-slate-500">
-              Filtered by analytical certainty: Facts (Data truth), Insights (Analytic interpretation), Hypotheses (Needs testing), Recommendations.
-            </p>
-          </div>
-
-          {/* Classification Filters */}
-          <div className="flex items-center space-x-1 bg-slate-100 p-1 rounded-lg text-xs font-semibold">
-            {['ALL', 'FACT', 'INSIGHT', 'HYPOTHESIS', 'RECOMMENDATION'].map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setFilterType(cat)}
-                className={`px-3 py-1 rounded-md transition-all ${
-                  filterType === cat
-                    ? 'bg-white text-slate-900 shadow-xs'
-                    : 'text-slate-600 hover:text-slate-900'
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Insights Cards List */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {filteredInsights.map((ins) => (
-            <div
-              key={ins.id}
-              className="p-4 rounded-xl border border-slate-200 bg-white hover:border-slate-300 hover:shadow-sm transition-all flex flex-col justify-between space-y-3"
-            >
-              <div>
-                <div className="flex items-center justify-between mb-2">
-                  <span className={`px-2 py-0.5 rounded text-[10px] font-bold tracking-wider border ${getBadgeStyle(ins.classification)}`}>
-                    {ins.classification}
-                  </span>
-                  <span className="text-[10px] font-mono text-slate-400">
-                    Area: {ins.affected_area}
-                  </span>
-                </div>
-
-                <h4 className="text-sm font-bold text-slate-900 leading-snug">{ins.headline}</h4>
-                <p className="text-xs text-slate-600 mt-1.5 leading-relaxed">{ins.narrative}</p>
-              </div>
-
-              <div className="pt-2 border-t border-slate-100 flex items-center justify-between">
-                {ins.magnitude_formatted ? (
-                  <span className="text-xs font-mono font-bold text-slate-800">
-                    {ins.magnitude_formatted}
-                  </span>
-                ) : <span />}
-
-                <button
-                  onClick={() => onViewEvidence(ins.evidence_id)}
-                  className="inline-flex items-center space-x-1 text-xs font-semibold text-blue-600 hover:text-blue-800 transition-colors"
-                >
-                  <Eye className="w-3.5 h-3.5" />
-                  <span>View Evidence</span>
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
+export const InsightsPage: React.FC<Props> = ({ data, onViewEvidence }) => {
+  const [filter, setFilter] = useState<'ALL' | 'FACT' | 'INSIGHT' | 'HYPOTHESIS'>('ALL');
+  const insights = useMemo(() => filter === 'ALL' ? data.insights : data.insights.filter(i => i.classification === filter), [data.insights, filter]);
+  return <div className="space-y-6">
+    <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900"><div className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-blue-600"><GitBranch className="h-4 w-4" /> Root-cause intelligence</div><h1 className="mt-2 text-2xl font-bold text-slate-900 dark:text-white">From variance to drivers to evidence.</h1><p className="mt-2 max-w-3xl text-sm leading-6 text-slate-500">Every driver is calculated from the same P&L bridge used by the dashboard. Evidence references expose the methodology and SQL behind each material finding.</p></section>
+    <div className="grid gap-6 lg:grid-cols-[1.1fr_.9fr]">
+      <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900"><div className="mb-4 flex items-center justify-between"><div><h2 className="text-sm font-bold text-slate-900 dark:text-white">Interactive driver tree</h2><p className="mt-1 text-xs text-slate-500">{inr(data.driver_tree.prior_value)} → {inr(data.driver_tree.current_value)} · {data.driver_tree.delta_pct.toFixed(1)}%</p></div><span className="rounded-md bg-emerald-50 px-2 py-1 text-[10px] font-bold text-emerald-700">Reconciled</span></div><div className="rounded-xl border border-slate-100 bg-slate-50 p-3 dark:border-slate-800 dark:bg-slate-950"><TreeNode node={data.driver_tree} depth={0} onEvidence={onViewEvidence} /></div></section>
+      <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900"><div className="flex items-center gap-2"><ShieldCheck className="h-4 w-4 text-emerald-500" /><div><h2 className="text-sm font-bold text-slate-900 dark:text-white">Evidence governance</h2><p className="text-xs text-slate-500">Certainty is explicit by design.</p></div></div><div className="mt-4 space-y-3"><div className="rounded-xl border border-blue-200 bg-blue-50 p-3 text-xs text-blue-800"><b>FACT</b> — directly supported by source data and deterministic calculation.</div><div className="rounded-xl border border-amber-200 bg-amber-50 p-3 text-xs text-amber-800"><b>INSIGHT</b> — analytical interpretation of measured patterns.</div><div className="rounded-xl border border-purple-200 bg-purple-50 p-3 text-xs text-purple-800"><b>HYPOTHESIS</b> — plausible explanation requiring validation.</div></div><div className="mt-4 rounded-xl border border-slate-200 p-3 text-xs text-slate-500 dark:border-slate-800">AI can explain verified results, but it does not calculate the numerical bridge.</div></section>
     </div>
-  );
+    <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900"><div className="mb-4 flex flex-wrap items-center justify-between gap-3"><div><h2 className="text-sm font-bold text-slate-900 dark:text-white">Classified findings</h2><p className="mt-1 text-xs text-slate-500">{insights.length} findings in the current view.</p></div><div className="flex gap-1">{(['ALL','FACT','INSIGHT','HYPOTHESIS'] as const).map(key => <button key={key} onClick={() => setFilter(key)} className={`rounded-lg px-3 py-1.5 text-[10px] font-bold ${filter === key ? 'bg-slate-900 text-white dark:bg-white dark:text-slate-900' : 'text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800'}`}>{key}</button>)}</div></div><div className="grid gap-3 md:grid-cols-2">{insights.map((item: ExecutiveInsight) => { const meta = classMeta[item.classification] || classMeta.FACT; return <article key={item.id} className="rounded-xl border border-slate-200 p-4 dark:border-slate-800"><div className="flex items-start gap-3"><span className={`flex items-center gap-1.5 rounded-lg border px-2 py-1 text-[10px] font-bold ${meta.cls}`}>{meta.icon}{item.classification}</span><div className="min-w-0 flex-1"><h3 className="text-xs font-bold text-slate-900 dark:text-white">{item.headline}</h3><p className="mt-1 text-xs leading-5 text-slate-500">{item.narrative}</p><div className="mt-3 flex items-center justify-between gap-2"><span className="font-mono text-[10px] text-slate-400">Confidence: {item.confidence} · {item.affected_area}</span><button onClick={() => onViewEvidence(item.evidence_id)} className="text-[10px] font-semibold text-blue-600 hover:underline">Audit evidence</button></div></div></div></article>; })}</div></section>
+    <div className="flex items-center gap-2 rounded-xl border border-amber-200 bg-amber-50 p-3 text-xs text-amber-800"><AlertTriangle className="h-4 w-4 shrink-0" /> Hypotheses are not causal facts. Validate them with experiments, operational records or additional data.</div>
+  </div>;
 };
