@@ -4,7 +4,7 @@ import os
 import numpy as np
 import pandas as pd
 
-DEMO_VERSION = "novamart-v5-coherent-inr"
+DEMO_VERSION = "novamart-v6-coherent-inr"
 
 
 def generate_fast_demo_datasets(output_dir: str, n_customers: int = 100_000, n_orders: int = 500_000) -> None:
