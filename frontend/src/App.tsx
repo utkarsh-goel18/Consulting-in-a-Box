@@ -22,16 +22,6 @@ export const App: React.FC = () => {
   const [activeEvidence, setActiveEvidence] = useState<EvidenceDetail | null>(null);
   const [darkMode, setDarkMode] = useState(() => localStorage.getItem('cib-theme') === 'dark');
 
-  const demoSequence = [
-    'Profiling data…',
-    'Building data model…',
-    'Calculating KPIs…',
-    'Analysing drivers…',
-    'Detecting anomalies…',
-    'Generating insights…',
-    'Preparing recommendations…'
-  ];
-
   useEffect(() => {
     document.documentElement.classList.toggle('dark', darkMode);
     localStorage.setItem('cib-theme', darkMode ? 'dark' : 'light');
@@ -40,10 +30,7 @@ export const App: React.FC = () => {
   const handleRunDemo = async () => {
     try {
       setDemoLoading(true);
-      for (const step of demoSequence) {
-        setDemoProgressStep(step);
-        await new Promise(resolve => setTimeout(resolve, 280));
-      }
+      setDemoProgressStep('Loading decision workspace…');
       const data = await bootstrapDemo();
       setDashboardData(data);
       setActiveTab('dashboard');
