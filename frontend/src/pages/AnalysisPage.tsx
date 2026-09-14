@@ -1,252 +1,98 @@
-import React, { useState, useEffect } from 'react';
-import { 
-  Compass, 
-  TrendingDown, 
-  Users, 
-  BarChart3, 
-  DollarSign, 
-  Target, 
-  ShoppingBag, 
-  Package, 
-  Activity, 
-  ArrowRight, 
-  CheckCircle2, 
-  Clock, 
-  Sparkles, 
-  Play, 
-  FileText 
-} from 'lucide-react';
-import { ConsultingCase, AnalysisPlan } from '../types';
-import { getConsultingCases, generateAnalysisPlan } from '../api/client';
+import React, { useEffect, useState } from 'react';
+import { Activity, ArrowRight, BarChart3, CheckCircle2, Compass, DollarSign, Package, Play, ShoppingBag, Sparkles, Target, TrendingDown, Users } from 'lucide-react';
+import { AnalysisPlan, ConsultingCase } from '../types';
+import { executeAnalysis, generateAnalysisPlan, getConsultingCases } from '../api/client';
 
-interface AnalysisPageProps {
-  onPlanExecuted: () => void;
-}
+interface Props { onPlanExecuted: () => void; }
 
-export const AnalysisPage: React.FC<AnalysisPageProps> = ({ onPlanExecuted }) => {
+const icons: Record<string, React.ReactNode> = {
+  TrendingDown: <TrendingDown className="h-4 w-4" />, Users: <Users className="h-4 w-4" />, BarChart3: <BarChart3 className="h-4 w-4" />,
+  DollarSign: <DollarSign className="h-4 w-4" />, Target: <Target className="h-4 w-4" />, ShoppingBag: <ShoppingBag className="h-4 w-4" />,
+  Package: <Package className="h-4 w-4" />, Activity: <Activity className="h-4 w-4" />,
+};
+
+export const AnalysisPage: React.FC<Props> = ({ onPlanExecuted }) => {
   const [cases, setCases] = useState<ConsultingCase[]>([]);
-  const [selectedCaseId, setSelectedCaseId] = useState<string>('case_profitability_decline');
-  const [customProblem, setCustomProblem] = useState<string>('');
+  const [selectedCaseId, setSelectedCaseId] = useState('case_profitability_decline');
+  const [customProblem, setCustomProblem] = useState('');
   const [plan, setPlan] = useState<AnalysisPlan | null>(null);
-  const [planning, setPlanning] = useState<boolean>(false);
-  const [executing, setExecuting] = useState<boolean>(false);
+  const [execution, setExecution] = useState<any>(null);
+  const [loading, setLoading] = useState(false);
+  const [executing, setExecuting] = useState(false);
+  const [error, setError] = useState('');
 
   useEffect(() => {
-    getConsultingCases()
-      .then((data) => {
-        setCases(data);
-        // Default plan generation for first case
-        handleGeneratePlan('case_profitability_decline', '');
-      })
-      .catch((err) => console.error(err));
+    getConsultingCases().then(setCases).catch(err => setError(err.message));
+    generateAnalysisPlan('case_profitability_decline').then(setPlan).catch(err => setError(err.message));
   }, []);
 
-  const handleGeneratePlan = async (caseId: string, customText: string) => {
-    try {
-      setPlanning(true);
-      const generatedPlan = await generateAnalysisPlan(caseId, customText);
-      setPlan(generatedPlan);
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setPlanning(false);
-    }
+  const chooseCase = async (id: string) => {
+    setSelectedCaseId(id); setCustomProblem(''); setExecution(null); setError(''); setLoading(true);
+    try { setPlan(await generateAnalysisPlan(id)); } catch (err: any) { setError(err.message); } finally { setLoading(false); }
   };
 
-  const handleCaseSelect = (cId: string) => {
-    setSelectedCaseId(cId);
-    setCustomProblem('');
-    handleGeneratePlan(cId, '');
+  const submitCustom = async (event: React.FormEvent) => {
+    event.preventDefault(); if (!customProblem.trim()) return;
+    setSelectedCaseId('custom'); setExecution(null); setError(''); setLoading(true);
+    try { setPlan(await generateAnalysisPlan('custom', customProblem)); } catch (err: any) { setError(err.message); } finally { setLoading(false); }
   };
 
-  const handleCustomSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!customProblem.trim()) return;
-    setSelectedCaseId('custom');
-    handleGeneratePlan('custom', customProblem);
-  };
-
-  const handleExecute = () => {
-    setExecuting(true);
-    setTimeout(() => {
-      setExecuting(false);
-      onPlanExecuted();
-    }, 1000);
-  };
-
-  const getIcon = (iconName: string) => {
-    switch (iconName) {
-      case 'TrendingDown': return <TrendingDown className="w-4 h-4" />;
-      case 'Users': return <Users className="w-4 h-4" />;
-      case 'BarChart3': return <BarChart3 className="w-4 h-4" />;
-      case 'DollarSign': return <DollarSign className="w-4 h-4" />;
-      case 'Target': return <Target className="w-4 h-4" />;
-      case 'ShoppingBag': return <ShoppingBag className="w-4 h-4" />;
-      case 'Package': return <Package className="w-4 h-4" />;
-      default: return <Activity className="w-4 h-4" />;
-    }
+  const run = async () => {
+    if (!plan) return;
+    setExecuting(true); setError('');
+    try { setExecution(await executeAnalysis(selectedCaseId, customProblem)); } catch (err: any) { setError(err.message); } finally { setExecuting(false); }
   };
 
   return (
-    <div className="space-y-6 animate-in fade-in duration-200">
-      
-      {/* Header */}
-      <div className="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
-        <h2 className="text-base font-bold text-slate-900 tracking-tight flex items-center space-x-2">
-          <Compass className="w-5 h-5 text-blue-600" />
-          <span>Strategic Problem Selection & Analysis Plan Engine</span>
-        </h2>
-        <p className="text-xs text-slate-500 mt-1">
-          Select a standard management consulting engagement or describe an ad-hoc operational problem. 
-          The AI formulates a structured quantitative plan executed deterministically by the Python/SQL engine.
-        </p>
-      </div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-        
-        {/* Left: 8 Predefined Cases & Custom Input */}
-        <div className="lg:col-span-5 space-y-4">
-          <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
-            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-3">
-              Standard Consulting Engagements
-            </h3>
-            
-            <div className="space-y-2">
-              {cases.map((c) => {
-                const isSelected = selectedCaseId === c.id;
-                return (
-                  <button
-                    key={c.id}
-                    onClick={() => handleCaseSelect(c.id)}
-                    className={`w-full text-left p-3 rounded-lg border transition-all flex items-start space-x-3 ${
-                      isSelected
-                        ? 'bg-blue-50/80 border-blue-400 shadow-sm'
-                        : 'bg-white hover:bg-slate-50 border-slate-200'
-                    }`}
-                  >
-                    <div className={`p-2 rounded-lg mt-0.5 ${
-                      isSelected ? 'bg-blue-600 text-white' : 'bg-slate-100 text-slate-600'
-                    }`}>
-                      {getIcon(c.icon)}
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center justify-between">
-                        <span className={`text-xs font-bold ${isSelected ? 'text-blue-900' : 'text-slate-900'}`}>
-                          {c.title}
-                        </span>
-                        <span className="text-[10px] text-slate-400 font-medium">{c.category}</span>
-                      </div>
-                      <p className="text-[11px] text-slate-500 line-clamp-2 mt-1 leading-snug">
-                        {c.default_question}
-                      </p>
-                    </div>
-                  </button>
-                );
-              })}
-            </div>
-
-            {/* Custom Problem Input Form */}
-            <div className="mt-5 pt-4 border-t border-slate-100">
-              <span className="text-xs font-bold uppercase tracking-wider text-slate-700 block mb-2">
-                Describe Your Own Business Problem
-              </span>
-              <form onSubmit={handleCustomSubmit} className="space-y-2">
-                <textarea
-                  rows={2}
-                  placeholder="e.g. Our profit declined significantly this quarter. Find the major drivers across logistics and pricing."
-                  value={customProblem}
-                  onChange={(e) => setCustomProblem(e.target.value)}
-                  className="w-full p-2.5 text-xs bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-500 font-sans"
-                />
-                <button
-                  type="submit"
-                  disabled={!customProblem.trim() || planning}
-                  className="w-full py-2 bg-slate-900 hover:bg-slate-800 disabled:opacity-50 text-white rounded-lg text-xs font-semibold flex items-center justify-center space-x-2 transition-colors"
-                >
-                  <Sparkles className="w-3.5 h-3.5 text-blue-400" />
-                  <span>Generate Custom Plan</span>
-                </button>
-              </form>
-            </div>
-
+    <div className="space-y-6">
+      <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+          <div>
+            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-blue-600"><Compass className="h-4 w-4" /> Consulting workflow</div>
+            <h1 className="mt-2 text-2xl font-bold tracking-tight text-slate-900 dark:text-white">Define the business problem. Then run the analysis.</h1>
+            <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-500">The AI layer structures the question; the deterministic analytics engine executes the numbers. This keeps narrative generation separate from calculation.</p>
           </div>
+          <div className="rounded-xl border border-blue-100 bg-blue-50 px-4 py-3 text-xs text-blue-800 dark:border-blue-900/50 dark:bg-blue-950/30 dark:text-blue-200">8 standard cases · custom problem supported</div>
         </div>
+      </section>
 
-        {/* Right: Generated Analysis Plan & Execution */}
-        <div className="lg:col-span-7 bg-white p-5 rounded-xl border border-slate-200 shadow-sm space-y-5">
-          {planning ? (
-            <div className="py-24 text-center text-slate-500 text-xs">
-              <Clock className="w-6 h-6 animate-spin mx-auto text-blue-600 mb-2" />
-              <span>Synthesizing structured consulting analysis plan...</span>
-            </div>
-          ) : plan ? (
-            <>
-              {/* Plan Header */}
-              <div className="flex items-start justify-between pb-3 border-b border-slate-100">
-                <div>
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-blue-600 bg-blue-50 px-2 py-0.5 rounded border border-blue-200">
-                    Analysis Plan: {plan.case_id}
-                  </span>
-                  <h3 className="text-base font-bold text-slate-900 mt-1">{plan.case_title}</h3>
-                  <p className="text-xs text-slate-500 mt-0.5">Focus: {plan.business_question}</p>
-                </div>
-                <button
-                  onClick={handleExecute}
-                  disabled={executing}
-                  className="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold rounded-lg flex items-center space-x-2 transition-all shadow-sm active:scale-95"
-                >
-                  <Play className="w-3.5 h-3.5 fill-current" />
-                  <span>{executing ? 'Computing Results...' : 'Execute Deterministic Analysis'}</span>
-                </button>
-              </div>
+      {error && <div className="rounded-xl border border-rose-200 bg-rose-50 px-4 py-3 text-xs text-rose-700">{error}</div>}
 
-              {/* Execution Steps List */}
-              <div className="space-y-3">
-                {plan.steps.map((step) => (
-                  <div
-                    key={step.step_number}
-                    className="p-3.5 bg-slate-50 rounded-lg border border-slate-200 flex items-start space-x-3 hover:border-slate-300 transition-colors"
-                  >
-                    <div className="w-6 h-6 rounded-full bg-blue-100 text-blue-800 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">
-                      {step.step_number}
-                    </div>
+      <div className="grid gap-6 lg:grid-cols-[420px_1fr]">
+        <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+          <div className="mb-4 text-xs font-bold uppercase tracking-wider text-slate-500">1 · Choose an engagement</div>
+          <div className="space-y-2">
+            {cases.map(c => {
+              const selected = selectedCaseId === c.id;
+              return <button key={c.id} onClick={() => chooseCase(c.id)} className={`flex w-full items-start gap-3 rounded-xl border p-3 text-left transition ${selected ? 'border-blue-400 bg-blue-50 dark:border-blue-700 dark:bg-blue-950/30' : 'border-slate-200 hover:border-slate-300 hover:bg-slate-50 dark:border-slate-800 dark:hover:bg-slate-950'}`}>
+                <span className={`mt-0.5 rounded-lg p-2 ${selected ? 'bg-blue-600 text-white' : 'bg-slate-100 text-slate-500 dark:bg-slate-800'}`}>{icons[c.icon] || icons.Activity}</span>
+                <span className="min-w-0 flex-1"><span className="flex items-center justify-between gap-2"><span className="text-xs font-bold text-slate-900 dark:text-white">{c.title}</span><span className="text-[10px] text-slate-400">{c.category}</span></span><span className="mt-1 block text-[11px] leading-5 text-slate-500">{c.default_question}</span></span>
+              </button>;
+            })}
+          </div>
+          <form onSubmit={submitCustom} className="mt-5 border-t border-slate-100 pt-5 dark:border-slate-800">
+            <div className="mb-2 flex items-center gap-2 text-xs font-bold text-slate-700 dark:text-slate-200"><Sparkles className="h-4 w-4 text-blue-500" /> Custom business problem</div>
+            <textarea value={customProblem} onChange={e => setCustomProblem(e.target.value)} rows={4} placeholder="e.g. Why did contribution margin deteriorate in the latest quarter?" className="w-full resize-none rounded-xl border border-slate-200 bg-slate-50 p-3 text-xs outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100 dark:border-slate-800 dark:bg-slate-950" />
+            <button disabled={!customProblem.trim() || loading} className="mt-2 flex w-full items-center justify-center gap-2 rounded-xl bg-slate-900 px-4 py-2.5 text-xs font-semibold text-white disabled:opacity-40"><Sparkles className="h-3.5 w-3.5" /> Generate custom plan</button>
+          </form>
+        </section>
 
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center justify-between">
-                        <span className="text-xs font-bold text-slate-900">{step.title}</span>
-                        <span className="text-[10px] font-mono bg-white text-slate-600 px-2 py-0.5 rounded border border-slate-200">
-                          {step.method}
-                        </span>
-                      </div>
-                      <p className="text-xs text-slate-600 mt-1 leading-relaxed">{step.description}</p>
-                      
-                      {/* Target Metrics */}
-                      <div className="flex items-center space-x-1.5 mt-2">
-                        <span className="text-[10px] text-slate-400 font-semibold uppercase">Target Metrics:</span>
-                        {step.target_metrics.map((tm) => (
-                          <span key={tm} className="text-[10px] font-mono bg-blue-50 text-blue-700 px-1.5 py-0.2 rounded">
-                            {tm}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
+        <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+          <div className="mb-5 flex flex-col gap-4 border-b border-slate-100 pb-5 sm:flex-row sm:items-start sm:justify-between dark:border-slate-800">
+            <div><div className="text-[10px] font-bold uppercase tracking-wider text-blue-600">2 · Generated analysis plan</div><h2 className="mt-1 text-lg font-bold text-slate-900 dark:text-white">{loading ? 'Building plan…' : plan?.case_title || 'Select a case'}</h2><p className="mt-1 text-xs leading-5 text-slate-500">{plan?.business_question}</p></div>
+            <button onClick={run} disabled={!plan || executing || loading} className="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-blue-600 px-4 py-2.5 text-xs font-semibold text-white shadow-sm hover:bg-blue-500 disabled:opacity-40"><Play className="h-3.5 w-3.5 fill-current" /> {executing ? 'Executing…' : 'Execute analysis'}</button>
+          </div>
 
-              {/* Governance Note */}
-              <div className="p-3 bg-emerald-50 border border-emerald-200 rounded-lg flex items-center space-x-2 text-xs text-emerald-800">
-                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                <span>
-                  Execution Protocol: All steps are executed via compiled SQL queries and deterministic NumPy/Pandas functions. No numerical hallucination permitted.
-                </span>
-              </div>
-            </>
-          ) : null}
-        </div>
+          {!plan && !loading && <div className="py-16 text-center text-sm text-slate-400">Choose a consulting case to generate an analytical workplan.</div>}
+          {loading && <div className="py-16 text-center text-sm text-slate-400">Structuring the problem and selecting analytical methods…</div>}
+          {plan && !loading && <div className="space-y-3">
+            {plan.steps.map(step => <div key={step.step_number} className="rounded-xl border border-slate-200 p-4 dark:border-slate-800"><div className="flex items-center gap-3"><span className="flex h-7 w-7 items-center justify-center rounded-full bg-blue-50 text-xs font-bold text-blue-700 dark:bg-blue-950/40 dark:text-blue-300">{step.step_number}</span><div className="flex-1"><div className="flex flex-wrap items-center gap-2"><span className="text-xs font-bold text-slate-900 dark:text-white">{step.title}</span><span className="rounded bg-slate-100 px-2 py-1 font-mono text-[10px] text-slate-500 dark:bg-slate-800">{step.method}</span></div><p className="mt-1 text-xs leading-5 text-slate-500">{step.description}</p></div></div><div className="mt-3 flex flex-wrap gap-1.5 pl-10">{step.target_metrics.map(metric => <span key={metric} className="rounded-md bg-blue-50 px-2 py-1 font-mono text-[10px] text-blue-700 dark:bg-blue-950/40 dark:text-blue-300">{metric}</span>)}</div></div>)}
+            <div className="flex items-start gap-2 rounded-xl border border-emerald-200 bg-emerald-50 p-3 text-xs text-emerald-800 dark:border-emerald-900/50 dark:bg-emerald-950/20 dark:text-emerald-300"><CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0" /><span>Governance: numerical results come from deterministic SQL/Pandas calculations. AI is used for plan structure and interpretation, not arithmetic.</span></div>
+          </div>}
 
+          {execution && <div className="mt-6 border-t border-slate-100 pt-5 dark:border-slate-800"><div className="mb-3 text-xs font-bold uppercase tracking-wider text-slate-500">3 · Execution audit</div><div className="space-y-2">{execution.timeline.map((item: any) => <div key={item.step} className="flex gap-3 rounded-lg bg-slate-50 p-3 dark:bg-slate-950"><CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-500" /><div><div className="text-xs font-semibold text-slate-800 dark:text-slate-100">{item.title}</div><div className="text-[11px] text-slate-500">{item.detail}</div></div></div>)}</div><button onClick={onPlanExecuted} className="mt-4 inline-flex items-center gap-2 text-xs font-semibold text-blue-600 hover:underline">Open verified insights <ArrowRight className="h-3.5 w-3.5" /></button></div>}
+        </section>
       </div>
-
     </div>
   );
 };
