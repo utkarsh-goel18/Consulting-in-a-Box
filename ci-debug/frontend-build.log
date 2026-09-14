@@ -1,9 +1,0 @@
-
-> frontend@0.0.0 build
-> tsc -b && vite build
-
-src/pages/DashboardPageINR.tsx(116,26): error TS2322: Type '(value: number) => [string, string]' is not assignable to type 'Formatter<ValueType, NameType> & ((value: ValueType, name: NameType, item: TooltipPayloadEntry, index: number, payload: TooltipPayload) => ReactNode | [...])'.
-  Type '(value: number) => [string, string]' is not assignable to type 'Formatter<ValueType, NameType>'.
-    Types of parameters 'value' and 'value' are incompatible.
-      Type 'ValueType | undefined' is not assignable to type 'number'.
-        Type 'undefined' is not assignable to type 'number'.
