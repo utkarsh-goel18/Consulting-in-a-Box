@@ -27,6 +27,7 @@ frontend/.vite/
 # Local generated demo data
 backend/data/*.csv
 backend/data/.novamart_demo_version
+backend/data/.novamart_dashboard_cache.json
 
 # IDE / OS
 .vscode/
