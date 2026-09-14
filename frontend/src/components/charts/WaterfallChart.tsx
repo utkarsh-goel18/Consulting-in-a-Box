@@ -14,24 +14,38 @@ interface WaterfallChartProps {
 }
 
 export const WaterfallChart: React.FC<WaterfallChartProps> = ({ data, currency = '₹' }) => {
-  let running = 0;
-  const chartData = data.map((item) => {
+  const chartData = data.map((item, index) => {
     if (item.type === 'total') {
-      running = item.amount;
-      return { step: item.step, base: 0, value: item.amount, type: item.type, displayAmount: item.amount };
+      return {
+        step: item.step,
+        base: 0,
+        value: Math.abs(item.amount),
+        type: item.type,
+        displayAmount: item.amount,
+        runningTotal: item.amount,
+      };
     }
 
-    const prior = running;
-    running = prior + item.amount;
-    // Preserve the negative running position so unfavorable bridge steps remain visible.
-    const base = item.amount < 0 ? running : prior;
-    return { step: item.step, base, value: Math.abs(item.amount), type: item.type, displayAmount: item.amount };
+    // The API supplies the authoritative running total. Derive the prior point
+    // from it rather than maintaining a second running calculation in the UI.
+    const runningTotal = item.running_total ?? item.amount;
+    const priorTotal = runningTotal - item.amount;
+    const base = Math.min(priorTotal, runningTotal);
+
+    return {
+      step: item.step,
+      base,
+      value: Math.abs(item.amount),
+      type: item.type,
+      displayAmount: item.amount,
+      runningTotal,
+      priorTotal,
+    };
   });
 
   const getBarColor = (type: string, amount: number) => {
     if (type === 'total') return '#334155';
-    if (amount < 0 || type === 'negative') return '#e11d48';
-    return '#059669';
+    return amount < 0 || type === 'negative' ? '#e11d48' : '#059669';
   };
 
   const formatAxis = (value: number) => {
@@ -43,16 +57,22 @@ export const WaterfallChart: React.FC<WaterfallChartProps> = ({ data, currency =
     return `${sign}${currency}${abs.toLocaleString('en-IN')}`;
   };
 
+  const formatAmount = (value: number) => `${value < 0 ? '-' : '+'}${currency}${Math.abs(value).toLocaleString('en-IN')}`;
+
   const CustomTooltip = ({ active, payload }: any) => {
     if (!active || !payload?.length) return null;
     const item = payload[0].payload;
     return (
       <div className="rounded-lg border border-slate-700 bg-slate-950 p-3 text-xs text-white shadow-xl">
         <p className="mb-1 font-bold text-slate-200">{item.step}</p>
-        <p className={item.displayAmount < 0 ? 'text-rose-400' : 'text-emerald-400'}>
-          {item.displayAmount < 0 ? '-' : item.type === 'total' ? '' : '+'}
-          {currency}{Math.abs(item.displayAmount).toLocaleString('en-IN')}
+        <p className={item.displayAmount < 0 ? 'text-rose-400' : item.type === 'total' ? 'text-slate-200' : 'text-emerald-400'}>
+          {item.type === 'total' ? `${currency}${Math.abs(item.displayAmount).toLocaleString('en-IN')}` : formatAmount(item.displayAmount)}
         </p>
+        {item.type !== 'total' && (
+          <p className="mt-1 text-[10px] text-slate-500">
+            {currency}{item.priorTotal?.toLocaleString('en-IN')} → {currency}{item.runningTotal?.toLocaleString('en-IN')}
+          </p>
+        )}
       </div>
     );
   };
@@ -62,7 +82,7 @@ export const WaterfallChart: React.FC<WaterfallChartProps> = ({ data, currency =
       <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h3 className="text-sm font-bold tracking-tight text-slate-900 dark:text-white">Executive P&L Waterfall Bridge</h3>
-          <p className="mt-1 text-xs text-slate-500">Prior-period profit → modeled drivers → current-period profit.</p>
+          <p className="mt-1 text-xs text-slate-500">Prior-period profit → profit-impact drivers → current-period profit.</p>
         </div>
         <div className="flex items-center gap-4 text-[11px] text-slate-500">
           <span className="flex items-center gap-1.5"><span className="h-2.5 w-2.5 rounded-sm bg-slate-700" />Benchmark</span>
@@ -78,8 +98,8 @@ export const WaterfallChart: React.FC<WaterfallChartProps> = ({ data, currency =
             <YAxis tick={{ fontSize: 10, fill: '#64748b' }} tickFormatter={formatAxis} />
             <Tooltip cursor={{ fill: 'rgba(148,163,184,0.08)' }} content={<CustomTooltip />} />
             <ReferenceLine y={0} stroke="#94a3b8" />
-            <Bar dataKey="base" stackId="waterfall" fill="transparent" />
-            <Bar dataKey="value" stackId="waterfall" radius={[4, 4, 4, 4]}>
+            <Bar dataKey="base" stackId="waterfall" fill="transparent" isAnimationActive={false} />
+            <Bar dataKey="value" stackId="waterfall" radius={[4, 4, 4, 4]} isAnimationActive={false}>
               {chartData.map((entry, idx) => <Cell key={`cell-${idx}`} fill={getBarColor(entry.type, entry.displayAmount)} />)}
             </Bar>
           </BarChart>
