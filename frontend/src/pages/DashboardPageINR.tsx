@@ -1,0 +1,167 @@
+import React, { useMemo, useState } from 'react';
+import { AlertTriangle, ArrowRight, BarChart3, Layers, Truck, TrendingDown, TrendingUp } from 'lucide-react';
+import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid } from 'recharts';
+import { ConsultingDashboard } from '../types';
+import { MetricCard } from '../components/common/MetricCard';
+import { WaterfallChart } from '../components/charts/WaterfallChart';
+
+interface DashboardPageProps {
+  data: ConsultingDashboard;
+  onNavigate: (tab: string) => void;
+  onViewEvidence: (evidenceId: string) => void;
+}
+
+const inr = new Intl.NumberFormat('en-IN', {
+  style: 'currency',
+  currency: 'INR',
+  maximumFractionDigits: 0,
+});
+
+const inrCompact = (value: number) => {
+  const abs = Math.abs(value);
+  const sign = value < 0 ? '-' : '';
+  if (abs >= 10_000_000) return `${sign}₹${(abs / 10_000_000).toFixed(2)}Cr`;
+  if (abs >= 100_000) return `${sign}₹${(abs / 100_000).toFixed(2)}L`;
+  if (abs >= 1_000) return `${sign}₹${(abs / 1_000).toFixed(1)}K`;
+  return inr.format(value);
+};
+
+const pct = (value: number) => `${value >= 0 ? '+' : ''}${value.toFixed(1)}%`;
+
+export const DashboardPageINR: React.FC<DashboardPageProps> = ({ data, onNavigate, onViewEvidence }) => {
+  const [activeSubView, setActiveSubView] = useState<'waterfall' | 'trends' | 'carriers' | 'categories'>('waterfall');
+  const kpi = data.kpi_summary;
+
+  const profitDelta = kpi.net_profit_current - kpi.net_profit_prior;
+  const revenueDelta = kpi.revenue_current - kpi.revenue_prior;
+  const topDriver = useMemo(() => {
+    const children = data.driver_tree?.children ?? [];
+    return [...children].sort((a, b) => Math.abs(b.impact_magnitude) - Math.abs(a.impact_magnitude))[0];
+  }, [data.driver_tree]);
+
+  return (
+    <div className="space-y-6 animate-in fade-in duration-200">
+      <section className="rounded-2xl border border-slate-800 bg-slate-950 p-5 text-white shadow-lg dark:bg-slate-950">
+        <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+          <div className="flex items-start gap-4">
+            <div className="mt-0.5 rounded-xl border border-rose-500/30 bg-rose-500/10 p-3 text-rose-400">
+              <AlertTriangle className="h-5 w-5" />
+            </div>
+            <div>
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="text-xs font-bold uppercase tracking-[0.14em] text-rose-400">Critical finding · {data.problem_title}</span>
+                <span className="rounded-md border border-slate-700 bg-slate-900 px-2 py-1 text-[10px] text-slate-300">{data.quarter_evaluated}</span>
+              </div>
+              <h2 className="mt-2 text-xl font-bold tracking-tight sm:text-2xl">
+                Operating profit {profitDelta < 0 ? 'contracted' : 'expanded'} {Math.abs(kpi.net_profit_growth_pct).toFixed(1)}% QoQ ({inrCompact(profitDelta)})
+              </h2>
+              <p className="mt-2 max-w-4xl text-sm leading-6 text-slate-300">
+                Revenue moved {pct(kpi.revenue_growth_pct)} QoQ while net margin moved {kpi.net_margin_delta_pp.toFixed(1)} percentage points.
+                {topDriver ? ` The largest modeled driver is ${topDriver.label}, contributing ${Math.abs(topDriver.contribution_pct).toFixed(1)}% of the driver-tree impact.` : ''}
+              </p>
+            </div>
+          </div>
+          <div className="flex shrink-0 gap-2">
+            <button onClick={() => onNavigate('insights')} className="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2.5 text-xs font-semibold text-white shadow-sm transition hover:bg-blue-500">
+              Explore root causes <ArrowRight className="h-3.5 w-3.5" />
+            </button>
+            <button onClick={() => onNavigate('scenarios')} className="rounded-lg border border-slate-700 bg-slate-900 px-4 py-2.5 text-xs font-semibold text-slate-200 transition hover:bg-slate-800">
+              Simulate solutions
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section className="grid grid-cols-2 gap-4 md:grid-cols-4">
+        <MetricCard label="Net Revenue" value={inrCompact(kpi.revenue_current)} priorValue={inrCompact(kpi.revenue_prior)} deltaPct={kpi.revenue_growth_pct} isPositiveGood subtitle={`QoQ change: ${inrCompact(revenueDelta)}`} />
+        <MetricCard label="Gross Profit" value={inrCompact(kpi.gross_profit_current)} priorValue={inrCompact(kpi.gross_profit_prior)} deltaPct={kpi.gross_profit_growth_pct} isPositiveGood subtitle="Gross profit contribution" />
+        <MetricCard label="Net Operating Profit" value={inrCompact(kpi.net_profit_current)} priorValue={inrCompact(kpi.net_profit_prior)} deltaPct={kpi.net_profit_growth_pct} isPositiveGood subtitle={`Current margin: ${kpi.net_margin_current_pct.toFixed(1)}%`} badge="Top Focus" />
+        <MetricCard label="Net Margin" value={`${kpi.net_margin_current_pct.toFixed(1)}%`} priorValue={`${kpi.net_margin_prior_pct.toFixed(1)}%`} deltaPp={kpi.net_margin_delta_pp} isPositiveGood subtitle="Quarter-over-quarter margin movement" />
+        <MetricCard label="Total Orders" value={kpi.orders_current.toLocaleString('en-IN')} priorValue={kpi.orders_prior.toLocaleString('en-IN')} deltaPct={kpi.orders_growth_pct} isPositiveGood subtitle="Order volume" />
+        <MetricCard label="Average Order Value" value={inr.format(kpi.aov_current)} priorValue={inr.format(kpi.aov_prior)} deltaPct={kpi.aov_growth_pct} isPositiveGood subtitle="Basket economics" badge="AOV" />
+        <MetricCard label="Blended CAC" value={inr.format(kpi.cac_current)} priorValue={inr.format(kpi.cac_prior)} deltaPct={kpi.cac_growth_pct} isPositiveGood={false} subtitle="Customer acquisition cost" />
+        <MetricCard label="Customer Churn" value={`${kpi.churn_rate_current_pct.toFixed(1)}%`} priorValue={`${kpi.churn_rate_prior_pct.toFixed(1)}%`} deltaPp={kpi.churn_rate_delta_pp} isPositiveGood={false} subtitle="Retention health" badge="Retention" />
+      </section>
+
+      <div className="flex flex-wrap items-center gap-2 border-b border-slate-200 pb-2 dark:border-slate-800">
+        {[
+          ['waterfall', 'Executive P&L Waterfall'],
+          ['carriers', 'Logistics Carrier Audit'],
+          ['categories', 'Category Margins & Pareto'],
+          ['trends', 'Monthly Revenue Trend'],
+        ].map(([key, label]) => (
+          <button key={key} onClick={() => setActiveSubView(key as typeof activeSubView)} className={`rounded-lg px-3 py-2 text-xs font-semibold transition ${activeSubView === key ? 'bg-slate-900 text-white shadow-sm dark:bg-white dark:text-slate-900' : 'text-slate-500 hover:bg-slate-100 hover:text-slate-900 dark:hover:bg-slate-900 dark:hover:text-slate-100'}`}>
+            {label}
+          </button>
+        ))}
+      </div>
+
+      {activeSubView === 'waterfall' && <WaterfallChart data={data.p_and_l_waterfall} currency="₹" />}
+
+      {activeSubView === 'trends' && (
+        <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+          <div className="mb-5 flex items-start justify-between gap-4">
+            <div>
+              <h3 className="flex items-center gap-2 text-sm font-bold text-slate-900 dark:text-white"><BarChart3 className="h-4 w-4 text-blue-500" /> Monthly Revenue Trend</h3>
+              <p className="mt-1 text-xs text-slate-500">Revenue and order volume across the demo evaluation period.</p>
+            </div>
+            <span className="rounded-md bg-slate-100 px-2 py-1 text-[10px] font-semibold text-slate-500 dark:bg-slate-800">INR · ₹</span>
+          </div>
+          <div className="h-80 w-full">
+            <ResponsiveContainer width="100%" height="100%">
+              <LineChart data={data.monthly_trend} margin={{ top: 10, right: 20, left: 10, bottom: 10 }}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#334155" opacity={0.25} />
+                <XAxis dataKey="month" tick={{ fontSize: 11, fill: '#64748b' }} />
+                <YAxis tick={{ fontSize: 11, fill: '#64748b' }} tickFormatter={(v) => inrCompact(Number(v))} />
+                <Tooltip formatter={(value: number) => [inr.format(value), 'Revenue']} />
+                <Line type="monotone" dataKey="revenue" stroke="#2563eb" strokeWidth={3} dot={{ r: 3 }} />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
+        </section>
+      )}
+
+      {activeSubView === 'carriers' && (
+        <section className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900">
+          <div className="flex flex-col gap-3 border-b border-slate-200 p-5 sm:flex-row sm:items-center sm:justify-between dark:border-slate-800">
+            <div>
+              <h3 className="flex items-center gap-2 text-sm font-bold text-slate-900 dark:text-white"><Truck className="h-4 w-4 text-blue-500" /> Shipping Partner Logistics Cost Inflation</h3>
+              <p className="mt-1 text-xs text-slate-500">Actual carrier-level metrics returned by the analytical engine.</p>
+            </div>
+            <button onClick={() => onViewEvidence('ev_shipping_surge')} className="text-xs font-semibold text-blue-600 hover:underline">View SQL audit</button>
+          </div>
+          <div className="overflow-x-auto">
+            <table className="min-w-full text-left text-xs">
+              <thead className="bg-slate-50 text-slate-500 dark:bg-slate-950"><tr>{['Carrier', 'Q2 Avg', 'Q3 Avg', 'Delta', 'Orders', 'Excess Cost'].map(h => <th key={h} className="px-5 py-3 font-semibold">{h}</th>)}</tr></thead>
+              <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+                {data.shipping_partner_breakdown.map(row => <tr key={row.partner} className="hover:bg-slate-50 dark:hover:bg-slate-950"><td className="px-5 py-3 font-semibold text-slate-900 dark:text-slate-100">{row.partner}</td><td className="px-5 py-3 font-mono text-slate-500">{inr.format(row.q2_avg_cost)}</td><td className="px-5 py-3 font-mono text-slate-900 dark:text-slate-100">{inr.format(row.q3_avg_cost)}</td><td className="px-5 py-3"><span className={`rounded px-2 py-1 font-semibold ${row.delta_pct > 15 ? 'bg-rose-100 text-rose-700' : 'bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300'}`}>{pct(row.delta_pct)}</span></td><td className="px-5 py-3 font-mono text-slate-500">{row.orders.toLocaleString('en-IN')}</td><td className="px-5 py-3 font-mono font-semibold text-rose-600">{inr.format(row.excess_cost)}</td></tr>)}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      )}
+
+      {activeSubView === 'categories' && (
+        <section className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900">
+          <div className="flex items-center justify-between border-b border-slate-200 p-5 dark:border-slate-800">
+            <div>
+              <h3 className="flex items-center gap-2 text-sm font-bold text-slate-900 dark:text-white"><Layers className="h-4 w-4 text-blue-500" /> Product Category Margin & Pareto</h3>
+              <p className="mt-1 text-xs text-slate-500">Category economics calculated from the loaded order and product data.</p>
+            </div>
+            <button onClick={() => onViewEvidence('ev_category_margin')} className="text-xs font-semibold text-blue-600 hover:underline">View SQL audit</button>
+          </div>
+          <div className="overflow-x-auto">
+            <table className="min-w-full text-left text-xs"><thead className="bg-slate-50 text-slate-500 dark:bg-slate-950"><tr>{['Category', 'Revenue', 'Gross Margin', 'Margin %', 'Pareto', 'Trend'].map(h => <th key={h} className="px-5 py-3 font-semibold">{h}</th>)}</tr></thead><tbody className="divide-y divide-slate-100 dark:divide-slate-800">{data.category_performance.map(cat => <tr key={cat.category} className="hover:bg-slate-50 dark:hover:bg-slate-950"><td className="px-5 py-3 font-semibold text-slate-900 dark:text-slate-100">{cat.category}</td><td className="px-5 py-3 font-mono text-slate-500">{inr.format(cat.revenue)}</td><td className="px-5 py-3 font-mono text-slate-900 dark:text-slate-100">{inr.format(cat.gross_margin)}</td><td className="px-5 py-3 font-mono font-semibold text-blue-600">{cat.margin_pct.toFixed(1)}%</td><td className="px-5 py-3"><div className="flex items-center gap-2"><div className="h-1.5 w-20 overflow-hidden rounded-full bg-slate-100 dark:bg-slate-800"><div className="h-full rounded-full bg-blue-600" style={{ width: `${Math.min(cat.pareto_pct, 100)}%` }} /></div><span className="font-mono text-slate-500">{cat.pareto_pct.toFixed(1)}%</span></div></td><td className="px-5 py-3"><span className={`rounded px-2 py-1 text-[10px] font-semibold uppercase ${cat.trend === 'down' ? 'bg-rose-100 text-rose-700' : 'bg-emerald-100 text-emerald-700'}`}>{cat.trend}</span></td></tr>)}</tbody></table>
+          </div>
+        </section>
+      )}
+
+      <div className="flex items-center justify-between border-t border-slate-200 pt-3 text-[11px] text-slate-400 dark:border-slate-800">
+        <span>All monetary values shown in Indian Rupees (INR).</span>
+        <span className="flex items-center gap-1">Deterministic analytics <TrendingDown className="h-3 w-3" /> evidence-backed decisions</span>
+      </div>
+    </div>
+  );
+};
+
+export default DashboardPageINR;
