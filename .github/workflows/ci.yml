@@ -21,6 +21,7 @@ jobs:
         working-directory: backend
     env:
       CIB_DEMO_SCALE: ci
+      PYTHONPATH: .
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -47,10 +48,7 @@ jobs:
           Path('/tmp/payload.json').write_text(json.dumps({"message":"CI: capture backend test diagnostics","content":encoded,"branch":"main"}))
           PY
           SHA=$(gh api repos/${{ github.repository }}/contents/ci-debug/backend-test.log --jq .sha 2>/dev/null || true)
-          if [ -n "$SHA" ]; then
-            jq --arg sha "$SHA" '.sha=$sha' /tmp/payload.json > /tmp/payload2.json
-            mv /tmp/payload2.json /tmp/payload.json
-          fi
+          if [ -n "$SHA" ]; then jq --arg sha "$SHA" '.sha=$sha' /tmp/payload.json > /tmp/payload2.json && mv /tmp/payload2.json /tmp/payload.json; fi
           gh api --method PUT repos/${{ github.repository }}/contents/ci-debug/backend-test.log --input /tmp/payload.json >/dev/null
       - name: Fail if backend tests failed
         if: steps.test.outcome == 'failure'
@@ -89,10 +87,7 @@ jobs:
           Path('/tmp/payload.json').write_text(json.dumps({"message":"CI: capture frontend build diagnostics","content":encoded,"branch":"main"}))
           PY
           SHA=$(gh api repos/${{ github.repository }}/contents/ci-debug/frontend-build.log --jq .sha 2>/dev/null || true)
-          if [ -n "$SHA" ]; then
-            jq --arg sha "$SHA" '.sha=$sha' /tmp/payload.json > /tmp/payload2.json
-            mv /tmp/payload2.json /tmp/payload.json
-          fi
+          if [ -n "$SHA" ]; then jq --arg sha "$SHA" '.sha=$sha' /tmp/payload.json > /tmp/payload2.json && mv /tmp/payload2.json /tmp/payload.json; fi
           gh api --method PUT repos/${{ github.repository }}/contents/ci-debug/frontend-build.log --input /tmp/payload.json >/dev/null
       - name: Fail if frontend build failed
         if: steps.build.outcome == 'failure'
