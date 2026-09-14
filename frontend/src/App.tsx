@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Navbar } from './components/layout/Navbar';
-import { DashboardPage } from './pages/DashboardPage';
+import { DashboardPageINR as DashboardPage } from './pages/DashboardPageINR';
 import { DatasetsPage } from './pages/DatasetsPage';
 import { AnalysisPage } from './pages/AnalysisPage';
 import { InsightsPage } from './pages/InsightsPage';
@@ -102,11 +102,10 @@ export const App: React.FC = () => {
       <footer className="border-t border-slate-200 bg-white dark:border-slate-800 dark:bg-[#0f172a]">
         <div className="mx-auto flex max-w-[1440px] flex-col gap-2 px-4 py-4 text-[11px] text-slate-400 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
           <span className="flex items-center gap-2"><Logo size={18} compact /> Consulting in a Box · Enterprise Decision Intelligence</span>
-          <span>Deterministic analytics · Audit-ready evidence</span>
+          <span>INR reporting · Deterministic analytics · Audit-ready evidence</span>
         </div>
       </footer>
     </div>
   );
 };
-
 export default App;
