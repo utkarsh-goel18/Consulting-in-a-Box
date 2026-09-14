@@ -166,8 +166,8 @@ export const DatasetsPage: React.FC = () => {
                 </span>
                 <div className="flex flex-wrap gap-1">
                   {ds.likely_primary_keys && ds.likely_primary_keys.length > 0 ? (
-                    ds.likely_primary_keys.map((pk) => (
-                      <span key={pk} className="text-[11px] font-mono bg-amber-50 text-amber-800 px-2 py-0.5 rounded border border-amber-200">
+                    ds.likely_primary_keys.map((pk, pkIndex) => (
+                      <span key={`${pk}-${pkIndex}`} className="text-[11px] font-mono bg-amber-50 text-amber-800 px-2 py-0.5 rounded border border-amber-200">
                         {pk}
                       </span>
                     ))
@@ -183,8 +183,8 @@ export const DatasetsPage: React.FC = () => {
                   Schema Attributes:
                 </span>
                 <div className="flex flex-wrap gap-1">
-                  {ds.columns.slice(0, 5).map((col) => (
-                    <span key={col.name} className="text-[10px] font-mono bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded">
+                  {ds.columns.slice(0, 5).map((col, colIndex) => (
+                    <span key={`${col.name}-${colIndex}`} className="text-[10px] font-mono bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded">
                       {col.name}
                     </span>
                   ))}
@@ -300,8 +300,8 @@ export const DatasetsPage: React.FC = () => {
                 <table className="min-w-full divide-y divide-slate-200 text-xs text-left">
                   <thead className="bg-slate-100 font-semibold text-slate-700 font-mono sticky top-0">
                     <tr>
-                      {tablePreview.columns.map((col: string) => (
-                        <th key={col} className="px-3 py-2 uppercase text-[10px]">
+                      {tablePreview.columns.map((col: string, colIndex: number) => (
+                        <th key={`${col}-${colIndex}`} className="px-3 py-2 uppercase text-[10px]">
                           {col}
                         </th>
                       ))}
