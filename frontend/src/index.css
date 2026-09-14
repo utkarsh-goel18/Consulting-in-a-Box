@@ -19,13 +19,32 @@
   .dark ::selection { background: #1e3a8a; color: #eff6ff; }
 }
 
-/* Small set of semantic surfaces used by the shell and shared components. */
 .theme-surface { background: white; border-color: #e2e8f0; }
 .dark .theme-surface { background: #111827; border-color: #263244; }
 .dark-brand-text { color: #0f172a; }
 .dark .dark-brand-text { color: #f8fafc; }
 .dark-logo-surface { color: #f8fafc; }
 .dark .dark-logo-surface { color: #020617; }
+
+/* Keep the existing page components readable in dark mode without rewriting their layouts. */
+.dark .bg-white { background-color: #111827 !important; }
+.dark .bg-slate-50 { background-color: #0f172a !important; }
+.dark .bg-slate-100 { background-color: #1e293b !important; }
+.dark .bg-\[\#f6f8fb\] { background-color: #0b1120 !important; }
+.dark .text-slate-950 { color: #f8fafc !important; }
+.dark .text-slate-900 { color: #f1f5f9 !important; }
+.dark .text-slate-800 { color: #e2e8f0 !important; }
+.dark .text-slate-700 { color: #cbd5e1 !important; }
+.dark .text-slate-600 { color: #94a3b8 !important; }
+.dark .text-slate-500 { color: #94a3b8 !important; }
+.dark .text-slate-400 { color: #64748b !important; }
+.dark .border-slate-200 { border-color: #263244 !important; }
+.dark .border-slate-300 { border-color: #334155 !important; }
+.dark .divide-slate-200 > :not([hidden]) ~ :not([hidden]) { border-color: #263244 !important; }
+.dark .hover\:bg-slate-50:hover { background-color: #1e293b !important; }
+.dark .hover\:bg-slate-100:hover { background-color: #263244 !important; }
+.dark input, .dark textarea, .dark select { background-color: #0f172a; color: #e2e8f0; border-color: #334155; }
+.dark input::placeholder, .dark textarea::placeholder { color: #64748b; }
 
 /* Quiet enterprise scrollbar */
 ::-webkit-scrollbar { width: 7px; height: 7px; }
