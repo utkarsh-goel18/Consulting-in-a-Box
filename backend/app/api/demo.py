@@ -29,6 +29,7 @@ def clear_dashboard_cache() -> None:
         pass
 
 
+@router.post("/bootstrap", response_model=ConsultingDashboard)
 def bootstrap_demo() -> ConsultingDashboard:
     """Return the deterministic NovaMart snapshot, using a versioned disk + process cache."""
     global _cached_dashboard
@@ -69,9 +70,3 @@ def bootstrap_demo() -> ConsultingDashboard:
     except OSError:
         pass
     return _cached_dashboard
-
-
-# Keep the endpoint declaration explicit after the cache helpers so the function
-# remains easy to import and test.
-bootstrap_demo = APIRouter(prefix="/demo", tags=["demo"]).post("/bootstrap", response_model=ConsultingDashboard)(bootstrap_demo)
-router = bootstrap_demo.router
