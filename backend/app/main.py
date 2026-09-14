@@ -25,27 +25,22 @@ async def lifespan(app: FastAPI):
     version_ok = os.path.exists(version_file) and open(version_file, encoding="utf-8").read().strip() == DEMO_VERSION
     missing = any(not os.path.exists(os.path.join(settings.DATA_DIR, name)) for name in required)
     if not version_ok or missing:
-        print("Preparing full NovaMart demo dataset (first run for this version)...")
-        generate_fast_demo_datasets(settings.DATA_DIR)
+        scale = os.getenv("CIB_DEMO_SCALE", "full").lower()
+        counts = (20_000, 75_000) if scale == "ci" else (100_000, 500_000)
+        print(f"Preparing NovaMart demo dataset: {counts[0]:,} customers / {counts[1]:,} orders...")
+        generate_fast_demo_datasets(settings.DATA_DIR, n_customers=counts[0], n_orders=counts[1])
         try:
             os.remove(os.path.join(settings.DATA_DIR, ".novamart_dashboard_cache.json"))
         except OSError:
             pass
         invalidate()
-
     repo.load_from_directory(settings.DATA_DIR)
     print(f"Loaded {len(repo.dataframes)} tables into memory & DuckDB analytical engine.")
     yield
 
 
-app = FastAPI(
-    title="Consulting in a Box API",
-    description="Automated Decision Intelligence & Consulting Engine",
-    version="2.1.0",
-    lifespan=lifespan,
-)
+app = FastAPI(title="Consulting in a Box API", description="Automated Decision Intelligence & Consulting Engine", version="2.1.0", lifespan=lifespan)
 app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_credentials=True, allow_methods=["*"], allow_headers=["*"])
-
 app.include_router(demo_router, prefix="/api")
 app.include_router(datasets_router, prefix="/api")
 app.include_router(analysis_router, prefix="/api")
@@ -54,11 +49,9 @@ app.include_router(scenarios_router, prefix="/api")
 app.include_router(reports_router, prefix="/api")
 app.include_router(settings_router, prefix="/api")
 
-
 @app.get("/api/health")
 def health_check():
     return {"status": "healthy", "service": "Consulting in a Box", "loaded_tables": list(repo.dataframes.keys()), "engine": "DuckDB + Python Analytical Engine"}
-
 
 if __name__ == "__main__":
     import uvicorn
