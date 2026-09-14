@@ -1,74 +1,72 @@
 from typing import Dict, Any, List
 from app.ai.base import BaseAIProvider
-from app.models.schemas import (
-    AnalysisPlan, AnalysisStep, ExecutiveInsight, StatementType, KPISummary
-)
+from app.models.schemas import AnalysisPlan, AnalysisStep, ExecutiveInsight, StatementType, KPISummary
+from app.core.currency import format_inr
+
+
+CASE_PLANS = {
+    "case_profitability_decline": ("Profitability Decline", "Financial Performance", [
+        ("P&L variance", "Waterfall decomposition", "Reconcile revenue, COGS, delivery, marketing, opex and returns period over period.", ["Revenue", "Gross Profit", "Net Profit"]),
+        ("Volume vs AOV", "Factor contribution", "Separate order-volume and basket-size effects on revenue.", ["Orders", "AOV"]),
+        ("Cost driver audit", "Variance analysis", "Identify the cost categories responsible for profit pressure.", ["COGS", "Delivery Cost", "Marketing Spend"]),
+        ("Root-cause synthesis", "Driver tree", "Rank verified drivers by contribution and evidence strength.", ["Contribution %", "Impact"]),
+    ]),
+    "case_customer_churn": ("Customer Churn", "Customer & Retention", [
+        ("Cohort retention", "Cohort analysis", "Compare customer retention and churn signals across periods and segments.", ["Churn Rate", "Active Customers"]),
+        ("Regional segmentation", "Geographic analysis", "Screen regions and tiers for abnormal customer defection.", ["Regional Churn", "Orders"]),
+        ("Experience drivers", "Correlation screening", "Test operational signals against churn without asserting causality.", ["Delivery Cost", "Return Rate"]),
+        ("Value at risk", "LTV sizing", "Estimate directional revenue/LTV exposure from observed churn changes.", ["LTV", "Revenue at Risk"]),
+    ]),
+    "case_revenue_growth": ("Revenue Growth", "Top-Line Expansion", [
+        ("Revenue decomposition", "Orders × AOV", "Quantify volume and basket-size headroom.", ["Revenue", "Orders", "AOV"]),
+        ("Category Pareto", "Contribution analysis", "Identify categories that drive the majority of revenue.", ["Category Revenue", "Pareto %"]),
+        ("Pricing screen", "Elasticity sensitivity", "Model directional price and volume trade-offs.", ["Price", "Orders"]),
+        ("Growth actions", "Scenario analysis", "Translate verified gaps into testable commercial actions.", ["Incremental Revenue", "Margin"]),
+    ]),
+    "case_cost_optimization": ("Cost Optimization", "Supply Chain & Operations", [
+        ("Cost baseline", "Cost bridge", "Reconcile COGS, delivery, marketing, opex and returns.", ["Total Costs", "Net Profit"]),
+        ("Carrier variance", "Vendor analysis", "Compare carrier rates and current-period volume.", ["Delivery Cost", "Excess Cost"]),
+        ("Category margin", "Margin analysis", "Locate categories where cost inflation or pricing pressure matters most.", ["Gross Margin", "Margin %"]),
+        ("Savings sizing", "Opportunity sizing", "Size recoverable cost pools and validate operational constraints.", ["Savings", "Payback"]),
+    ]),
+    "case_marketing_roi": ("Marketing ROI", "Growth Marketing", [
+        ("Channel baseline", "Unit economics", "Calculate spend, attributed orders, CAC and ROAS by channel.", ["CAC", "ROAS"]),
+        ("Efficiency drift", "Period variance", "Identify channels with material efficiency deterioration.", ["CAC Growth", "ROAS Change"]),
+        ("Budget mix", "Portfolio analysis", "Compare incremental efficiency before recommending reallocation.", ["Spend", "ROAS"]),
+        ("Reallocation scenario", "Sensitivity analysis", "Model directional profit impact of budget shifts.", ["Profit", "CAC"]),
+    ]),
+    "case_sales_performance": ("Sales Performance", "Commercial Operations", [
+        ("Basket diagnostic", "AOV analysis", "Decompose changes in basket size and discounting.", ["AOV", "Discount"]),
+        ("Customer segment mix", "Segmentation", "Compare purchasing patterns across customer segments.", ["Orders", "AOV"]),
+        ("Category performance", "Margin analysis", "Identify categories with growth and margin headroom.", ["Revenue", "Margin"]),
+        ("Commercial actions", "Scenario modeling", "Test targeted basket-building and pricing interventions.", ["Revenue", "Profit"]),
+    ]),
+    "case_inventory_optimization": ("Inventory Optimization", "Merchandising", [
+        ("SKU velocity", "ABC/Pareto analysis", "Rank product demand and revenue concentration.", ["Revenue", "Volume"]),
+        ("Margin exposure", "Contribution analysis", "Locate low-margin high-volume categories.", ["Margin", "COGS"]),
+        ("Return signals", "Return-rate analysis", "Screen return reasons and category-level return exposure.", ["Return Rate", "Refunds"]),
+        ("Action sizing", "Scenario analysis", "Model pricing, assortment and procurement interventions.", ["Profit", "Working Capital"]),
+    ]),
+    "case_operational_efficiency": ("Operational Efficiency", "Operations", [
+        ("Fulfillment baseline", "Process KPI analysis", "Establish cost and volume baselines across operations.", ["Delivery Cost", "Orders"]),
+        ("Carrier performance", "Vendor variance", "Identify rate and mix anomalies by shipping partner.", ["Carrier Cost", "Variance"]),
+        ("Reverse logistics", "Return analysis", "Quantify refund and reverse-logistics pressure.", ["Returns", "Refunds"]),
+        ("Operating actions", "Opportunity sizing", "Prioritize actions by impact, confidence and effort.", ["Savings", "Payback"]),
+    ]),
+}
+
 
 class MockStrategicConsultant(BaseAIProvider):
-    """
-    Deterministic Strategic Consultant engine operating locally without external API dependencies.
-    Provides authentic McKinsey/Bain/BCG structured decision frameworks.
-    """
+    """Offline deterministic consultant. It structures questions; it never computes facts."""
 
     def generate_analysis_plan(self, business_problem: str, dataset_overview: Dict[str, Any]) -> AnalysisPlan:
-        # Check standard cases
-        prob_lower = business_problem.lower()
-        
-        if "churn" in prob_lower or "retention" in prob_lower:
-            return AnalysisPlan(
-                case_id="case_churn",
-                case_title="Customer Churn & Cohort Retention Diagnostic",
-                business_question=business_problem,
-                estimated_impact_area="Customer Lifetime Value & Recurring Revenue",
-                steps=[
-                    AnalysisStep(step_number=1, title="Cohort Retention Mapping", method="SQL / Cohort Analysis", description="Segment signups by quarter and calculate repeat purchase rates at 30, 60, and 90-day intervals.", target_metrics=["Cohort Retention %", "Repeat Order Rate"]),
-                    AnalysisStep(step_number=2, title="Regional Churn Decomposition", method="Geographic Segmentation", description="Identify whether churn is localized to specific logistics zones or delivery tiers.", target_metrics=["Regional Churn Rate", "Order Defection %"]),
-                    AnalysisStep(step_number=3, title="First-Order Experience Correlation", method="Bivariate Correlation", description="Analyze correlation between delivery delays/fees on first orders and churn propensity.", target_metrics=["On-time Delivery %", "Delivery Surcharge Impact"]),
-                    AnalysisStep(step_number=4, title="Customer Lifetime Value Sizing", method="LTV Modeling", description="Quantify total revenue at risk from elevated churn rate vs historic benchmark.", target_metrics=["Annualized LTV Loss", "Payback Period Drift"])
-                ]
-            )
-            
-        # Default to Profitability Decline
-        return AnalysisPlan(
-            case_id="case_profit_decline",
-            case_title="Profitability Decline & Driver Tree Diagnostic",
-            business_question=business_problem,
-            estimated_impact_area="Operating Margin & Net Profitability",
-            steps=[
-                AnalysisStep(step_number=1, title="Executive P&L Period-over-Period Variance", method="Waterfall Decomposition", description="Compare Net Revenue, COGS, Delivery Costs, and Marketing Spend QoQ.", target_metrics=["Net Revenue", "Gross Margin", "Operating Margin"]),
-                AnalysisStep(step_number=2, title="Volume vs Price / AOV Decomposition", method="Factor Contribution Analysis", description="Isolate top-line decline between unit order volume and basket size/promotional discounts.", target_metrics=["Orders", "Average Order Value (AOV)", "Discount Rate"]),
-                AnalysisStep(step_number=3, title="Logistics & Last-Mile Cost Audit", method="Vendor Contract Variance", description="Evaluate per-order fulfillment costs across shipping partners and identify rate inflation.", target_metrics=["Delivery Cost / Order", "Vendor Rate Delta"]),
-                AnalysisStep(step_number=4, title="Marketing CAC & ROAS Efficiency Screening", method="Attribution Unit Economics", description="Analyze customer acquisition cost (CAC) and ROAS across Paid Social, Google Ads, and Affiliate.", target_metrics=["CAC", "ROAS", "Blended Payback"]),
-                AnalysisStep(step_number=5, title="Category & SKU Margin Pareto Analysis", method="Pareto 80/20 & Margin Drift", description="Identify product categories experiencing margin compression and inventory discount fatigue.", target_metrics=["Category Gross Margin %", "Pareto Contribution"]),
-                AnalysisStep(step_number=6, title="Synthesize Root Causes & Driver Tree", method="Hierarchical Driver Tree", description="Assemble verified mathematical findings into an executive decision tree.", target_metrics=["Contribution %", "Impact Magnitude ($)"])
-            ]
-        )
+        case_id = dataset_overview.get("case_id") or "case_profitability_decline"
+        title, impact, raw_steps = CASE_PLANS.get(case_id, CASE_PLANS["case_profitability_decline"])
+        steps = [AnalysisStep(step_number=i + 1, title=title, method=method, description=description, target_metrics=metrics) for i, (title, method, description, metrics) in enumerate(raw_steps)]
+        return AnalysisPlan(case_id=case_id, case_title=title, business_question=business_problem, steps=steps, estimated_impact_area=impact)
 
-    def synthesize_executive_narrative(
-        self, problem_title: str, kpi: KPISummary, root_cause_summary: str
-    ) -> str:
-        return (
-            f"During the current quarter (Q3 2024), NovaMart experienced a {abs(kpi.net_profit_growth_pct):.1f}% contraction "
-            f"in net operating profit, declining from ${kpi.net_profit_prior:,.0f} to ${kpi.net_profit_current:,.0f}. "
-            f"The diagnostic reveals that 52% of this contraction stems from a 13.7% spike in fulfillment logistics costs "
-            f"(predominantly FastLogistics rate hikes), exacerbated by a 5.1% erosion in Average Order Value (AOV) "
-            f"and 38.2% CAC inflation in Paid Social channels. Corrective vendor re-allocation and minimum order thresholds "
-            f"can restore an estimated $420,000 in annualized operating income."
-        )
+    def synthesize_executive_narrative(self, problem_title: str, kpi: KPISummary, root_cause_summary: str) -> str:
+        return f"{problem_title}: net profit moved from {format_inr(kpi.net_profit_prior)} to {format_inr(kpi.net_profit_current)} ({kpi.net_profit_growth_pct:+.1f}%). Revenue changed {kpi.revenue_growth_pct:+.1f}% and AOV changed {kpi.aov_growth_pct:+.1f}%. The analytical driver tree identifies the largest verified sources of variance; causal explanations remain hypotheses until validated."
 
-    def formulate_hypotheses(
-        self, anomalies: List[Dict[str, Any]], context: Dict[str, Any]
-    ) -> List[ExecutiveInsight]:
-        return [
-            ExecutiveInsight(
-                id="ins_hypo_logistics_fuel",
-                classification=StatementType.HYPOTHESIS,
-                headline="Carrier fuel surcharge adjustments exceeded industry averages",
-                narrative="FastLogistics instituted an unannounced surcharge increase in July 2024. Benchmarking suggests market rates increased by only 4.2% while NovaMart was billed +17.1%.",
-                magnitude_value=105400.0,
-                magnitude_formatted="$105.4K Variance",
-                affected_area="Vendor Management",
-                confidence="Medium",
-                evidence_id="ev_shipping_surge"
-            )
-        ]
+    def formulate_hypotheses(self, anomalies: List[Dict[str, Any]], context: Dict[str, Any]) -> List[ExecutiveInsight]:
+        return [ExecutiveInsight(id="ai_hypothesis_01", classification=StatementType.HYPOTHESIS, headline="An operational driver may explain the observed variance", narrative="This is a hypothesis generated from an anomaly signal. Validate it against operational records before treating it as causal.", magnitude_value=None, magnitude_formatted=None, affected_area="Operations", confidence="Medium", evidence_id="ev_cost_inflation")]
