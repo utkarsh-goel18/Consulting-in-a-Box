@@ -11,14 +11,26 @@ from app.models.schemas import ConsultingDashboard
 router = APIRouter(prefix="/demo", tags=["demo"])
 _cached_dashboard: ConsultingDashboard | None = None
 
+# Bump this when the deterministic dashboard calculation changes so an old
+# serialized dashboard can never mask a corrected analytical result.
+DASHBOARD_CACHE_VERSION = "pnl-v2"
+
 
 def _cache_path() -> str:
-    return os.path.join(settings.DATA_DIR, ".novamart_dashboard_cache.json")
+    return os.path.join(settings.DATA_DIR, f".novamart_dashboard_cache_{DASHBOARD_CACHE_VERSION}.json")
 
 
-@router.post("/bootstrap", response_model=ConsultingDashboard)
+def clear_dashboard_cache() -> None:
+    global _cached_dashboard
+    _cached_dashboard = None
+    try:
+        os.remove(_cache_path())
+    except OSError:
+        pass
+
+
 def bootstrap_demo() -> ConsultingDashboard:
-    """Return the deterministic NovaMart snapshot, using a disk + process cache."""
+    """Return the deterministic NovaMart snapshot, using a versioned disk + process cache."""
     global _cached_dashboard
     if _cached_dashboard is not None:
         return _cached_dashboard
@@ -57,3 +69,9 @@ def bootstrap_demo() -> ConsultingDashboard:
     except OSError:
         pass
     return _cached_dashboard
+
+
+# Keep the endpoint declaration explicit after the cache helpers so the function
+# remains easy to import and test.
+bootstrap_demo = APIRouter(prefix="/demo", tags=["demo"]).post("/bootstrap", response_model=ConsultingDashboard)(bootstrap_demo)
+router = bootstrap_demo.router
