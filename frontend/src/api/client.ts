@@ -1,35 +1,14 @@
-import {
-  ConsultingDashboard, DatasetsOverview, DatasetProfile, ConsultingCase, AnalysisPlan,
-  DriverNode, ExecutiveInsight, EvidenceDetail, ScenarioLevers, ScenarioResult
-} from '../types';
+import { ConsultingDashboard, DatasetsOverview, DatasetProfile, ConsultingCase, AnalysisPlan, DriverNode, ExecutiveInsight, EvidenceDetail, ScenarioLevers, ScenarioResult } from '../types';
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8000/api';
-
-async function request<T>(url: string, init?: RequestInit): Promise<T> {
-  const res = await fetch(`${API_BASE}${url}`, init);
-  if (!res.ok) {
-    const message = await res.text().catch(() => 'Request failed');
-    throw new Error(message || `Request failed (${res.status})`);
-  }
-  return res.json();
-}
-
+async function request<T>(url: string, init?: RequestInit): Promise<T> { const res = await fetch(`${API_BASE}${url}`, init); if (!res.ok) { const message = await res.text().catch(() => 'Request failed'); throw new Error(message || `Request failed (${res.status})`); } return res.json(); }
 export function bootstrapDemo(): Promise<ConsultingDashboard> { return request<ConsultingDashboard>('/demo/bootstrap', { method: 'POST' }); }
 export function getDatasetsOverview(): Promise<DatasetsOverview> { return request<DatasetsOverview>('/datasets/overview'); }
-export async function uploadDataset(file: File, workspaceName = 'Uploaded Workspace'): Promise<DatasetProfile> {
-  const formData = new FormData();
-  formData.append('file', file);
-  formData.append('workspace_name', workspaceName);
-  return request<DatasetProfile>('/datasets/upload', { method: 'POST', body: formData });
-}
+export async function uploadDataset(file: File, workspaceName = 'Uploaded Workspace'): Promise<DatasetProfile> { const formData = new FormData(); formData.append('file', file); formData.append('workspace_name', workspaceName); return request<DatasetProfile>('/datasets/upload', { method: 'POST', body: formData }); }
 export function getTablePreview(tableName: string): Promise<any> { return request<any>(`/datasets/${encodeURIComponent(tableName)}/preview`); }
 export function getConsultingCases(): Promise<ConsultingCase[]> { return request<ConsultingCase[]>('/analysis/cases'); }
-export function generateAnalysisPlan(caseId: string, customProblem = ''): Promise<AnalysisPlan> {
-  return request<AnalysisPlan>('/analysis/plan', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ case_id: caseId, custom_problem: customProblem }) });
-}
-export function executeAnalysis(caseId: string, customProblem = ''): Promise<any> {
-  return request<any>('/analysis/execute', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ case_id: caseId, custom_problem: customProblem }) });
-}
+export function generateAnalysisPlan(caseId: string, customProblem = ''): Promise<AnalysisPlan> { return request<AnalysisPlan>('/analysis/plan', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ case_id: caseId, custom_problem: customProblem }) }); }
+export async function executeAnalysis(caseId: string, customProblem = ''): Promise<any> { const result = await request<any>('/analysis/execute', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ case_id: caseId, custom_problem: customProblem }) }); if (result.dashboard) sessionStorage.setItem('cib-analysis-dashboard-v1', JSON.stringify(result.dashboard)); return result; }
 export function getDriverTree(): Promise<DriverNode> { return request<DriverNode>('/insights/tree'); }
 export function getClassifiedInsights(): Promise<ExecutiveInsight[]> { return request<ExecutiveInsight[]>('/insights/classified'); }
 export function getEvidenceDetail(evidenceId: string): Promise<EvidenceDetail> { return request<EvidenceDetail>(`/insights/evidence/${encodeURIComponent(evidenceId)}`); }
