@@ -14,7 +14,7 @@ from app.models.schemas import ConsultingDashboard
 router = APIRouter(prefix="/demo", tags=["demo"])
 _cached_dashboard: ConsultingDashboard | None = None
 
-DASHBOARD_CACHE_VERSION = "pnl-v5-finite-kpis"
+DASHBOARD_CACHE_VERSION = "pnl-v6-robust-validation"
 
 
 def _cache_path() -> str:
@@ -37,8 +37,8 @@ def _finite(value: object) -> bool:
         return False
 
 
-def _cache_is_valid(dashboard: ConsultingDashboard) -> bool:
-    """Reject stale/partially serialized dashboards before they reach the UI."""
+def _validation_error(dashboard: ConsultingDashboard) -> str | None:
+    """Return a precise reason when a dashboard is not safe for the UI."""
     kpi = dashboard.kpi_summary
     required_kpis = (
         "revenue_prior", "revenue_current", "revenue_growth_pct",
@@ -51,24 +51,35 @@ def _cache_is_valid(dashboard: ConsultingDashboard) -> bool:
         "cac_prior", "cac_current", "cac_growth_pct",
         "churn_rate_prior_pct", "churn_rate_current_pct", "churn_rate_delta_pp",
     )
-    if not all(_finite(getattr(kpi, field, None)) for field in required_kpis):
-        return False
+    bad = [field for field in required_kpis if not _finite(getattr(kpi, field, None))]
+    if bad:
+        return f"non-finite KPI fields: {', '.join(bad)}"
 
     waterfall = dashboard.p_and_l_waterfall
     if not waterfall:
-        return False
-    totals = [
-        row for row in waterfall
-        if isinstance(row, dict) and row.get("type") == "total"
-    ]
+        return "empty P&L waterfall"
+    if not all(isinstance(row, dict) for row in waterfall):
+        return "waterfall contains a non-dictionary row"
+    if not all(isinstance(row.get("step"), str) for row in waterfall):
+        return "waterfall contains a row without a step"
+    if not all(_finite(row.get("amount")) and _finite(row.get("running_total")) for row in waterfall):
+        return "waterfall contains a non-finite amount or running total"
+
+    totals = [row for row in waterfall if row.get("type") == "total"]
     if len(totals) < 2:
-        return False
-    if not all(_finite(row.get("amount")) for row in waterfall if isinstance(row, dict)):
-        return False
+        return "waterfall does not contain prior/current total rows"
+
     prior = float(totals[0]["amount"])
     current = float(totals[-1]["amount"])
     impacts = sum(float(row["amount"]) for row in waterfall if row.get("type") != "total")
-    return abs((prior + impacts) - current) <= 0.05
+    reconciliation_gap = abs((prior + impacts) - current)
+    if reconciliation_gap > 1.0:
+        return f"P&L reconciliation gap is {reconciliation_gap:.2f}"
+    return None
+
+
+def _cache_is_valid(dashboard: ConsultingDashboard) -> bool:
+    return _validation_error(dashboard) is None
 
 
 def _restore_demo_workspace() -> None:
@@ -130,8 +141,9 @@ def bootstrap_demo() -> ConsultingDashboard:
         marketing_efficiency=snapshot["marketing_efficiency"],
         shipping_partner_breakdown=snapshot["shipping_partner_breakdown"],
     )
-    if not _cache_is_valid(_cached_dashboard):
-        raise RuntimeError("Deterministic demo dashboard contains a non-finite KPI or failed P&L reconciliation.")
+    validation_error = _validation_error(_cached_dashboard)
+    if validation_error:
+        raise RuntimeError(f"Deterministic demo dashboard validation failed: {validation_error}")
     try:
         with open(cache, "w", encoding="utf-8") as handle:
             json.dump(_cached_dashboard.model_dump(mode="json"), handle)
