@@ -1,14 +1,6 @@
 import {
-  ConsultingDashboard,
-  DatasetsOverview,
-  DatasetProfile,
-  ConsultingCase,
-  AnalysisPlan,
-  DriverNode,
-  ExecutiveInsight,
-  EvidenceDetail,
-  ScenarioLevers,
-  ScenarioResult
+  ConsultingDashboard, DatasetsOverview, DatasetProfile, ConsultingCase, AnalysisPlan,
+  DriverNode, ExecutiveInsight, EvidenceDetail, ScenarioLevers, ScenarioResult
 } from '../types';
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8000/api';
@@ -22,12 +14,12 @@ async function request<T>(url: string, init?: RequestInit): Promise<T> {
   return res.json();
 }
 
-export function bootstrapDemo(): Promise<ConsultingDashboard> {
-  return request<ConsultingDashboard>('/demo/bootstrap', { method: 'POST' });
-}
+export function bootstrapDemo(): Promise<ConsultingDashboard> { return request<ConsultingDashboard>('/demo/bootstrap', { method: 'POST' }); }
 export function getDatasetsOverview(): Promise<DatasetsOverview> { return request<DatasetsOverview>('/datasets/overview'); }
-export async function uploadDataset(file: File): Promise<DatasetProfile> {
-  const formData = new FormData(); formData.append('file', file);
+export async function uploadDataset(file: File, workspaceName = 'Uploaded Workspace'): Promise<DatasetProfile> {
+  const formData = new FormData();
+  formData.append('file', file);
+  formData.append('workspace_name', workspaceName);
   return request<DatasetProfile>('/datasets/upload', { method: 'POST', body: formData });
 }
 export function getTablePreview(tableName: string): Promise<any> { return request<any>(`/datasets/${encodeURIComponent(tableName)}/preview`); }
@@ -41,15 +33,9 @@ export function executeAnalysis(caseId: string, customProblem = ''): Promise<any
 export function getDriverTree(): Promise<DriverNode> { return request<DriverNode>('/insights/tree'); }
 export function getClassifiedInsights(): Promise<ExecutiveInsight[]> { return request<ExecutiveInsight[]>('/insights/classified'); }
 export function getEvidenceDetail(evidenceId: string): Promise<EvidenceDetail> { return request<EvidenceDetail>(`/insights/evidence/${encodeURIComponent(evidenceId)}`); }
-export function simulateScenario(levers: ScenarioLevers): Promise<ScenarioResult> {
-  return request<ScenarioResult>('/scenarios/simulate', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(levers) });
-}
-export function getSensitivityMatrix(levers: ScenarioLevers): Promise<any> {
-  return request<any>('/scenarios/sensitivity', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(levers) });
-}
+export function simulateScenario(levers: ScenarioLevers): Promise<ScenarioResult> { return request<ScenarioResult>('/scenarios/simulate', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(levers) }); }
+export function getSensitivityMatrix(levers: ScenarioLevers): Promise<any> { return request<any>('/scenarios/sensitivity', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(levers) }); }
 export function getReportContent(): Promise<any> { return request<any>('/reports/content'); }
 export function getDownloadPdfUrl(): string { return `${API_BASE}/reports/download-pdf`; }
 export function getSystemSettings(): Promise<any> { return request<any>('/settings'); }
-export function updateSystemSettings(settingsData: any): Promise<any> {
-  return request<any>('/settings', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(settingsData) });
-}
+export function updateSystemSettings(settingsData: any): Promise<any> { return request<any>('/settings', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(settingsData) }); }
