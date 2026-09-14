@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 from typing import List, Dict, Any, Optional
 from enum import Enum
 
@@ -16,7 +16,6 @@ class ColumnType(str, Enum):
     BOOLEAN = "BOOLEAN"
     ID = "ID"
 
-# 1. Dataset Profiling Schemas
 class ColumnProfile(BaseModel):
     name: str
     dtype: ColumnType
@@ -36,7 +35,7 @@ class DatasetProfile(BaseModel):
     file_name: str
     row_count: int
     column_count: int
-    data_quality_score: float # 0 to 100
+    data_quality_score: float
     likely_primary_keys: List[str]
     columns: List[ColumnProfile]
     file_size_bytes: int
@@ -46,23 +45,22 @@ class DetectedRelationship(BaseModel):
     source_column: str
     target_dataset: str
     target_column: str
-    relationship_type: str # '1:N' or 'N:1' or '1:1'
+    relationship_type: str
     match_rate_pct: float
-    confidence: str # 'High', 'Medium', 'Low'
+    confidence: str
 
 class DatasetsOverview(BaseModel):
     datasets: List[DatasetProfile]
     relationships: List[DetectedRelationship]
     overall_quality_score: float
 
-# 2. Analysis Plan Schemas
 class AnalysisStep(BaseModel):
     step_number: int
     title: str
     method: str
     description: str
     target_metrics: List[str]
-    status: str = "COMPLETED" # PENDING, RUNNING, COMPLETED
+    status: str = "COMPLETED"
 
 class AnalysisPlan(BaseModel):
     case_id: str
@@ -71,47 +69,36 @@ class AnalysisPlan(BaseModel):
     steps: List[AnalysisStep]
     estimated_impact_area: str
 
-# 3. KPI & Executive Overview Schemas
 class KPISummary(BaseModel):
     revenue_prior: float
     revenue_current: float
     revenue_growth_pct: float
-    
     gross_profit_prior: float
     gross_profit_current: float
     gross_profit_growth_pct: float
-    
     net_profit_prior: float
     net_profit_current: float
     net_profit_growth_pct: float
-    
     net_margin_prior_pct: float
     net_margin_current_pct: float
-    net_margin_delta_pp: float # percentage points
-    
+    net_margin_delta_pp: float
     orders_prior: int
     orders_current: int
     orders_growth_pct: float
-    
     aov_prior: float
     aov_current: float
     aov_growth_pct: float
-    
     active_customers_prior: int
     active_customers_current: int
     active_customers_growth_pct: float
-    
     cac_prior: float
     cac_current: float
     cac_growth_pct: float
-    
     churn_rate_prior_pct: float
     churn_rate_current_pct: float
     churn_rate_delta_pp: float
-    
-    currency_symbol: str = "$"
+    currency_symbol: str = "₹"
 
-# 4. Driver Tree Schemas
 class DriverNode(BaseModel):
     id: str
     label: str
@@ -120,16 +107,15 @@ class DriverNode(BaseModel):
     current_value: float
     delta_value: float
     delta_pct: float
-    contribution_pct: float # Contribution to parent change
+    contribution_pct: float
     impact_magnitude: float
-    currency: str = "$"
-    trend: str # 'up', 'down', 'flat'
-    status: str # 'positive', 'negative', 'neutral'
+    currency: str = "₹"
+    trend: str
+    status: str
     affected_segments: List[str] = []
     children: List["DriverNode"] = []
     evidence_id: Optional[str] = None
 
-# 5. Evidence & Classified Insights
 class EvidenceDetail(BaseModel):
     evidence_id: str
     title: str
@@ -141,23 +127,22 @@ class EvidenceDetail(BaseModel):
 
 class ExecutiveInsight(BaseModel):
     id: str
-    classification: StatementType # FACT, INSIGHT, HYPOTHESIS, RECOMMENDATION
+    classification: StatementType
     headline: str
     narrative: str
     magnitude_value: Optional[float] = None
     magnitude_formatted: Optional[str] = None
     affected_area: str
-    confidence: str # High, Medium, Low
+    confidence: str
     evidence_id: str
 
-# 6. Scenario Simulation Schemas
 class ScenarioLevers(BaseModel):
-    price_change_pct: float = 0.0        # e.g., +5%
-    marketing_spend_delta_pct: float = 0.0 # e.g., -10%
-    churn_rate_delta_pp: float = 0.0      # e.g., -2.0 pp
-    delivery_cost_delta_pct: float = 0.0  # e.g., -8%
-    cogs_reduction_pct: float = 0.0       # e.g., -3%
-    return_rate_delta_pp: float = 0.0     # e.g., -1.5 pp
+    price_change_pct: float = 0.0
+    marketing_spend_delta_pct: float = 0.0
+    churn_rate_delta_pp: float = 0.0
+    delivery_cost_delta_pct: float = 0.0
+    cogs_reduction_pct: float = 0.0
+    return_rate_delta_pp: float = 0.0
 
 class MetricComparison(BaseModel):
     metric_name: str
@@ -177,7 +162,6 @@ class ScenarioResult(BaseModel):
     executive_verdict: str
     key_assumptions: List[str]
 
-# 7. Strategic Recommendations
 class StrategicRecommendation(BaseModel):
     id: str
     title: str
@@ -185,12 +169,11 @@ class StrategicRecommendation(BaseModel):
     why: str
     expected_impact_annualized: float
     expected_impact_formatted: str
-    confidence: str # High, Medium, Low
-    implementation_timeframe: str # Quick Win (0-30d), Tactical (1-3mo), Strategic (3-6mo)
+    confidence: str
+    implementation_timeframe: str
     assumptions: List[str]
     supporting_evidence_ids: List[str]
 
-# 8. Complete Consulting Engagement Package
 class ConsultingDashboard(BaseModel):
     company_name: str = "NovaMart"
     industry: str = "E-commerce"
