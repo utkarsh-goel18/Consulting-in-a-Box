@@ -18,13 +18,12 @@ export const WaterfallChart: React.FC<WaterfallChartProps> = ({ data, currency =
   const chartData = data.map((item) => {
     if (item.type === 'total') {
       running = item.amount;
-      return { step: item.step, base: 0, value: Math.abs(item.amount), type: item.type, displayAmount: item.amount };
+      return { step: item.step, base: 0, value: item.amount, type: item.type, displayAmount: item.amount };
     }
 
     const prior = running;
     running = prior + item.amount;
-    // Keep negative running totals negative. Clamping the base to zero was
-    // hiding every unfavorable bridge step when profit was below zero.
+    // Preserve the negative running position so unfavorable bridge steps remain visible.
     const base = item.amount < 0 ? running : prior;
     return { step: item.step, base, value: Math.abs(item.amount), type: item.type, displayAmount: item.amount };
   });
