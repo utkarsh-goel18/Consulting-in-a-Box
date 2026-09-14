@@ -52,7 +52,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
       <button onClick={onRunDemo} disabled={demoLoading} className="relative flex shrink-0 items-center gap-2 rounded-lg bg-blue-600 px-3.5 py-2.5 text-xs font-bold text-white shadow-sm transition hover:bg-blue-700 disabled:cursor-wait disabled:opacity-70">
         <Play className="h-3.5 w-3.5 fill-current" />
-        <span className="hidden md:inline">Run demo</span>
+        <span className="hidden md:inline">Run Demo Engagement</span>
         {demoLoading && <span className="hidden xl:inline font-medium text-blue-100">· {demoProgressStep}</span>}
       </button>
 
