@@ -1,3 +1,8 @@
+from __future__ import annotations
+
+import math
+from typing import Any
+
 from fastapi import APIRouter
 from pydantic import BaseModel
 
@@ -23,6 +28,30 @@ PREDEFINED_CASES = [
 class PlanRequest(BaseModel):
     case_id: str
     custom_problem: str = ""
+
+
+def _json_safe(value: Any) -> Any:
+    """Recursively remove NaN/Infinity from analytics payloads before JSON serialization.
+
+    Analytics may legitimately produce an undefined percentage when its denominator is
+    zero (for example CAC/ROAS for a channel with no attributable orders). The API must
+    never emit non-standard JSON. Numeric non-finite values are represented as 0.0 at
+    the transport boundary; the deterministic engine remains the source of truth.
+    """
+    if isinstance(value, float):
+        return value if math.isfinite(value) else 0.0
+    if isinstance(value, int) or value is None or isinstance(value, (str, bool)):
+        return value
+    if isinstance(value, dict):
+        return {str(key): _json_safe(item) for key, item in value.items()}
+    if isinstance(value, (list, tuple, set)):
+        return [_json_safe(item) for item in value]
+    try:
+        if hasattr(value, "item"):
+            return _json_safe(value.item())
+    except Exception:
+        pass
+    return value
 
 
 @router.get("/cases")
@@ -59,7 +88,7 @@ def execute_analysis(req: PlanRequest):
         marketing_efficiency=snapshot["marketing_efficiency"],
         shipping_partner_breakdown=snapshot["shipping_partner_breakdown"],
     )
-    return {
+    payload = {
         "case_id": req.case_id,
         "case_title": plan.case_title,
         "business_question": plan.business_question,
@@ -79,3 +108,4 @@ def execute_analysis(req: PlanRequest):
         },
         "dashboard": dashboard.model_dump(mode="json"),
     }
+    return _json_safe(payload)
