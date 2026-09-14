@@ -1,59 +1,59 @@
+from __future__ import annotations
+
+import json
 import os
-import pandas as pd
 from fastapi import APIRouter
+
+from app.core.analysis_service import build_consulting_snapshot
 from app.core.config import settings
-from app.core.database import repo
-from app.engine.fast_demo_data import generate_fast_demo_datasets, DEMO_VERSION
-from app.engine.analytics_engine import DeterministicAnalyticsEngine
-from app.engine.driver_tree import build_driver_tree
-from app.engine.recommendation_engine import generate_classified_insights, generate_strategic_recommendations
 from app.models.schemas import ConsultingDashboard
 
 router = APIRouter(prefix="/demo", tags=["demo"])
 _cached_dashboard: ConsultingDashboard | None = None
 
 
+def _cache_path() -> str:
+    return os.path.join(settings.DATA_DIR, ".novamart_dashboard_cache.json")
+
+
 @router.post("/bootstrap", response_model=ConsultingDashboard)
-def bootstrap_demo():
-    """Load the NovaMart analytical snapshot and cache it for the process lifetime."""
+def bootstrap_demo() -> ConsultingDashboard:
+    """Return the deterministic NovaMart snapshot, using a disk + process cache."""
     global _cached_dashboard
     if _cached_dashboard is not None:
         return _cached_dashboard
 
-    data_dir = settings.DATA_DIR
-    required = ["customers.csv", "orders.csv", "products.csv", "order_items.csv", "marketing_spend.csv", "expenses.csv", "returns.csv"]
-    version_file = os.path.join(data_dir, ".novamart_demo_version")
-    version_ok = os.path.exists(version_file) and open(version_file, encoding="utf-8").read().strip() == DEMO_VERSION
-    if not version_ok or any(not os.path.exists(os.path.join(data_dir, name)) for name in required):
-        generate_fast_demo_datasets(data_dir)
-        repo.dataframes.clear()
+    cache = _cache_path()
+    if os.path.exists(cache):
+        try:
+            with open(cache, encoding="utf-8") as handle:
+                _cached_dashboard = ConsultingDashboard.model_validate(json.load(handle))
+                return _cached_dashboard
+        except Exception:
+            try:
+                os.remove(cache)
+            except OSError:
+                pass
 
-    if not repo.dataframes:
-        repo.load_from_directory(data_dir)
-
-    engine = DeterministicAnalyticsEngine(repo.dataframes)
-    snapshot = engine.analysis_snapshot()
-    costs = engine._period_costs()
-    snapshot["costs"] = {"marketing_delta": costs["Marketing Spend"][1] - costs["Marketing Spend"][0]}
-    snapshot["delivery_current"] = costs["Delivery Costs"][1]
-    kpi = snapshot["kpi"]
-
-    driver_tree = build_driver_tree(kpi, snapshot)
-    insights = generate_classified_insights(kpi, snapshot)
-    recommendations = generate_strategic_recommendations(kpi, snapshot)
-    waterfall = snapshot["waterfall"]
-
-    orders = repo.dataframes.get("orders", pd.DataFrame())
-    monthly_trend = []
-    if not orders.empty and "month" in orders.columns:
-        grouped = orders.groupby("month").agg(revenue=("net_amount", "sum"), orders=("order_id", "count")).reset_index()
-        monthly_trend = [{"month": str(row.month), "revenue": round(float(row.revenue), 2), "orders": int(row.orders)} for row in grouped.itertuples()]
-
-    q_prior, q_curr = engine._quarters()
+    snapshot = build_consulting_snapshot()
     _cached_dashboard = ConsultingDashboard(
-        company_name="NovaMart", industry="E-commerce", quarter_evaluated=f"{q_curr} vs {q_prior}", problem_title="Profitability & Growth Performance",
-        kpi_summary=kpi, driver_tree=driver_tree, insights=insights, recommendations=recommendations,
-        p_and_l_waterfall=waterfall, monthly_trend=monthly_trend,
-        category_performance=snapshot["categories"], marketing_efficiency=snapshot["marketing"], shipping_partner_breakdown=snapshot["shipping"],
+        company_name=snapshot["company_name"],
+        industry=snapshot["industry"],
+        quarter_evaluated=snapshot["quarter_evaluated"],
+        problem_title=snapshot["problem_title"],
+        kpi_summary=snapshot["kpi_summary"],
+        driver_tree=snapshot["driver_tree"],
+        insights=snapshot["insights"],
+        recommendations=snapshot["recommendations"],
+        p_and_l_waterfall=snapshot["waterfall"],
+        monthly_trend=snapshot["monthly_trend"],
+        category_performance=snapshot["category_performance"],
+        marketing_efficiency=snapshot["marketing_efficiency"],
+        shipping_partner_breakdown=snapshot["shipping_partner_breakdown"],
     )
+    try:
+        with open(cache, "w", encoding="utf-8") as handle:
+            json.dump(_cached_dashboard.model_dump(mode="json"), handle)
+    except OSError:
+        pass
     return _cached_dashboard
