@@ -4,17 +4,16 @@ import json
 import os
 from fastapi import APIRouter
 
-from app.core.analysis_service import build_consulting_snapshot
+from app.core.analysis_service import build_consulting_snapshot, invalidate
 from app.core.config import settings
+from app.core.database import repo
+from app.engine.fast_demo_data import generate_fast_demo_datasets
 from app.models.schemas import ConsultingDashboard
 
 router = APIRouter(prefix="/demo", tags=["demo"])
 _cached_dashboard: ConsultingDashboard | None = None
 
-# Version the serialized dashboard separately from the analytical engine. This
-# prevents a locally persisted snapshot created by an older waterfall formula
-# from surviving a backend restart.
-DASHBOARD_CACHE_VERSION = "pnl-v3-accounting-bridge"
+DASHBOARD_CACHE_VERSION = "pnl-v4-accounting-schema"
 
 
 def _cache_path() -> str:
@@ -31,7 +30,6 @@ def clear_dashboard_cache() -> None:
 
 
 def _cache_is_valid(dashboard: ConsultingDashboard) -> bool:
-    """Guard the most important contract of a P&L bridge before caching it."""
     waterfall = dashboard.p_and_l_waterfall
     if not waterfall:
         return False
@@ -44,10 +42,32 @@ def _cache_is_valid(dashboard: ConsultingDashboard) -> bool:
     return abs((prior + impacts) - current) <= 0.05
 
 
+def _restore_demo_workspace() -> None:
+    """Restore the canonical NovaMart fixture after a user has uploaded another workspace."""
+    generate_fast_demo_datasets(settings.DATA_DIR)
+    repo.dataframes.clear()
+    for table in ("customers", "products", "orders", "order_items", "marketing_spend", "expenses", "returns"):
+        path = os.path.join(settings.DATA_DIR, f"{table}.csv")
+        if os.path.exists(path):
+            import pandas as pd
+            repo.register_dataframe(table, pd.read_csv(path))
+    repo.workspace_name = "NovaMart"
+    repo.is_demo_workspace = True
+    invalidate()
+    clear_dashboard_cache()
+
+
 @router.post("/bootstrap", response_model=ConsultingDashboard)
 def bootstrap_demo() -> ConsultingDashboard:
-    """Return the deterministic NovaMart snapshot, using a versioned disk + process cache."""
+    """Return the canonical NovaMart demo snapshot, never an uploaded workspace."""
     global _cached_dashboard
+
+    # Uploads and the demo are deliberately separate workspaces. Previously, clicking
+    # Run Demo after an upload caused the analytics engine to run against the uploaded
+    # schema and could fail on fields that only exist in the NovaMart fixture.
+    if not repo.is_demo_workspace:
+        _restore_demo_workspace()
+
     if _cached_dashboard is not None:
         return _cached_dashboard
 
