@@ -5,11 +5,7 @@ from typing import Any, Dict
 from app.core.database import repo
 from app.engine.analytics_engine import DeterministicAnalyticsEngine
 from app.engine.driver_tree import build_driver_tree
-from app.engine.recommendation_engine import (
-    generate_classified_insights,
-    generate_strategic_recommendations,
-)
-
+from app.engine.recommendation_engine import generate_classified_insights, generate_strategic_recommendations
 
 _engine: DeterministicAnalyticsEngine | None = None
 _signature: tuple[tuple[str, int, int], ...] | None = None
@@ -52,8 +48,8 @@ def build_consulting_snapshot() -> Dict[str, Any]:
     engine = get_engine()
     q_prior, q_curr = engine._quarters()
     return {
-        "company_name": "NovaMart",
-        "industry": "E-commerce",
+        "company_name": repo.workspace_name,
+        "industry": "E-commerce / Business Dataset",
         "quarter_evaluated": f"{q_curr} vs {q_prior}",
         "problem_title": "Profitability Decline",
         "kpi_summary": kpi,
