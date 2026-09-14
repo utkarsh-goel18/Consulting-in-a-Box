@@ -1,24 +1,23 @@
 import os
 import duckdb
 import pandas as pd
-from typing import Dict, Any, Optional
+from typing import Dict, Any
 from sqlalchemy import create_engine, text
 from app.core.config import settings
 
+
 class DataRepository:
-    """
-    Unified Data Repository providing dual-engine access:
-    1. In-process DuckDB for lightning-fast OLAP analysis on CSVs and DataFrames
-    2. SQLAlchemy connection for enterprise PostgreSQL integration
-    """
+    """Unified in-memory analytical repository for demo and uploaded workspaces."""
     _instance = None
 
     def __init__(self):
         self.dataframes: Dict[str, pd.DataFrame] = {}
+        self.workspace_name: str = "NovaMart"
+        self.is_demo_workspace: bool = True
         self.duck_conn = duckdb.connect(database=":memory:")
         self.pg_engine = None
         self._init_pg()
-        
+
     @classmethod
     def get_instance(cls):
         if cls._instance is None:
@@ -47,13 +46,16 @@ class DataRepository:
         try:
             self.duck_conn.register(name, df)
         except Exception:
-            pass
+            try:
+                self.duck_conn.unregister(name)
+                self.duck_conn.register(name, df)
+            except Exception:
+                pass
 
     def load_from_directory(self, dir_path: str = None):
         target_dir = dir_path or settings.DATA_DIR
         if not os.path.exists(target_dir):
             return
-            
         for file in os.listdir(target_dir):
             if file.endswith(".csv"):
                 table_name = os.path.splitext(file)[0]
@@ -65,7 +67,7 @@ class DataRepository:
                     print(f"Error loading {file}: {e}")
 
     def query_sql(self, sql: str) -> pd.DataFrame:
-        """Executes analytical SQL query against loaded tables via DuckDB."""
         return self.duck_conn.execute(sql).df()
+
 
 repo = DataRepository.get_instance()
