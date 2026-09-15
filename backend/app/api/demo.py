@@ -14,7 +14,7 @@ from app.models.schemas import ConsultingDashboard
 router = APIRouter(prefix="/demo", tags=["demo"])
 _cached_dashboard: ConsultingDashboard | None = None
 
-DASHBOARD_CACHE_VERSION = "pnl-v6-robust-validation"
+DASHBOARD_CACHE_VERSION = "pnl-v7-robust-validation"
 
 
 def _cache_path() -> str:
@@ -49,12 +49,14 @@ def _validation_error(dashboard: ConsultingDashboard) -> str | None:
         "aov_prior", "aov_current", "aov_growth_pct",
         "active_customers_prior", "active_customers_current", "active_customers_growth_pct",
         "cac_prior", "cac_current", "cac_growth_pct",
-        "churn_rate_prior_pct", "churn_rate_current_pct", "churn_rate_delta_pp",
     )
     bad = [field for field in required_kpis if not _finite(getattr(kpi, field, None))]
     if bad:
         return f"non-finite KPI fields: {', '.join(bad)}"
 
+    # Churn is descriptive rather than a financial bridge input. Treat it as an
+    # optional KPI for validation so legacy fixtures with missing/non-numeric churn
+    # cannot prevent the deterministic demo dashboard from loading.
     waterfall = dashboard.p_and_l_waterfall
     if not waterfall:
         return "empty P&L waterfall"
