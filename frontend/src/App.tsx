@@ -24,6 +24,10 @@ const isUsableDashboard = (value: unknown): value is ConsultingDashboard => {
   const data = value as Partial<ConsultingDashboard>;
   const kpi = data.kpi_summary as Partial<ConsultingDashboard['kpi_summary']> | undefined;
   if (!kpi || !data.driver_tree || !Array.isArray(data.p_and_l_waterfall)) return false;
+
+  // Churn is a supporting customer metric, not a prerequisite for rendering
+  // the financial dashboard. Legacy/demo datasets may not contain a numeric
+  // churn encoding, so keep it out of the core dashboard validity gate.
   const requiredKpis = [
     kpi.revenue_prior, kpi.revenue_current, kpi.revenue_growth_pct,
     kpi.gross_profit_prior, kpi.gross_profit_current, kpi.gross_profit_growth_pct,
@@ -32,7 +36,6 @@ const isUsableDashboard = (value: unknown): value is ConsultingDashboard => {
     kpi.orders_prior, kpi.orders_current, kpi.orders_growth_pct,
     kpi.aov_prior, kpi.aov_current, kpi.aov_growth_pct,
     kpi.cac_prior, kpi.cac_current, kpi.cac_growth_pct,
-    kpi.churn_rate_prior_pct, kpi.churn_rate_current_pct, kpi.churn_rate_delta_pp,
   ];
   return requiredKpis.every(isFiniteNumber) && data.p_and_l_waterfall.every(row =>
     row && typeof row.step === 'string' && isFiniteNumber(row.amount) && isFiniteNumber(row.running_total) && typeof row.type === 'string'
