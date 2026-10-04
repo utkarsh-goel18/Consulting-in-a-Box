@@ -132,16 +132,23 @@ customers ─────────────< orders ───────�
 
 ## 5. The NovaMart Consulting Engagement Case
 
-When launched in **Demo Mode**, the application evaluates **NovaMart**, a mid-market e-commerce enterprise:
+When launched in **Demo Mode**, the application evaluates a synthetic e-commerce business called **NovaMart**.
 
-- **Target Window**: Q3 2024 vs Q2 2024
-- **Reported Challenge**: *"Net operating profit contracted 17.4% QoQ. Isolate the major cost and revenue drivers."*
+- **Evaluation window:** Q3 2024 vs Q2 2024
+- **Primary case:** Profitability Decline
+- **Objective:** isolate the revenue, cost, customer, logistics, and marketing drivers behind the change in operating profitability.
 
-### Engineered Business Anomalies Detected by Engine:
-1. **Logistics Rate Hike**: FastLogistics instituted an unannounced +17.1% regional delivery fee increase on Tier-2 routes, adding $105,400 in direct excess fulfillment costs.
-2. **AOV Dilution**: Mid-quarter promotional discounting caused basket size contraction in Electronics (-8.4% units/order) and increased coupon usage, pulling AOV down by 5.1% (-$25.34/order).
-3. **Paid Social Diminishing Returns**: Paid Social customer acquisition cost (CAC) jumped 38.2% from $71.20 to $98.50 with a depressed ROAS of 2.1x, while Affiliate and Search remained highly profitable (4.5x and 3.8x ROAS).
-4. **Tier-2 Churn Acceleration**: Customer churn increased by 3.2 percentage points, with 74% of newly churned accounts located in Tier-2 zip codes impacted by NovaMart's flat delivery surcharge.
+The generated fixture is intentionally designed with coherent relationships and business signals so the platform can demonstrate:
+
+- Revenue and average-order-value movement
+- Order-volume changes
+- COGS and delivery-cost pressure
+- Marketing efficiency changes, including channel-level CAC/ROAS movement
+- Customer churn movement
+- Product-category and shipping-partner performance
+- A reconciled P&L driver tree and what-if scenario analysis
+
+The NovaMart data is generated locally by the backend rather than stored as a required production dataset. This keeps the repository lightweight while preserving a deterministic, zero-API demo experience.
 
 ---
 
