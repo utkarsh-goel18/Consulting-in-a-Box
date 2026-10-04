@@ -1,16 +1,17 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 import { Download, FileText, Printer, ShieldCheck } from 'lucide-react';
 import { ConsultingDashboard } from '../types';
-import { getDownloadPdfUrl, getReportContent } from '../api/client';
+import { getDownloadPdfUrl } from '../api/client';
 
 interface Props { dashboardData: ConsultingDashboard; }
 const inr = (value: number) => { const abs = Math.abs(value); const sign = value < 0 ? '-' : ''; if (abs >= 10_000_000) return `${sign}₹${(abs / 10_000_000).toFixed(2)}Cr`; if (abs >= 100_000) return `${sign}₹${(abs / 100_000).toFixed(2)}L`; return `${sign}₹${Math.round(abs).toLocaleString('en-IN')}`; };
 
 export const ReportsPage: React.FC<Props> = ({ dashboardData }) => {
-  const [report, setReport] = useState<any>(null);
-  useEffect(() => { getReportContent().then(setReport).catch(() => setReport(null)); }, []);
   const k = dashboardData.kpi_summary;
-  const costs = report?.costs || {};
+  // Keep the on-screen report bound to the exact dashboard snapshot selected by the user.
+  // Do not fetch the server's cached/default report here: that can still be the NovaMart demo
+  // after a different dataset has been uploaded and analyzed.
+  const costs = dashboardData.costs || {};
   const root = dashboardData.driver_tree;
   const totalCostDelta = useMemo(() => Object.values(costs).reduce((sum: number, value: any) => sum + Number(value?.delta || 0), 0), [costs]);
   const Section = ({ n, title, children }: { n: number; title: string; children: React.ReactNode }) => <section className="space-y-3"><h2 className="border-l-4 border-blue-600 pl-3 text-sm font-bold uppercase tracking-wider text-slate-900 dark:text-white">{n}. {title}</h2>{children}</section>;
