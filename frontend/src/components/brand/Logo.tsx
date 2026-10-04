@@ -33,7 +33,7 @@ export const Logo: React.FC<LogoProps> = ({ size = 42, showWordmark = false, com
       </defs>
 
       {/* Light rounded-square brand tile */}
-      <rect x="1" y="1" width="46" height="46" rx="14" fill="#f8fafc" />
+      <rect x="1" y="1" width="46" height="46" rx="14" fill="#ffffff" />
 
       {/* Rising analytical bars */}
       <path
@@ -47,7 +47,7 @@ export const Logo: React.FC<LogoProps> = ({ size = 42, showWordmark = false, com
       <path
         d="M10.5 18.5C15.4 12.6 21.7 9.9 27.4 11.2C31.9 12.2 34.2 15.3 36.3 18.7"
         fill="none"
-        stroke="#ffffff"
+        stroke="#0ea5c9"
         strokeWidth="2.2"
         strokeLinecap="round"
         opacity=".95"
