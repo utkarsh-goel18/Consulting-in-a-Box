@@ -139,14 +139,26 @@ class DeterministicAnalyticsEngine:
         net_p = rev_p - cogs_p - delivery_p - mkt_p - exp_p - ret_p
         net_c = rev_c - cogs_c - delivery_c - mkt_c - exp_c - ret_c
 
+        def _parse_churn(s: pd.Series) -> pd.Series:
+            num = pd.to_numeric(s, errors="coerce")
+            if num.notna().sum() > 0:
+                return num.fillna(0)
+            str_s = s.astype(str).str.strip().str.lower()
+            return str_s.isin(["churned", "churn", "true", "1", "yes"]).astype(float)
+
         if not customers.empty and "churn_q2_status" in customers.columns and "churn_q3_status" in customers.columns:
-            churn_p = float(pd.to_numeric(customers["churn_q2_status"], errors="coerce").mean() * 100)
-            churn_c = float(pd.to_numeric(customers["churn_q3_status"], errors="coerce").mean() * 100)
+            churn_p = float(_parse_churn(customers["churn_q2_status"]).mean() * 100)
+            churn_c = float(_parse_churn(customers["churn_q3_status"]).mean() * 100)
         elif not customers.empty and "churn_status" in customers.columns:
-            churn_c = float(pd.to_numeric(customers["churn_status"], errors="coerce").mean() * 100)
+            churn_c = float(_parse_churn(customers["churn_status"]).mean() * 100)
             churn_p = max(churn_c - 1.5, 0.0)
         else:
             churn_p = churn_c = 0.0
+
+        if not np.isfinite(churn_p):
+            churn_p = 0.0
+        if not np.isfinite(churn_c):
+            churn_c = 0.0
 
         self._kpi_cache = KPISummary(
             revenue_prior=round(rev_p, 2), revenue_current=round(rev_c, 2), revenue_growth_pct=self._pct(rev_c, rev_p),
@@ -239,7 +251,19 @@ class DeterministicAnalyticsEngine:
         grouped = grouped.sort_values("revenue", ascending=False)
         total_revenue = grouped["revenue"].sum()
         grouped["pareto_pct"] = grouped["revenue"].cumsum() / max(total_revenue, 1) * 100
-        return [{"category": str(r.category), "revenue": round(float(r.revenue), 2), "gross_margin": round(float(r.gross_margin), 2), "margin_pct": round(float(r.margin_pct), 2), "pareto_pct": round(float(r.pareto_pct), 2), "trend": "watch" if r.margin_pct < 25 else "stable"} for r in grouped.itertuples()]
+        records = []
+        for r in grouped.itertuples():
+            mpct = float(r.margin_pct) if pd.notna(r.margin_pct) and np.isfinite(r.margin_pct) else 0.0
+            ppct = float(r.pareto_pct) if pd.notna(r.pareto_pct) and np.isfinite(r.pareto_pct) else 0.0
+            records.append({
+                "category": str(r.category),
+                "revenue": round(float(r.revenue), 2),
+                "gross_margin": round(float(r.gross_margin), 2),
+                "margin_pct": round(mpct, 2),
+                "pareto_pct": round(ppct, 2),
+                "trend": "watch" if mpct < 25 else "stable",
+            })
+        return records
 
     def analyze_marketing_efficiency(self) -> List[Dict[str, Any]]:
         marketing = self.dfs.get("marketing_spend", pd.DataFrame())

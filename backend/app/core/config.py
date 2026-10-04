@@ -1,8 +1,10 @@
 import os
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 from typing import Optional
 
 class Settings(BaseModel):
+    model_config = ConfigDict(arbitrary_types_allowed=True)
+
     PROJECT_NAME: str = "Consulting in a Box"
     API_V1_STR: str = "/api"
     DEMO_MODE: bool = True
@@ -22,9 +24,6 @@ class Settings(BaseModel):
     GEMINI_API_KEY: Optional[str] = os.getenv("GEMINI_API_KEY", None)
     OPENAI_API_KEY: Optional[str] = os.getenv("OPENAI_API_KEY", None)
     AI_MODEL: str = os.getenv("AI_MODEL", "gemini-1.5-flash")
-
-    class Config:
-        arbitrary_types_allowed = True
 
 settings = Settings()
 os.makedirs(settings.DATA_DIR, exist_ok=True)

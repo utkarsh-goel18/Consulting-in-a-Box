@@ -3,12 +3,14 @@ from fastapi import APIRouter, Response
 from app.core.analysis_service import build_consulting_snapshot
 from app.reports.pdf_generator import generate_consulting_pdf
 
+from app.core.currency import json_safe
+
 router = APIRouter(prefix="/reports", tags=["reports"])
 
 
 def get_report_payload():
     snapshot = build_consulting_snapshot()
-    return {
+    raw = {
         "company_name": snapshot["company_name"],
         "industry": snapshot["industry"],
         "quarter_evaluated": snapshot["quarter_evaluated"],
@@ -26,6 +28,7 @@ def get_report_payload():
         "shipping_partner_breakdown": snapshot["shipping_partner_breakdown"],
         "costs": snapshot["costs"],
     }
+    return json_safe(raw)
 
 
 @router.get("/content")

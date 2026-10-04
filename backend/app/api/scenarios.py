@@ -7,6 +7,8 @@ from app.models.schemas import ScenarioLevers, ScenarioResult
 router = APIRouter(prefix="/scenarios", tags=["scenarios"])
 
 
+from app.core.currency import json_safe
+
 def _simulate(levers: ScenarioLevers) -> ScenarioResult:
     snapshot = get_snapshot()
     return run_what_if_simulation(snapshot["kpi"], levers, snapshot)
@@ -33,4 +35,4 @@ def sensitivity_matrix(levers: ScenarioLevers | None = None):
             metric = result.metrics["Net Profit"]
             row.append({"price_change_pct": price, "delivery_cost_delta_pct": delivery, "net_profit": metric.scenario_value, "delta_pct": metric.percentage_delta, "favorable": metric.is_positive_trend})
         cells.append(row)
-    return {"price_values": price_values, "delivery_cost_values": delivery_values, "cells": cells}
+    return json_safe({"price_values": price_values, "delivery_cost_values": delivery_values, "cells": cells})

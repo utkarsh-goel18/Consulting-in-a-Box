@@ -59,3 +59,51 @@ def test_evidence_and_report():
         report = c.get("/api/reports/content")
         assert report.status_code == 200
         assert report.json()["currency_symbol"] == "₹"
+
+
+def test_pdf_download():
+    with TestClient(app) as c:
+        response = c.get("/api/reports/download-pdf")
+        assert response.status_code == 200
+        assert response.headers["content-type"] == "application/pdf"
+        assert len(response.content) > 1000
+
+
+def test_settings_endpoints():
+    with TestClient(app) as c:
+        res = c.get("/api/settings")
+        assert res.status_code == 200
+        data = res.json()
+        assert "demo_mode" in data
+        assert "ai_provider" in data
+
+        update_res = c.post("/api/settings", json={"demo_mode": True, "ai_provider": "mock"})
+        assert update_res.status_code == 200
+        assert update_res.json()["status"] == "success"
+
+
+def test_table_preview():
+    with TestClient(app) as c:
+        res = c.get("/api/datasets/orders/preview")
+        assert res.status_code == 200
+        data = res.json()
+        assert data["dataset_name"] == "orders"
+        assert len(data["records"]) > 0
+
+
+def test_ai_provider():
+    from app.ai.openai_provider import OpenAIProvider
+    from app.ai.gemini_provider import GeminiAIProvider
+    from app.ai.mock_consultant import MockStrategicConsultant
+
+    mock_p = MockStrategicConsultant()
+    plan = mock_p.generate_analysis_plan("Profit drop diagnostic", {"case_id": "case_profitability_decline"})
+    assert len(plan.steps) > 0
+
+    openai_p = OpenAIProvider(api_key=None)
+    plan_o = openai_p.generate_analysis_plan("Profit drop diagnostic", {"case_id": "case_profitability_decline"})
+    assert len(plan_o.steps) > 0
+
+    gemini_p = GeminiAIProvider(api_key=None)
+    plan_g = gemini_p.generate_analysis_plan("Profit drop diagnostic", {"case_id": "case_profitability_decline"})
+    assert len(plan_g.steps) > 0
