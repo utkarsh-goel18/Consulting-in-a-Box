@@ -306,5 +306,28 @@ class DeterministicAnalyticsEngine:
             records.append({"channel": str(r.channel), "spend": round(float(r.spend), 2), "cac": round(cac, 2), "cac_growth_pct": round(growth, 1), "roas": round(roas, 2), "verdict": verdict})
         return sorted(records, key=lambda x: x["roas"])
 
+    def analyze_monthly_revenue_trend(self) -> List[Dict[str, Any]]:
+        """Return deterministic monthly delivered revenue for dashboard trend charts."""
+        orders = self.dfs.get("orders", pd.DataFrame())
+        if orders.empty or "month" not in orders.columns or "net_amount" not in orders.columns:
+            return []
+        delivered = self._delivered_orders(orders)
+        if delivered.empty:
+            return []
+        grouped = delivered.groupby("month", as_index=False)["net_amount"].sum().sort_values("month")
+        records: List[Dict[str, Any]] = []
+        for row in grouped.itertuples(index=False):
+            revenue = float(row.net_amount)
+            if np.isfinite(revenue):
+                records.append({"month": str(row.month), "revenue": round(revenue, 2)})
+        return records
+
     def analysis_snapshot(self) -> Dict[str, Any]:
-        return {"kpi": self.calculate_executive_kpis(), "shipping": self.analyze_shipping_partners(), "categories": self.analyze_category_margins(), "marketing": self.analyze_marketing_efficiency(), "waterfall": self.calculate_pnl_waterfall()}
+        return {
+            "kpi": self.calculate_executive_kpis(),
+            "shipping": self.analyze_shipping_partners(),
+            "categories": self.analyze_category_margins(),
+            "marketing": self.analyze_marketing_efficiency(),
+            "waterfall": self.calculate_pnl_waterfall(),
+            "monthly_trend": self.analyze_monthly_revenue_trend(),
+        }
