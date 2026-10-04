@@ -84,16 +84,17 @@ export const App: React.FC = () => {
     }
   };
 
-  const handleAnalysisExecuted = () => {
+  const handleAnalysisExecuted = (executedDashboard?: ConsultingDashboard) => {
     try {
-      const raw = sessionStorage.getItem(ANALYSIS_DASHBOARD_KEY);
-      if (raw) {
-        const data = JSON.parse(raw) as ConsultingDashboard;
-        if (isUsableDashboard(data)) {
-          setDashboardData(data);
-          sessionStorage.setItem(CACHE_KEY, JSON.stringify(data));
-          sessionStorage.setItem(DEMO_STARTED_KEY, 'true');
-        }
+      const data = executedDashboard || JSON.parse(sessionStorage.getItem(ANALYSIS_DASHBOARD_KEY) || 'null');
+      if (isUsableDashboard(data)) {
+        // Replace the active workspace immediately with the snapshot produced by
+        // the just-completed analysis. This keeps Overview, Insights, Scenarios
+        // and Reports synchronized with the uploaded dataset instead of a prior
+        // NovaMart/demo snapshot.
+        setDashboardData(data);
+        sessionStorage.setItem(CACHE_KEY, JSON.stringify(data));
+        sessionStorage.setItem(DEMO_STARTED_KEY, 'true');
       }
     } catch { /* keep the current workspace if the persisted result is malformed */ }
     setActiveTab('insights');
