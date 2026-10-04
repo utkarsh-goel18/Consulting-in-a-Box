@@ -171,6 +171,7 @@ export interface ConsultingDashboard {
   category_performance: Array<{ category: string; revenue: number; gross_margin: number; margin_pct: number; pareto_pct: number; trend: string }>;
   marketing_efficiency: Array<{ channel: string; spend: number; cac: number; cac_growth_pct: number; roas: number; verdict: string }>;
   shipping_partner_breakdown: Array<{ partner: string; q2_avg_cost: number; q3_avg_cost: number; delta_pct: number; orders: number; excess_cost: number }>;
+  costs?: Record<string, { prior: number; current: number; delta: number }>;
 }
 
 export interface AnalysisStep {
