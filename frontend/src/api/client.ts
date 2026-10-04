@@ -16,5 +16,25 @@ export function simulateScenario(levers: ScenarioLevers): Promise<ScenarioResult
 export function getSensitivityMatrix(levers: ScenarioLevers): Promise<any> { return request<any>('/scenarios/sensitivity', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(levers) }); }
 export function getReportContent(): Promise<any> { return request<any>('/reports/content'); }
 export function getDownloadPdfUrl(): string { return `${API_BASE}/reports/download-pdf`; }
+export async function downloadDashboardPdf(dashboardData: ConsultingDashboard): Promise<void> {
+  const res = await fetch(`${API_BASE}/reports/download-pdf`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(dashboardData),
+  });
+  if (!res.ok) {
+    const message = await res.text().catch(() => 'PDF generation failed');
+    throw new Error(message || `PDF generation failed (${res.status})`);
+  }
+  const blob = await res.blob();
+  const url = URL.createObjectURL(blob);
+  const anchor = document.createElement('a');
+  anchor.href = url;
+  anchor.download = 'Consulting_Report_INR.pdf';
+  document.body.appendChild(anchor);
+  anchor.click();
+  anchor.remove();
+  URL.revokeObjectURL(url);
+}
 export function getSystemSettings(): Promise<any> { return request<any>('/settings'); }
 export function updateSystemSettings(settingsData: any): Promise<any> { return request<any>('/settings', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(settingsData) }); }
