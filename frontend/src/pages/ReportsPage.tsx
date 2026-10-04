@@ -1,13 +1,26 @@
 import React, { useMemo } from 'react';
 import { Download, FileText, Printer, ShieldCheck } from 'lucide-react';
 import { ConsultingDashboard } from '../types';
-import { getDownloadPdfUrl } from '../api/client';
+import { downloadDashboardPdf } from '../api/client';
 
 interface Props { dashboardData: ConsultingDashboard; }
 const inr = (value: number) => { const abs = Math.abs(value); const sign = value < 0 ? '-' : ''; if (abs >= 10_000_000) return `${sign}₹${(abs / 10_000_000).toFixed(2)}Cr`; if (abs >= 100_000) return `${sign}₹${(abs / 100_000).toFixed(2)}L`; return `${sign}₹${Math.round(abs).toLocaleString('en-IN')}`; };
 
 export const ReportsPage: React.FC<Props> = ({ dashboardData }) => {
   const k = dashboardData.kpi_summary;
+  const [pdfLoading, setPdfLoading] = React.useState(false);
+  const [pdfError, setPdfError] = React.useState('');
+  const handlePdfDownload = async () => {
+    try {
+      setPdfError('');
+      setPdfLoading(true);
+      await downloadDashboardPdf(dashboardData);
+    } catch (error: any) {
+      setPdfError(error?.message || 'Unable to generate the PDF report.');
+    } finally {
+      setPdfLoading(false);
+    }
+  };
   // Keep the on-screen report bound to the exact dashboard snapshot selected by the user.
   // Do not fetch the server's cached/default report here: that can still be the NovaMart demo
   // after a different dataset has been uploaded and analyzed.
@@ -16,7 +29,7 @@ export const ReportsPage: React.FC<Props> = ({ dashboardData }) => {
   const totalCostDelta = useMemo(() => Object.values(costs).reduce((sum: number, value: any) => sum + Number(value?.delta || 0), 0), [costs]);
   const Section = ({ n, title, children }: { n: number; title: string; children: React.ReactNode }) => <section className="space-y-3"><h2 className="border-l-4 border-blue-600 pl-3 text-sm font-bold uppercase tracking-wider text-slate-900 dark:text-white">{n}. {title}</h2>{children}</section>;
   return <div className="space-y-6">
-    <div className="no-print flex flex-col gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:flex-row sm:items-center sm:justify-between dark:border-slate-800 dark:bg-slate-900"><div><div className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] text-blue-600"><FileText className="h-4 w-4" /> Executive deliverable</div><h1 className="mt-1 text-lg font-bold text-slate-900 dark:text-white">10-section decision intelligence report</h1><p className="mt-1 text-xs text-slate-500">Generated from the same deterministic snapshot powering the application.</p></div><div className="flex gap-2"><button onClick={() => window.print()} className="inline-flex items-center gap-2 rounded-lg bg-slate-100 px-3 py-2 text-xs font-semibold text-slate-700"><Printer className="h-3.5 w-3.5" /> Print</button><button onClick={() => window.open(getDownloadPdfUrl(), '_blank')} className="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-xs font-semibold text-white"><Download className="h-3.5 w-3.5" /> Official PDF</button></div></div>
+    <div className="no-print flex flex-col gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:flex-row sm:items-center sm:justify-between dark:border-slate-800 dark:bg-slate-900"><div><div className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] text-blue-600"><FileText className="h-4 w-4" /> Executive deliverable</div><h1 className="mt-1 text-lg font-bold text-slate-900 dark:text-white">10-section decision intelligence report</h1><p className="mt-1 text-xs text-slate-500">Generated from the same deterministic snapshot powering the application.</p></div><div className="flex gap-2"><button onClick={() => window.print()} className="inline-flex items-center gap-2 rounded-lg bg-slate-100 px-3 py-2 text-xs font-semibold text-slate-700"><Printer className="h-3.5 w-3.5" /> Print</button><button onClick={handlePdfDownload} disabled={pdfLoading} className="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-xs font-semibold text-white disabled:cursor-not-allowed disabled:opacity-60"><Download className="h-3.5 w-3.5" /> {pdfLoading ? 'Generating…' : 'Official PDF'}</button></div></div>
     <article className="mx-auto max-w-5xl space-y-10 rounded-2xl border border-slate-200 bg-white p-7 shadow-sm md:p-10 print:border-0 print:shadow-none dark:border-slate-800 dark:bg-slate-900">
       <header className="border-b-2 border-slate-900 pb-6 dark:border-white"><div className="text-[10px] font-bold uppercase tracking-[0.16em] text-blue-600">Consulting in a Box · Decision Intelligence</div><h1 className="mt-2 text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white">{dashboardData.company_name} Performance Diagnostic</h1><p className="mt-2 text-xs text-slate-500">{dashboardData.industry} · {dashboardData.quarter_evaluated} · INR</p></header>
       <Section n={1} title="Executive Summary"><div className="rounded-xl border border-blue-100 bg-blue-50 p-4 text-sm leading-6 text-slate-700 dark:border-blue-900/50 dark:bg-blue-950/20 dark:text-slate-200">Net operating profit changed <b>{k.net_profit_growth_pct.toFixed(1)}%</b> QoQ, from <b>{inr(k.net_profit_prior)}</b> to <b>{inr(k.net_profit_current)}</b>. Revenue changed {k.revenue_growth_pct.toFixed(1)}%, while net margin moved {k.net_margin_delta_pp.toFixed(1)} pp. The driver tree reconciles the observed profit variance into revenue and cost impacts.</div></Section>
