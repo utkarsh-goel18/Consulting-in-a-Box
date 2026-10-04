@@ -148,104 +148,211 @@ When launched in **Demo Mode**, the application evaluates **NovaMart**, a mid-ma
 ## 6. How to Run Locally
 
 ### Prerequisites
-- **Node.js** (v18+) & **npm**
-- **Python** (v3.10+)
 
-### Quick Start (Zero-Configuration Demo Mode)
+- Python 3.10+
+- Node.js 18+
+- npm
 
-#### 1. Backend Setup
+### 1. Start the backend
+
 ```bash
-# Navigate to backend
 cd backend
-
-# Create virtual environment
 python -m venv venv
-
-# Activate virtual environment (Windows PowerShell)
-.\venv\Scripts\Activate.ps1
-# Or macOS/Linux: source venv/bin/activate
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Launch FastAPI backend server
-uvicorn app.main:app --host 127.0.0.1 --port 8000 --reload
 ```
-*The backend will automatically generate the NovaMart demo datasets in `backend/data/` and load them into memory & DuckDB upon startup.*
 
-#### 2. Frontend Setup
+Windows PowerShell:
+
+```powershell
+.\venv\Scripts\Activate.ps1
+```
+
+macOS/Linux:
+
 ```bash
-# Open a second terminal and navigate to frontend
+source venv/bin/activate
+```
+
+Install dependencies and start FastAPI:
+
+```bash
+pip install -r requirements.txt
+python -m uvicorn app.main:app --host 127.0.0.1 --port 8000 --reload
+```
+
+The backend automatically prepares the NovaMart demo workspace and loads it into the analytical repository.
+
+### 2. Start the frontend
+
+Open a second terminal:
+
+```bash
 cd frontend
-
-# Install dependencies
 npm install
-
-# Start Vite development server
 npm run dev
 ```
 
-Open your browser at: **`http://localhost:5173`**
+Open `http://localhost:5173`.
 
-Click **"Try Demo (NovaMart)"** in the top navigation bar to watch the automated verification sequence load the executive consulting suite!
+### 3. Demo workflow
 
----
+Click **Run Demo Engagement** to run the built-in NovaMart case.
 
-## 7. Connecting to PostgreSQL (Optional Enterprise Setup)
+For an uploaded dataset:
 
-If you wish to run the analytics directly against an enterprise PostgreSQL instance:
+1. Open **Data**.
+2. Upload the relevant CSV/XLSX files.
+3. Review the data profile and relationships.
+4. Open **Analysis**.
+5. Select a consulting case, such as **Profitability Decline**.
+6. Click **Execute Analysis**.
+7. Review the resulting **Overview, Insights, Scenarios, and Reports**.
+8. The report and PDF export use the analyzed workspace rather than silently reverting to NovaMart.
 
-1. Create a database:
-   ```sql
-   CREATE DATABASE consulting_box;
-   ```
-2. Configure `.env` in `backend/`:
-   ```ini
-   DATABASE_URL=postgresql://postgres:your_password@localhost:5432/consulting_box
-   ```
-3. Run the PostgreSQL seeder:
-   ```bash
-   python scripts/seed_postgres.py
-   ```
-*If PostgreSQL is not running or credentials are not supplied, the platform seamlessly falls back to DuckDB in-process OLAP, guaranteeing zero downtime.*
+The upload path is designed for multi-table business datasets such as customers, orders, products, marketing spend, expenses, and returns. The exact tables required depend on the selected analysis.
 
 ---
 
-## 8. Enabling Live LLM Reasoning (Optional)
+## 7. Optional PostgreSQL Configuration
 
-In `.env` or via the **/settings** UI tab:
+The application can use PostgreSQL for enterprise persistence while retaining DuckDB as the embedded analytical engine.
+
+Configure `backend/.env`:
+
+```ini
+DATABASE_URL=postgresql://postgres:your_password@localhost:5432/consulting_box
+```
+
+If PostgreSQL is not configured, the application remains fully usable in local/demo mode.
+
+---
+
+## 8. Optional AI Providers
+
+The platform includes a provider abstraction with deterministic offline fallback.
+
+Without an API key, the application uses the local mock strategic consultant, so the core workflow does not require an external LLM.
+
+For Gemini:
+
 ```ini
 AI_PROVIDER=gemini
-GEMINI_API_KEY=AIzaSyYourKeyHere
-AI_MODEL=gemini-1.5-flash
+GEMINI_API_KEY=your_key_here
 ```
-Or for OpenAI:
+
+For OpenAI:
+
 ```ini
 AI_PROVIDER=openai
-OPENAI_API_KEY=sk-YourKeyHere
+OPENAI_API_KEY=your_key_here
 ```
-*Note: When no API key is provided, the platform operates in 100% deterministic Mock Strategic Consultant mode, guaranteeing that all analysis plans, root causes, and recommendations are available offline.*
+
+Never commit API keys or `.env` files. They are excluded by `.gitignore`.
 
 ---
 
-## 9. Testing & Quality Assurance
+## 9. Testing & Verification
 
-Run the automated backend test suite:
+### Backend
+
+From the `backend` directory:
+
+```powershell
+python -m pytest -q
+```
+
+The current automated suite contains **14 tests**, covering:
+
+- Dataset profiling and relationship detection
+- Driver-tree reconciliation
+- Scenario simulation and sensitivity analysis
+- PDF report generation and download
+- Health endpoint
+- Demo bootstrap
+- Dataset overview and table preview
+- Analysis execution
+- Evidence and report APIs
+- Settings endpoints
+- AI provider behavior
+
+Expected result:
+
+```text
+14 passed
+```
+
+### Frontend
+
+From the `frontend` directory:
+
 ```bash
-cd backend
-.\venv\Scripts\python.exe -m pytest -o pythonpath=. tests/
+npm run build
 ```
-Tests cover:
-- Automated dataset profiling, type inference & PK/FK detection
-- Mathematical consistency of the Driver Tree decomposition
-- Microeconomic elasticity calculations in the What-If Simulator
-- Server-side PDF Report generation with ReportLab
-- REST API endpoint contracts and health checks
+
+This runs TypeScript compilation followed by the Vite production build.
 
 ---
 
-## 10. Limitations & Future Roadmap
+## 10. Repository Hygiene
 
-- **Data Connectors**: Currently supports CSV, XLSX, and PostgreSQL. Future iterations can integrate Snowflake, BigQuery, and Databricks connectors.
-- **Predictive ML**: Adding automated ARIMA/Prophet time-series forecasting for seasonal demand planning.
-- **Monte Carlo Simulations**: Upgrading the scenario simulator with probabilistic confidence intervals around price elasticity.
+Generated/local artifacts are intentionally excluded from version control:
+
+- Python virtual environments
+- `__pycache__` and pytest caches
+- Node modules and Vite build output
+- `.env` files and credentials
+- Generated NovaMart CSV fixtures
+- Local dashboard cache files
+- IDE and OS metadata
+
+The demo dataset is generated by the backend, so a clean clone does not need to carry large generated CSV files.
+
+---
+
+## 11. Project Structure
+
+```text
+Consulting-in-a-Box/
+├── backend/
+│   ├── app/
+│   │   ├── ai/              # AI provider abstraction + deterministic fallback
+│   │   ├── api/             # FastAPI routes
+│   │   ├── core/            # configuration, repository, currency/safety utilities
+│   │   ├── engine/          # profiling, analytics, drivers, scenarios
+│   │   ├── models/          # Pydantic/domain schemas
+│   │   └── reports/         # executive PDF generation
+│   ├── sql/                 # PostgreSQL schema and analytical SQL
+│   ├── tests/               # automated backend tests
+│   └── data/                # generated/local demo workspace
+├── frontend/
+│   └── src/
+│       ├── components/      # reusable UI, charts and evidence components
+│       ├── pages/           # Dashboard, Data, Analysis, Insights, Scenarios, Reports
+│       └── api/             # backend client
+└── README.md
+```
+
+---
+
+## 12. Current Scope & Future Roadmap
+
+### Current
+
+- Multi-file CSV/XLSX ingestion
+- Data profiling and relationship detection
+- Deterministic KPI and variance analysis
+- Driver-tree root-cause decomposition
+- Evidence/audit trail
+- What-if scenario simulation
+- Executive dashboard and visual analytics
+- Uploaded-workspace reports and PDF export
+- Offline deterministic AI fallback
+- Optional Gemini/OpenAI provider integrations
+- NovaMart one-click demo mode
+
+### Future
+
+- Snowflake, BigQuery and Databricks connectors
+- Additional forecasting models
+- Probabilistic/Monte Carlo scenario analysis
+- Role-based access control and persistent workspaces
+- Production deployment and observability
