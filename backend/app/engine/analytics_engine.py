@@ -307,19 +307,53 @@ class DeterministicAnalyticsEngine:
         return sorted(records, key=lambda x: x["roas"])
 
     def analyze_monthly_revenue_trend(self) -> List[Dict[str, Any]]:
-        """Return deterministic monthly delivered revenue for dashboard trend charts."""
-        orders = self.dfs.get("orders", pd.DataFrame())
-        if orders.empty or "month" not in orders.columns or "net_amount" not in orders.columns:
+        """Return deterministic monthly delivered revenue and order volume for trend charts.
+
+        The method is deliberately defensive because uploaded workspaces may not have
+        gone through the canonical preprocessing path or may use common aliases.
+        """
+        orders = self.dfs.get("orders", pd.DataFrame()).copy()
+        if orders.empty:
             return []
+
+        # Rebuild the month key when a caller registered a dataframe without running
+        # _preprocess (or when a custom upload uses a slightly different date dtype).
+        if "month" not in orders.columns or orders["month"].isna().all():
+            date_col = next((c for c in ("order_date", "date", "orderDate") if c in orders.columns), None)
+            if date_col is None:
+                return []
+            parsed = pd.to_datetime(orders[date_col], errors="coerce")
+            orders["month"] = parsed.dt.to_period("M").astype(str)
+
+        if "net_amount" in orders.columns:
+            orders["_trend_revenue"] = pd.to_numeric(orders["net_amount"], errors="coerce").fillna(0.0)
+        elif "gross_amount" in orders.columns:
+            gross = pd.to_numeric(orders["gross_amount"], errors="coerce").fillna(0.0)
+            discount = pd.to_numeric(orders.get("discount_amount", 0.0), errors="coerce").fillna(0.0)
+            orders["_trend_revenue"] = gross - discount
+        else:
+            return []
+
         delivered = self._delivered_orders(orders)
+        delivered = delivered[delivered["month"].notna() & (delivered["month"].astype(str) != "NaT")]
         if delivered.empty:
             return []
-        grouped = delivered.groupby("month", as_index=False)["net_amount"].sum().sort_values("month")
+
+        grouped = delivered.groupby("month", as_index=False).agg(
+            revenue=("_trend_revenue", "sum"),
+            orders=("month", "size"),
+        ).sort_values("month")
+
         records: List[Dict[str, Any]] = []
         for row in grouped.itertuples(index=False):
-            revenue = float(row.net_amount)
+            revenue = float(row.revenue)
+            order_count = int(row.orders)
             if np.isfinite(revenue):
-                records.append({"month": str(row.month), "revenue": round(revenue, 2)})
+                records.append({
+                    "month": str(row.month),
+                    "revenue": round(revenue, 2),
+                    "orders": order_count,
+                })
         return records
 
     def analysis_snapshot(self) -> Dict[str, Any]:
