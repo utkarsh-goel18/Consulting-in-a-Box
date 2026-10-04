@@ -3,7 +3,7 @@ import { Activity, ArrowRight, BarChart3, CheckCircle2, Compass, DollarSign, Pac
 import { AnalysisPlan, ConsultingCase } from '../types';
 import { executeAnalysis, generateAnalysisPlan, getConsultingCases } from '../api/client';
 
-interface Props { onPlanExecuted: () => void; }
+interface Props { onPlanExecuted: (dashboard?: import('../types').ConsultingDashboard) => void; }
 
 const icons: Record<string, React.ReactNode> = {
   TrendingDown: <TrendingDown className="h-4 w-4" />, Users: <Users className="h-4 w-4" />, BarChart3: <BarChart3 className="h-4 w-4" />,
@@ -40,7 +40,7 @@ export const AnalysisPage: React.FC<Props> = ({ onPlanExecuted }) => {
   const run = async () => {
     if (!plan) return;
     setExecuting(true); setError('');
-    try { setExecution(await executeAnalysis(selectedCaseId, customProblem)); } catch (err: any) { setError(err.message); } finally { setExecuting(false); }
+    try { const result = await executeAnalysis(selectedCaseId, customProblem); setExecution(result); if (result?.dashboard) onPlanExecuted(result.dashboard); } catch (err: any) { setError(err.message); } finally { setExecuting(false); }
   };
 
   return (
